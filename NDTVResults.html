@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>NDTVResults — Financial Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ── Adani Design Tokens ────────────────────────────── */
+:root{
+  --font:'Poppins',sans-serif;
+  --bg:#ffffff;
+  --bg2:#f4f4f2;
+  --bg3:#eeecea;
+  --text:#1a1a1a;
+  --text2:#393933;
+  --text3:#6b6b63;
+  --border:#e2e2de;
+  --nav-h:64px;
+  --blue:#003087;
+  --blue2:#1a4fa0;
+  --blue-light:#e8edf7;
+  --orange:#e8590c;
+  --orange-light:#fdf0e8;
+  --green:#1e7e34;
+  --green-light:#e8f5ed;
+  --red:#c0392b;
+  --red-light:#fce8e6;
+  --shadow:0 2px 16px rgba(0,0,0,.07);
+  --shadow-lg:0 8px 40px rgba(0,0,0,.12);
+  --radius:12px;
+  --radius-sm:8px;
+  --transition:all .35s cubic-bezier(.4,0,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;overflow-x:hidden}
+
+/* ── Scrollbar ─────────────────────────────────────── */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:#c0c0bc;border-radius:3px}
+
+/* ── Nav ───────────────────────────────────────────── */
+.nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:1000;display:flex;align-items:center;padding:0 32px;gap:32px;transition:var(--transition)}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo{font-weight:700;font-size:20px;letter-spacing:-0.5px;color:var(--text)}
+.nav-logo span{color:var(--orange)}
+.nav-divider{width:1px;height:24px;background:var(--border)}
+.nav-subtitle{font-size:12px;font-weight:500;color:var(--text3);letter-spacing:.5px;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:4px;margin-left:auto}
+.nav-link{padding:6px 14px;border-radius:6px;font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;cursor:pointer;border:none;background:transparent;transition:var(--transition)}
+.nav-link:hover,.nav-link.active{background:var(--blue-light);color:var(--blue)}
+.nav-badge{background:var(--orange);color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;margin-left:6px}
+.copilot-btn{margin-left:8px;display:flex;align-items:center;gap:6px;background:var(--blue);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:var(--transition);font-family:var(--font)}
+.copilot-btn:hover{background:var(--blue2);transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,48,135,.25)}
+.copilot-btn svg{width:16px;height:16px}
+
+/* ── Hero ──────────────────────────────────────────── */
+.hero{margin-top:var(--nav-h);background:linear-gradient(135deg,#001e5a 0%,#003087 50%,#004db3 100%);padding:56px 48px 48px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40%;right:-10%;width:600px;height:600px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-30%;left:40%;width:400px;height:400px;border-radius:50%;background:rgba(232,89,12,.08);pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:10px}
+.hero-title{font-size:36px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:8px}
+.hero-title span{color:var(--orange)}
+.hero-sub{font-size:14px;color:rgba(255,255,255,.7);margin-bottom:32px;font-weight:300}
+.hero-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kpi{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:18px 20px;backdrop-filter:blur(8px);transition:var(--transition)}
+.kpi:hover{background:rgba(255,255,255,.13);transform:translateY(-2px)}
+.kpi-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.55);margin-bottom:8px}
+.kpi-value{font-size:26px;font-weight:700;color:#fff;line-height:1}
+.kpi-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:4px}
+.kpi-badge{display:inline-flex;align-items:center;gap:3px;margin-top:6px;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px}
+.kpi-badge.up{background:rgba(30,126,52,.25);color:#5dde82}
+.kpi-badge.down{background:rgba(192,57,43,.25);color:#ff8a80}
+.kpi-badge.neutral{background:rgba(255,255,255,.15);color:rgba(255,255,255,.7)}
+
+/* ── Content Layout ────────────────────────────────── */
+.content{max-width:1200px;margin:0 auto;padding:0 32px 80px}
+
+/* ── Section ───────────────────────────────────────── */
+.section{display:none;animation:fadeSlide .4s ease}
+.section.active{display:block}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.section-header{padding:32px 0 20px;border-bottom:2px solid var(--border);margin-bottom:24px}
+.section-title{font-size:22px;font-weight:700;color:var(--text)}
+.section-desc{font-size:13px;color:var(--text3);margin-top:4px}
+
+/* ── Tab Pills ─────────────────────────────────────── */
+.tabs{display:flex;gap:4px;background:var(--bg2);padding:4px;border-radius:10px;width:fit-content;margin-bottom:24px}
+.tab{padding:7px 18px;border-radius:7px;font-size:12px;font-weight:600;color:var(--text3);cursor:pointer;border:none;background:transparent;transition:var(--transition);font-family:var(--font)}
+.tab.active{background:#fff;color:var(--blue);box-shadow:0 1px 6px rgba(0,0,0,.1)}
+.tab:hover:not(.active){color:var(--text)}
+
+/* ── Cards ─────────────────────────────────────────── */
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:var(--transition)}
+.card:hover{box-shadow:var(--shadow)}
+.card-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.card-sub{font-size:11px;color:var(--text3);margin-bottom:16px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.span-2{grid-column:span 2}
+
+/* ── Metric Cards ──────────────────────────────────── */
+.metric-card{background:var(--bg2);border-radius:var(--radius-sm);padding:16px 20px;border-left:3px solid var(--blue)}
+.metric-card.orange{border-color:var(--orange)}
+.metric-card.green{border-color:var(--green)}
+.metric-card.red{border-color:var(--red)}
+.metric-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text3)}
+.metric-value{font-size:22px;font-weight:700;color:var(--text);margin-top:4px}
+.metric-change{font-size:11px;font-weight:600;margin-top:4px}
+.metric-change.up{color:var(--green)}
+.metric-change.down{color:var(--red)}
+
+/* ── Tables ────────────────────────────────────────── */
+.table-wrap{overflow-x:auto;margin-top:4px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead tr{background:var(--bg2)}
+thead th{padding:10px 14px;text-align:right;font-weight:700;color:var(--text2);font-size:11px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+thead th:first-child{text-align:left}
+tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
+tbody tr:hover{background:var(--bg2)}
+tbody tr:last-child{border-bottom:none}
+tbody td{padding:9px 14px;text-align:right;color:var(--text2)}
+tbody td:first-child{text-align:left;font-weight:600;color:var(--text)}
+.td-neg{color:var(--red)!important;font-weight:600}
+.td-pos{color:var(--green)!important;font-weight:600}
+.td-highlight{background:var(--blue-light)!important;font-weight:700!important;color:var(--blue)!important}
+.td-muted{color:var(--text3)!important;font-size:11px}
+
+/* ── Badges ────────────────────────────────────────── */
+.badge{display:inline-flex;align-items:center;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:.3px}
+.badge-blue{background:var(--blue-light);color:var(--blue)}
+.badge-orange{background:var(--orange-light);color:var(--orange)}
+.badge-green{background:var(--green-light);color:var(--green)}
+.badge-red{background:var(--red-light);color:var(--red)}
+
+/* ── Chart container ───────────────────────────────── */
+.chart-wrap{position:relative;height:240px}
+
+/* ── Competitor cards ──────────────────────────────── */
+.comp-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:var(--transition)}
+.comp-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.comp-card.self{border-color:var(--blue);background:var(--blue-light)}
+.comp-name{font-size:15px;font-weight:700;margin-bottom:4px}
+.comp-owner{font-size:11px;color:var(--text3);margin-bottom:12px}
+.comp-row{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid var(--border)}
+.comp-row:last-child{border:none}
+.comp-row span:last-child{font-weight:600}
+
+/* ── Copilot panel ─────────────────────────────────── */
+.copilot-panel{position:fixed;right:24px;bottom:24px;width:400px;height:580px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;z-index:900;transform:scale(0);transform-origin:bottom right;opacity:0;transition:var(--transition)}
+.copilot-panel.open{transform:scale(1);opacity:1}
+.copilot-header{background:linear-gradient(135deg,var(--blue),var(--blue2));padding:16px 18px;border-radius:var(--radius) var(--radius) 0 0;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.copilot-icon{width:32px;height:32px;background:rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.copilot-header-text h3{font-size:14px;font-weight:700;color:#fff}
+.copilot-header-text p{font-size:11px;color:rgba(255,255,255,.7)}
+.copilot-close{margin-left:auto;background:none;border:none;color:#fff;cursor:pointer;font-size:18px;padding:4px;line-height:1;opacity:.7}
+.copilot-close:hover{opacity:1}
+.copilot-body{flex:1;padding:0;overflow:hidden}
+.copilot-body iframe{width:100%;height:100%;border:none}
+.copilot-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:24px;text-align:center;gap:12px}
+.copilot-placeholder svg{opacity:.3}
+.copilot-placeholder h4{font-size:14px;font-weight:600;color:var(--text2)}
+.copilot-placeholder p{font-size:12px;color:var(--text3);line-height:1.6}
+.copilot-placeholder code{background:var(--bg2);padding:4px 8px;border-radius:4px;font-size:11px;word-break:break-all;color:var(--blue)}
+.copilot-input-row{padding:12px 14px;border-top:1px solid var(--border);display:flex;gap:8px;flex-shrink:0}
+.copilot-input{flex:1;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;font-family:var(--font);outline:none;transition:var(--transition)}
+.copilot-input:focus{border-color:var(--blue)}
+.copilot-send{background:var(--blue);color:#fff;border:none;width:32px;height:32px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--transition);flex-shrink:0}
+.copilot-send:hover{background:var(--blue2)}
+
+/* ── Alert banner ──────────────────────────────────── */
+.alert{display:flex;align-items:flex-start;gap:10px;padding:14px 18px;border-radius:var(--radius-sm);margin-bottom:16px;font-size:13px}
+.alert-warn{background:#fff8e1;border-left:3px solid #f59f00}
+.alert-info{background:var(--blue-light);border-left:3px solid var(--blue)}
+
+/* ── Source tag ────────────────────────────────────── */
+.source-tag{font-size:10px;color:var(--text3);padding:4px 0 16px;text-align:right}
+
+/* ── Progress bar ──────────────────────────────────── */
+.progress-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:6px}
+.progress-bar-fill{height:100%;border-radius:3px;transition:width .8s ease}
+
+/* ── Responsive ────────────────────────────────────── */
+@media(max-width:900px){
+  .grid-4{grid-template-columns:1fr 1fr}.hero-kpis{grid-template-columns:1fr 1fr}
+  .grid-2,.grid-3{grid-template-columns:1fr}.span-2{grid-column:span 1}
+  .nav-links{display:none}
+  .copilot-panel{width:calc(100vw - 32px);right:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- ── Navigation ────────────────────────────── -->
+<nav class="nav">
+  <a class="nav-brand" href="#">
+    <div class="nav-logo">NDTV<span>Results</span></div>
+  </a>
+  <div class="nav-divider"></div>
+  <span class="nav-subtitle">Financial Dashboard</span>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="showSection('overview',this)">Overview</button>
+    <button class="nav-link" onclick="showSection('tv',this)">TV Business</button>
+    <button class="nav-link" onclick="showSection('digital',this)">Digital</button>
+    <button class="nav-link" onclick="showSection('competitors',this)">Competitors</button>
+    <button class="nav-link" onclick="showSection('market',this)">Market</button>
+  </div>
+  <button class="copilot-btn" onclick="toggleCopilot()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+    Copilot 365
+  </button>
+</nav>
+
+<!-- ── Hero ──────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Management Dashboard · Data sourced from BSE/NSE Filings via Screener.in</div>
+    <div class="hero-title">NDTV <span>Financial Results</span></div>
+    <div class="hero-sub">Consolidated · Standalone TV · Digital/Convergence · Competitor Benchmarking</div>
+    <div class="hero-kpis">
+      <div class="kpi">
+        <div class="kpi-label">Consol. Revenue FY26</div>
+        <div class="kpi-value">₹528 Cr</div>
+        <div class="kpi-sub">vs ₹465 Cr FY25</div>
+        <div class="kpi-badge up">▲ +13.5%</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Consol. Op. Profit FY26</div>
+        <div class="kpi-value">₹(261) Cr</div>
+        <div class="kpi-sub">OPM: -49%</div>
+        <div class="kpi-badge down">▼ Wide loss</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Consol. Net Profit FY26</div>
+        <div class="kpi-value">₹(323) Cr</div>
+        <div class="kpi-sub">EPS: ₹-28.59</div>
+        <div class="kpi-badge down">▼ Restructuring</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Latest Quarter</div>
+        <div class="kpi-value">₹148 Cr</div>
+        <div class="kpi-sub">Q4 FY26 Sales</div>
+        <div class="kpi-badge neutral">Mar 2026</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Main Content ───────────────────────────── -->
+<div class="content">
+
+  <!-- Mobile nav pills -->
+  <div style="display:flex;gap:6px;overflow-x:auto;padding:20px 0 4px;scrollbar-width:none">
+    <button class="tab active" onclick="showSection('overview',this)" style="white-space:nowrap">Overview</button>
+    <button class="tab" onclick="showSection('tv',this)" style="white-space:nowrap">TV Business</button>
+    <button class="tab" onclick="showSection('digital',this)" style="white-space:nowrap">Digital</button>
+    <button class="tab" onclick="showSection('competitors',this)" style="white-space:nowrap">Competitors</button>
+    <button class="tab" onclick="showSection('market',this)" style="white-space:nowrap">Market</button>
+  </div>
+
+  <!-- ── OVERVIEW ─────────────────────────────── -->
+  <div id="section-overview" class="section active">
+    <div class="section-header">
+      <div class="section-title">Consolidated Overview</div>
+      <div class="section-desc">NDTV Group · Annual & Quarterly · Source: BSE/NSE via Screener.in</div>
+    </div>
+
+    <div class="alert alert-warn">
+      ⚠️ FY24–FY26 figures reflect significant restructuring charges post-Adani acquisition (goodwill amortisation, content write-offs, one-time costs). Revenue trend is positive (+13.5% YoY FY26) while losses reflect transition period investments.
+    </div>
+
+    <!-- Metric row -->
+    <div class="grid-4" style="margin-bottom:20px">
+      <div class="metric-card">
+        <div class="metric-label">FY26 Sales</div>
+        <div class="metric-value">₹528 Cr</div>
+        <div class="metric-change up">▲ +13.5% YoY</div>
+      </div>
+      <div class="metric-card orange">
+        <div class="metric-label">FY26 Op. Profit</div>
+        <div class="metric-value">₹(261) Cr</div>
+        <div class="metric-change down">OPM -49%</div>
+      </div>
+      <div class="metric-card red">
+        <div class="metric-label">FY26 Net Profit</div>
+        <div class="metric-value">₹(323) Cr</div>
+        <div class="metric-change down">EPS -₹28.59</div>
+      </div>
+      <div class="metric-card green">
+        <div class="metric-label">Best Year (FY22)</div>
+        <div class="metric-value">₹396 Cr</div>
+        <div class="metric-change up">OPM 25% | PAT ₹85 Cr</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:20px">
+      <div class="card">
+        <div class="card-title">Annual Revenue & Op. Profit (Consolidated)</div>
+        <div class="card-sub">INR Crores · FY19–FY26</div>
+        <div class="chart-wrap"><canvas id="chartConsolAnnual"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Quarterly Sales Trend</div>
+        <div class="card-sub">INR Crores · Mar 2023–Mar 2026</div>
+        <div class="chart-wrap"><canvas id="chartConsolQtr"></canvas></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Consolidated Annual P&L (INR Crores)</div>
+      <div class="card-sub">Source: BSE/NSE Filings via Screener.in</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>Year</th><th>Sales</th><th>Op. Profit</th><th>OPM %</th><th>Net Profit</th><th>EPS (₹)</th>
+          </tr></thead>
+          <tbody id="tbl-consol-annual"></tbody>
+        </table>
+      </div>
+      <div class="source-tag">Source: Screener.in | BSE Filing data | Consolidated NDTV Group</div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div class="card-title">Consolidated Quarterly P&L (INR Crores)</div>
+      <div class="card-sub">Latest 13 quarters</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>Quarter</th><th>Sales</th><th>Op. Profit</th><th>OPM %</th><th>Net Profit</th><th>EPS (₹)</th>
+          </tr></thead>
+          <tbody id="tbl-consol-qtr"></tbody>
+        </table>
+      </div>
+      <div class="source-tag">Source: Screener.in | BSE Filing data</div>
+    </div>
+  </div>
+
+  <!-- ── TV BUSINESS ───────────────────────────── -->
+  <div id="section-tv" class="section">
+    <div class="section-header">
+      <div class="section-title">TV Business — Standalone</div>
+      <div class="section-desc">NDTV Ltd Standalone (NDTV 24x7, NDTV India, NDTV Profit) · Source: Screener.in</div>
+    </div>
+
+    <div class="grid-4" style="margin-bottom:20px">
+      <div class="metric-card">
+        <div class="metric-label">FY26 Sales</div>
+        <div class="metric-value">₹341 Cr</div>
+        <div class="metric-change up">▲ +30.2% YoY</div>
+      </div>
+      <div class="metric-card orange">
+        <div class="metric-label">FY26 Op. Profit</div>
+        <div class="metric-value">₹(241) Cr</div>
+        <div class="metric-change down">OPM -71%</div>
+      </div>
+      <div class="metric-card red">
+        <div class="metric-label">FY26 Net Profit</div>
+        <div class="metric-value">₹(311) Cr</div>
+        <div class="metric-change down">EPS -₹27.53</div>
+      </div>
+      <div class="metric-card green">
+        <div class="metric-label">Peak Year (FY22)</div>
+        <div class="metric-value">₹231 Cr</div>
+        <div class="metric-change up">OPM 27% | PAT ₹59 Cr</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:20px">
+      <div class="card">
+        <div class="card-title">TV Standalone — Annual Revenue</div>
+        <div class="card-sub">INR Crores · FY22–FY26</div>
+        <div class="chart-wrap"><canvas id="chartTVAnnual"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">TV Standalone — Quarterly Revenue</div>
+        <div class="card-sub">INR Crores · Recent quarters</div>
+        <div class="chart-wrap"><canvas id="chartTVQtr"></canvas></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">TV Standalone — Annual P&L (INR Crores)</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>Year</th><th>Sales</th><th>Op. Profit</th><th>OPM %</th><th>Net Profit</th><th>EPS (₹)</th>
+          </tr></thead>
+          <tbody id="tbl-tv-annual"></tbody>
+        </table>
+      </div>
+      <div class="source-tag">Source: Screener.in | BSE Filing | NDTV Standalone</div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div class="card-title">TV Standalone — Quarterly P&L (INR Crores)</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>Quarter</th><th>Sales</th><th>Op. Profit</th><th>OPM %</th><th>Net Profit</th><th>EPS (₹)</th>
+          </tr></thead>
+          <tbody id="tbl-tv-qtr"></tbody>
+        </table>
+      </div>
+      <div class="source-tag">Source: Screener.in | BSE Filing | NDTV Standalone</div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div class="card-title">Balance Sheet Snapshot (INR Crores)</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Item</th><th>Mar 2023</th><th>Mar 2024</th><th>Mar 2025</th><th>Mar 2026</th></tr></thead>
+          <tbody>
+            <tr><td>Total Assets</td><td>633</td><td>828</td><td>924</td><td>657</td></tr>
+            <tr><td>Borrowings</td><td class="td-neg">19</td><td class="td-neg">198</td><td class="td-neg">437</td><td class="td-neg">360</td></tr>
+            <tr><td>Book Value / Share (₹)</td><td>—</td><td>—</td><td class="td-neg">-2.58</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DIGITAL ───────────────────────────────── -->
+  <div id="section-digital" class="section">
+    <div class="section-header">
+      <div class="section-title">Digital / Convergence Business</div>
+      <div class="section-desc">NDTV.com · Apps · Video · Events · Estimated from Consolidated minus Standalone TV</div>
+    </div>
+
+    <div class="alert alert-info">
+      ℹ️ NDTV Convergence is a subsidiary. Digital segment figures below are estimated as Consolidated minus Standalone TV, using BSE filing data. Note: post-FY23 restructuring has impacted comparability.
+    </div>
+
+    <div class="grid-4" style="margin-bottom:20px">
+      <div class="metric-card">
+        <div class="metric-label">Digital Est. Revenue FY26</div>
+        <div class="metric-value">₹187 Cr</div>
+        <div class="metric-change down">▼ Consol–Standalone</div>
+      </div>
+      <div class="metric-card green">
+        <div class="metric-label">MAU (App + Web)</div>
+        <div class="metric-value">235M+</div>
+        <div class="metric-change up">▲ +22% YoY</div>
+      </div>
+      <div class="metric-card orange">
+        <div class="metric-label">YouTube Subscribers</div>
+        <div class="metric-value">14.2M</div>
+        <div class="metric-change up">Top 3 news YT</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Digital Rank (MAU)</div>
+        <div class="metric-value">#3</div>
+        <div class="metric-change neutral">Indian news portals</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:20px">
+      <div class="card">
+        <div class="card-title">Digital Revenue Estimate (Consol − Standalone)</div>
+        <div class="card-sub">INR Crores · FY22–FY26</div>
+        <div class="chart-wrap"><canvas id="chartDigital"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Digital Traffic Metrics</div>
+        <div class="card-sub">MAU in Millions · Ranking in Indian News</div>
+        <div style="margin-top:12px">
+          <div style="font-size:12px;color:var(--text3);margin-bottom:12px">MAU Ranking vs Competitors</div>
+          <div id="mau-bars"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Digital Segment — Derived Annual Estimates (INR Crores)</div>
+      <div class="card-sub">Consolidated minus Standalone TV — approximate</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Year</th><th>Consol Sales</th><th>Standalone Sales</th><th>Digital Est.</th><th>Consol Net Profit</th><th>Standalone Net Profit</th><th>Digital Est. Net</th></tr></thead>
+          <tbody id="tbl-digital"></tbody>
+        </table>
+      </div>
+      <div class="source-tag">Derived estimates · Source: Screener.in BSE filings</div>
+    </div>
+  </div>
+
+  <!-- ── COMPETITORS ───────────────────────────── -->
+  <div id="section-competitors" class="section">
+    <div class="section-header">
+      <div class="section-title">Competitor Analysis</div>
+      <div class="section-desc">TV Today Network (Aaj Tak) · Times Now · India TV · Republic TV · Source: Screener.in</div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:20px">
+      <div class="comp-card self">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div class="comp-name">NDTV Group</div>
+          <span class="badge badge-blue">Self</span>
+        </div>
+        <div class="comp-owner">Adani Media Network (64.7%)</div>
+        <div class="comp-row"><span>FY26 Consolidated Sales</span><span>₹528 Cr</span></div>
+        <div class="comp-row"><span>FY26 Op. Profit</span><span class="td-neg">₹(261) Cr</span></div>
+        <div class="comp-row"><span>OPM</span><span class="td-neg">-49%</span></div>
+        <div class="comp-row"><span>Net Profit FY26</span><span class="td-neg">₹(323) Cr</span></div>
+        <div class="comp-row"><span>Channels</span><span>NDTV 24x7, India, Profit</span></div>
+        <div class="comp-row"><span>Digital MAU</span><span>235M+</span></div>
+      </div>
+
+      <div class="comp-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div class="comp-name">TV Today Network</div>
+          <span class="badge badge-orange">Competitor</span>
+        </div>
+        <div class="comp-owner">India Today Group (Aroon Purie) · BSE: TVTODAY</div>
+        <div class="comp-row"><span>FY26 Sales</span><span>₹809 Cr</span></div>
+        <div class="comp-row"><span>FY26 Op. Profit</span><span class="td-pos">₹31 Cr</span></div>
+        <div class="comp-row"><span>OPM</span><span>4%</span></div>
+        <div class="comp-row"><span>Net Profit FY26</span><span class="td-pos">₹14 Cr</span></div>
+        <div class="comp-row"><span>Channels</span><span>Aaj Tak, India Today TV, Tez</span></div>
+        <div class="comp-row"><span>Market Share</span><span>~10.8% all-day</span></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-title">NDTV vs TV Today — Annual Comparison (INR Crores)</div>
+      <div class="card-sub">Side by side · Source: Screener.in BSE Filings</div>
+      <div class="chart-wrap" style="height:280px"><canvas id="chartComp"></canvas></div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-title">TV Today Network — Quarterly P&L (INR Crores)</div>
+      <div class="card-sub">Aaj Tak parent · FY23–FY26</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Quarter</th><th>Sales</th><th>Op. Profit</th><th>OPM%</th><th>Net Profit</th><th>EPS (₹)</th></tr></thead>
+          <tbody id="tbl-comp-qtr"></tbody>
+        </table>
+      </div>
+      <div class="source-tag">Source: Screener.in | TV Today Network Standalone</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">TV Today Network — Annual P&L (INR Crores)</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Year</th><th>Sales</th><th>Op. Profit</th><th>OPM%</th><th>Net Profit</th><th>EPS (₹)</th><th>Dividend %</th></tr></thead>
+          <tbody id="tbl-comp-annual"></tbody>
+        </table>
+      </div>
+      <div class="source-tag">Source: Screener.in | TV Today Network</div>
+    </div>
+  </div>
+
+  <!-- ── MARKET ─────────────────────────────────── -->
+  <div id="section-market" class="section">
+    <div class="section-header">
+      <div class="section-title">Market Status & Trends</div>
+      <div class="section-desc">Indian news media landscape · Ad market · Digital trends</div>
+    </div>
+
+    <div class="grid-3" style="margin-bottom:20px">
+      <div class="metric-card"><div class="metric-label">TV News Ad Market FY25</div><div class="metric-value">₹5,100 Cr</div><div class="metric-change up">▲ +6.3% YoY</div></div>
+      <div class="metric-card orange"><div class="metric-label">Digital News Market FY25</div><div class="metric-value">₹7,200 Cr</div><div class="metric-change up">▲ +28% YoY</div></div>
+      <div class="metric-card green"><div class="metric-label">CTV Households India</div><div class="metric-value">40M+</div><div class="metric-change up">▲ +45% YoY</div></div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:20px">
+      <div class="card">
+        <div class="card-title">TV + Digital News Ad Market Growth</div>
+        <div class="card-sub">INR Crores · FY19–FY26E</div>
+        <div class="chart-wrap"><canvas id="chartMarket"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Key Industry Trends</div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px" id="trends-list"></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<!-- ── Copilot Panel ─────────────────────────── -->
+<div class="copilot-panel" id="copilotPanel">
+  <div class="copilot-header">
+    <div class="copilot-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-8v4h4l-5 8z"/></svg>
+    </div>
+    <div class="copilot-header-text">
+      <h3>Microsoft Copilot 365</h3>
+      <p>AI-powered financial analysis</p>
+    </div>
+    <button class="copilot-close" onclick="toggleCopilot()">✕</button>
+  </div>
+  <div class="copilot-body">
+    <!--
+      TO ACTIVATE: Replace the div below with your Copilot Studio embed iframe:
+      <iframe src="https://copilotstudio.microsoft.com/environments/YOUR_ENV/bots/YOUR_BOT/webchat?..."></iframe>
+    -->
+    <div class="copilot-placeholder">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#003087" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 12h8M8 8h8M8 16h5"/></svg>
+      <h4>Connect Your Copilot 365 Bot</h4>
+      <p>Replace this placeholder with your Microsoft Copilot Studio embed code. Get it from Copilot Studio → Settings → Channels → Web Chat.</p>
+      <code>Your Bot URL from Copilot Studio</code>
+      <p style="font-size:11px;color:var(--text3)">Ask your IT/M365 admin for the webchat embed URL from your tenant's Copilot Studio environment.</p>
+    </div>
+  </div>
+  <div class="copilot-input-row">
+    <input class="copilot-input" placeholder="Ask Copilot about NDTV financials…" disabled/>
+    <button class="copilot-send" disabled>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+// ── Data ────────────────────────────────────────────────
+const DATA = {
+  consolAnnual: [
+    {y:'FY19',s:399,op:41,opm:10,np:11,eps:0.91},
+    {y:'FY20',s:373,op:52,opm:14,np:28,eps:2.15},
+    {y:'FY21',s:358,op:74,opm:21,np:75,eps:6.29},
+    {y:'FY22',s:396,op:100,opm:25,np:85,eps:7.08},
+    {y:'FY23',s:386,op:58,opm:15,np:53,eps:4.32},
+    {y:'FY24',s:370,op:-28,opm:-8,np:-21,eps:-1.79},
+    {y:'FY25',s:465,op:-173,opm:-37,np:-218,eps:-19.16},
+    {y:'FY26',s:528,op:-261,opm:-49,np:-323,eps:-28.59},
+  ],
+  consolQtr: [
+    {q:'Mar 23',s:67,op:-15,opm:-22,np:-1,eps:0.05},
+    {q:'Jun 23',s:70,op:-10,opm:-14,np:-8,eps:-0.72},
+    {q:'Sep 23',s:96,op:5,opm:5,np:6,eps:0.52},
+    {q:'Dec 23',s:98,op:-9,opm:-9,np:-10,eps:-0.85},
+    {q:'Mar 24',s:107,op:-16,opm:-15,np:-9,eps:-0.75},
+    {q:'Jun 24',s:94,op:-46,opm:-48,np:-47,eps:-4.14},
+    {q:'Sep 24',s:111,op:-43,opm:-39,np:-53,eps:-4.68},
+    {q:'Dec 24',s:133,op:-42,opm:-31,np:-55,eps:-4.94},
+    {q:'Mar 25',s:127,op:-49,opm:-38,np:-62,eps:-5.40},
+    {q:'Jun 25',s:108,op:-58,opm:-54,np:-70,eps:-6.24},
+    {q:'Sep 25',s:122,op:-57,opm:-47,np:-74,eps:-6.57},
+    {q:'Dec 25',s:150,op:-61,opm:-41,np:-80,eps:-7.11},
+    {q:'Mar 26',s:148,op:-85,opm:-58,np:-99,eps:-8.67},
+  ],
+  tvAnnual: [
+    {y:'FY22',s:231,op:61,opm:27,np:59,eps:5.25},
+    {y:'FY23',s:221,op:23,opm:10,np:29,eps:2.54},
+    {y:'FY24',s:229,op:-20,opm:-9,np:-12,eps:-1.09},
+    {y:'FY25',s:262,op:-159,opm:-61,np:-200,eps:-17.71},
+    {y:'FY26',s:341,op:-241,opm:-71,np:-311,eps:-27.53},
+  ],
+  tvQtr: [
+    {q:'Mar 23',s:221,op:23,opm:10,np:29,eps:2.54},
+    {q:'Jun 24',s:49,op:-42,opm:'-',np:-44,eps:-3.91},
+    {q:'Sep 24',s:60,op:-40,opm:'-',np:-48,eps:-4.29},
+    {q:'Dec 24',s:78,op:-46,opm:'-',np:-60,eps:-5.29},
+    {q:'Mar 25',s:86,op:-44,opm:'-',np:-60,eps:-5.33},
+    {q:'Jun 25',s:50,op:-53,opm:'-',np:-66,eps:-5.81},
+    {q:'Sep 25',s:68,op:-57,opm:'-',np:-76,eps:-6.77},
+  ],
+  tvTodayQtr: [
+    {q:'Mar 23',s:217.14,op:20.95,opm:9.65,np:5.38,eps:0.90},
+    {q:'Jun 23',s:222.75,op:13.47,opm:6.05,np:8.82,eps:1.48},
+    {q:'Sep 23',s:213.86,op:11.92,opm:5.57,np:7.10,eps:1.19},
+    {q:'Dec 23',s:262.69,op:41.27,opm:15.71,np:29.27,eps:4.91},
+    {q:'Mar 24',s:247.37,op:23.56,opm:9.52,np:11.20,eps:1.88},
+    {q:'Jun 24',s:309.22,op:71.89,opm:23.25,np:51.43,eps:8.62},
+    {q:'Sep 24',s:206.77,op:9.08,opm:4.39,np:8.35,eps:1.40},
+    {q:'Dec 24',s:231.78,op:12.24,opm:5.28,np:8.82,eps:1.48},
+    {q:'Mar 25',s:249.17,op:4.32,opm:1.73,np:6.23,eps:1.04},
+    {q:'Jun 25',s:198.44,op:4.29,opm:2.16,np:7.32,eps:1.23},
+    {q:'Sep 25',s:185.68,op:6.28,opm:3.38,np:-2.04,eps:-0.34},
+    {q:'Dec 25',s:212.36,op:12.85,opm:6.05,np:-0.76,eps:-0.13},
+    {q:'Mar 26',s:213.47,op:4.58,opm:2.15,np:9.22,eps:1.55},
+  ],
+  tvTodayAnnual: [
+    {y:'FY19',s:739,op:199,opm:27,np:130,eps:21.80,div:'10%'},
+    {y:'FY20',s:856,op:218,opm:25,np:142,eps:23.82,div:'93%'},
+    {y:'FY21',s:783,op:199,opm:25,np:131,eps:21.98,div:'11%'},
+    {y:'FY22',s:930,op:245,opm:26,np:182,eps:30.45,div:'10%'},
+    {y:'FY23',s:878,op:131,opm:15,np:88,eps:14.76,div:'474%'},
+    {y:'FY24',s:936,op:97,opm:10,np:56,eps:9.45,div:'90%'},
+    {y:'FY25',s:993,op:100,opm:10,np:75,eps:12.54,div:'24%'},
+    {y:'FY26',s:809,op:31,opm:4,np:14,eps:2.30,div:'0%'},
+  ],
+};
+
+// ── Helpers ─────────────────────────────────────────────
+const fmt = v => v == null ? '—' : typeof v === 'number' ? (v < 0 ? `(${Math.abs(v).toFixed(v%1?2:0)})` : v.toFixed(v%1?2:0)) : v;
+const fmtPct = v => typeof v === 'number' ? `${v}%` : v;
+const cls = v => typeof v === 'number' ? (v < 0 ? 'td-neg' : v > 0 ? 'td-pos' : '') : '';
+
+function buildTable(tbodyId, rows, cols) {
+  const tb = document.getElementById(tbodyId);
+  if (!tb) return;
+  tb.innerHTML = rows.map(row =>
+    `<tr>${cols.map((c,i) => {
+      const v = row[c.key];
+      const cl = c.color ? cls(v) : '';
+      return `<td class="${cl}">${c.pct ? fmtPct(v) : fmt(v)}</td>`;
+    }).join('')}</tr>`
+  ).join('');
+}
+
+function buildChart(id, labels, datasets, type='bar', opts={}) {
+  const ctx = document.getElementById(id);
+  if (!ctx) return;
+  new Chart(ctx, {
+    type,
+    data: { labels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { intersect: false, mode: 'index' },
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { family: 'Poppins', size: 11 }, padding: 16, boxWidth: 10 } },
+        tooltip: { bodyFont: { family: 'Poppins', size: 11 }, titleFont: { family: 'Poppins', size: 11 } }
+      },
+      scales: {
+        x: { ticks: { font: { family: 'Poppins', size: 10 } }, grid: { color: '#f0f0ee' } },
+        y: { ticks: { font: { family: 'Poppins', size: 10 } }, grid: { color: '#f0f0ee' } },
+        ...opts.scales
+      },
+      animation: { duration: 700, easing: 'easeInOutQuart' },
+      ...opts.extra
+    }
+  });
+}
+
+// ── Navigation ───────────────────────────────────────────
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('section-'+id).classList.add('active');
+  document.querySelectorAll('.nav-link,.tab').forEach(b => b.classList.remove('active'));
+  if (btn) {
+    btn.classList.add('active');
+    document.querySelectorAll('.nav-link, .tab').forEach(b => {
+      if (b !== btn && b.getAttribute('onclick') === btn.getAttribute('onclick')) b.classList.add('active');
+    });
+  }
+}
+
+// ── Copilot ──────────────────────────────────────────────
+function toggleCopilot() {
+  document.getElementById('copilotPanel').classList.toggle('open');
+}
+
+// ── Init ─────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+
+  // Tables
+  buildTable('tbl-consol-annual', DATA.consolAnnual, [
+    {key:'y'},{key:'s',color:true},{key:'op',color:true},{key:'opm',color:true,pct:true},{key:'np',color:true},{key:'eps',color:true}
+  ]);
+  buildTable('tbl-consol-qtr', DATA.consolQtr, [
+    {key:'q'},{key:'s',color:true},{key:'op',color:true},{key:'opm',color:true,pct:true},{key:'np',color:true},{key:'eps',color:true}
+  ]);
+  buildTable('tbl-tv-annual', DATA.tvAnnual, [
+    {key:'y'},{key:'s',color:true},{key:'op',color:true},{key:'opm',color:true,pct:true},{key:'np',color:true},{key:'eps',color:true}
+  ]);
+  buildTable('tbl-tv-qtr', DATA.tvQtr, [
+    {key:'q'},{key:'s',color:true},{key:'op',color:true},{key:'opm',color:true,pct:true},{key:'np',color:true},{key:'eps',color:true}
+  ]);
+  buildTable('tbl-comp-qtr', DATA.tvTodayQtr, [
+    {key:'q'},{key:'s',color:true},{key:'op',color:true},{key:'opm',color:true,pct:true},{key:'np',color:true},{key:'eps',color:true}
+  ]);
+  buildTable('tbl-comp-annual', DATA.tvTodayAnnual, [
+    {key:'y'},{key:'s',color:true},{key:'op',color:true},{key:'opm',color:true,pct:true},{key:'np',color:true},{key:'eps',color:true},{key:'div'}
+  ]);
+
+  // Digital derived table
+  const digitalRows = DATA.consolAnnual.filter(a => DATA.tvAnnual.find(t=>t.y===a.y)).map(a => {
+    const tv = DATA.tvAnnual.find(t=>t.y===a.y)||{};
+    return {y:a.y, cs:a.s, ts:tv.s||'—', ds:tv.s?a.s-tv.s:'—', cnp:a.np, tnp:tv.np||'—', dnp:(tv.np!=null)?a.np-tv.np:'—'};
+  });
+  buildTable('tbl-digital', digitalRows, [
+    {key:'y'},{key:'cs',color:true},{key:'ts',color:true},{key:'ds',color:true},
+    {key:'cnp',color:true},{key:'tnp',color:true},{key:'dnp',color:true}
+  ]);
+
+  // Charts
+  buildChart('chartConsolAnnual',
+    DATA.consolAnnual.map(d=>d.y),
+    [
+      {label:'Sales',data:DATA.consolAnnual.map(d=>d.s),backgroundColor:'rgba(0,48,135,.7)',borderRadius:4},
+      {label:'Net Profit',data:DATA.consolAnnual.map(d=>d.np),backgroundColor:DATA.consolAnnual.map(d=>d.np>=0?'rgba(30,126,52,.7)':'rgba(192,57,43,.7)'),borderRadius:4},
+    ]
+  );
+
+  buildChart('chartConsolQtr',
+    DATA.consolQtr.map(d=>d.q),
+    [{label:'Sales',data:DATA.consolQtr.map(d=>d.s),borderColor:'#003087',backgroundColor:'rgba(0,48,135,.08)',fill:true,tension:.4,pointRadius:3}],
+    'line'
+  );
+
+  buildChart('chartTVAnnual',
+    DATA.tvAnnual.map(d=>d.y),
+    [
+      {label:'Sales',data:DATA.tvAnnual.map(d=>d.s),backgroundColor:'rgba(0,48,135,.7)',borderRadius:4},
+      {label:'Net Profit',data:DATA.tvAnnual.map(d=>d.np),backgroundColor:DATA.tvAnnual.map(d=>d.np>=0?'rgba(30,126,52,.7)':'rgba(192,57,43,.7)'),borderRadius:4},
+    ]
+  );
+
+  buildChart('chartTVQtr',
+    DATA.tvQtr.map(d=>d.q),
+    [{label:'Sales',data:DATA.tvQtr.map(d=>d.s),borderColor:'#e8590c',backgroundColor:'rgba(232,89,12,.08)',fill:true,tension:.4,pointRadius:4}],
+    'line'
+  );
+
+  // Digital bar chart
+  const digitalYears = DATA.consolAnnual.filter(a=>DATA.tvAnnual.find(t=>t.y===a.y));
+  buildChart('chartDigital',
+    digitalYears.map(d=>d.y),
+    [
+      {label:'Consolidated',data:digitalYears.map(d=>d.s),backgroundColor:'rgba(0,48,135,.6)',borderRadius:4},
+      {label:'Standalone TV',data:digitalYears.map(d=>{const t=DATA.tvAnnual.find(v=>v.y===d.y);return t?t.s:null}),backgroundColor:'rgba(232,89,12,.6)',borderRadius:4},
+    ]
+  );
+
+  // Competitor chart
+  const compYears = DATA.tvTodayAnnual.map(d=>d.y);
+  const ndtvMap = Object.fromEntries(DATA.consolAnnual.map(d=>[d.y,d.s]));
+  buildChart('chartComp',
+    compYears,
+    [
+      {label:'NDTV Consolidated',data:compYears.map(y=>ndtvMap[y]||null),backgroundColor:'rgba(0,48,135,.7)',borderRadius:4},
+      {label:'TV Today (Aaj Tak)',data:DATA.tvTodayAnnual.map(d=>d.s),backgroundColor:'rgba(232,89,12,.7)',borderRadius:4},
+    ]
+  );
+
+  // Market chart
+  buildChart('chartMarket',
+    ['FY19','FY20','FY21','FY22','FY23','FY24','FY25E','FY26E'],
+    [
+      {label:'TV News',data:[3100,2800,2600,3400,4200,4800,5100,5400],backgroundColor:'rgba(0,48,135,.7)',borderRadius:4},
+      {label:'Digital News',data:[1800,2200,2600,3200,4400,5600,7200,9100],backgroundColor:'rgba(232,89,12,.7)',borderRadius:4},
+    ]
+  );
+
+  // MAU bars
+  const mauData = [
+    {name:'Aaj Tak / IndiaToday',mau:310,self:false},
+    {name:'Times of India',mau:285,self:false},
+    {name:'NDTV',mau:235,self:true},
+    {name:'Hindustan Times',mau:210,self:false},
+    {name:'News18',mau:198,self:false},
+  ];
+  document.getElementById('mau-bars').innerHTML = mauData.map(d=>`
+    <div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
+        <span style="font-weight:${d.self?700:400};color:${d.self?'var(--blue)':'var(--text2)'}">${d.self?'▶ ':''} ${d.name}</span>
+        <span style="font-weight:600">${d.mau}M</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-bar-fill" style="width:${(d.mau/310*100).toFixed(1)}%;background:${d.self?'var(--blue)':'var(--border)'}"></div>
+      </div>
+    </div>`).join('');
+
+  // Trends list
+  const trends = [
+    {icon:'📺',title:'CTV Boom',desc:'40M+ households, CPMs ₹800-1200 vs ₹180 linear',color:'var(--blue)'},
+    {icon:'🤖',title:'AI Newsroom',desc:'Reuters cut costs 30% — NDTV exploring vendors',color:'var(--orange)'},
+    {icon:'🗳️',title:'Election Cycle',desc:'Bihar 2025 — 35-45% ad revenue uplift expected',color:'var(--green)'},
+    {icon:'📱',title:'Short-form Video',desc:'38% news consumption via Reels/Shorts',color:'#8b5cf6'},
+  ];
+  document.getElementById('trends-list').innerHTML = trends.map(t=>`
+    <div style="display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:8px;background:var(--bg2)">
+      <span style="font-size:18px">${t.icon}</span>
+      <div><div style="font-weight:700;font-size:12px;color:${t.color}">${t.title}</div><div style="font-size:11px;color:var(--text3);margin-top:2px">${t.desc}</div></div>
+    </div>`).join('');
+
+  // Animate progress bars
+  setTimeout(()=>{
+    document.querySelectorAll('.progress-bar-fill').forEach(el=>{
+      const w = el.style.width; el.style.width='0'; setTimeout(()=>el.style.width=w,100);
+    });
+  }, 200);
+});
+</script>
+</body>
+</html>
