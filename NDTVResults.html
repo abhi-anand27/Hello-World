@@ -8,28 +8,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-/* ── Adani Design Tokens ────────────────────────────── */
+/* ── Design Tokens — Charcoal + Warm Grey Dark Mode ── */
 :root{
   --font:'Poppins',sans-serif;
-  --bg:#ffffff;
-  --bg2:#f4f4f2;
-  --bg3:#eeecea;
-  --text:#1a1a1a;
-  --text2:#393933;
-  --text3:#6b6b63;
-  --border:#e2e2de;
+  --bg:#1c1c1e;
+  --bg2:#2c2c2e;
+  --bg3:#3a3a3c;
+  --text:#f5f5f0;
+  --text2:#d4d4cc;
+  --text3:#8e8e86;
+  --border:#3a3a3c;
   --nav-h:64px;
-  --blue:#003087;
-  --blue2:#1a4fa0;
-  --blue-light:#e8edf7;
-  --orange:#e8590c;
-  --orange-light:#fdf0e8;
-  --green:#1e7e34;
-  --green-light:#e8f5ed;
-  --red:#c0392b;
-  --red-light:#fce8e6;
-  --shadow:0 2px 16px rgba(0,0,0,.07);
-  --shadow-lg:0 8px 40px rgba(0,0,0,.12);
+  --blue:#4f8ef7;
+  --blue2:#3a7de8;
+  --blue-light:#1e2d4a;
+  --orange:#ff7a3d;
+  --orange-light:#2e1e10;
+  --green:#34c759;
+  --green-light:#0f2e1a;
+  --red:#ff453a;
+  --red-light:#2e0f0e;
+  --shadow:0 2px 16px rgba(0,0,0,.35);
+  --shadow-lg:0 8px 40px rgba(0,0,0,.5);
   --radius:12px;
   --radius-sm:8px;
   --transition:all .35s cubic-bezier(.4,0,.2,1);
@@ -41,10 +41,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 /* ── Scrollbar ─────────────────────────────────────── */
 ::-webkit-scrollbar{width:6px;height:6px}
 ::-webkit-scrollbar-track{background:var(--bg2)}
-::-webkit-scrollbar-thumb{background:#c0c0bc;border-radius:3px}
+::-webkit-scrollbar-thumb{background:#4a4a4c;border-radius:3px}
 
 /* ── Nav ───────────────────────────────────────────── */
-.nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:1000;display:flex;align-items:center;padding:0 32px;gap:32px;transition:var(--transition)}
+.nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:rgba(28,28,30,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:1000;display:flex;align-items:center;padding:0 32px;gap:32px;transition:var(--transition)}
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
 .nav-logo{font-weight:700;font-size:20px;letter-spacing:-0.5px;color:var(--text)}
 .nav-logo span{color:var(--orange)}
@@ -92,11 +92,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 /* ── Tab Pills ─────────────────────────────────────── */
 .tabs{display:flex;gap:4px;background:var(--bg2);padding:4px;border-radius:10px;width:fit-content;margin-bottom:24px}
 .tab{padding:7px 18px;border-radius:7px;font-size:12px;font-weight:600;color:var(--text3);cursor:pointer;border:none;background:transparent;transition:var(--transition);font-family:var(--font)}
-.tab.active{background:#fff;color:var(--blue);box-shadow:0 1px 6px rgba(0,0,0,.1)}
+.tab.active{background:var(--bg3);color:var(--blue);box-shadow:0 1px 6px rgba(0,0,0,.3)}
 .tab:hover:not(.active){color:var(--text)}
 
 /* ── Cards ─────────────────────────────────────────── */
-.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:var(--transition)}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:var(--transition)}
 .card:hover{box-shadow:var(--shadow)}
 .card-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
 .card-sub{font-size:11px;color:var(--text3);margin-bottom:16px}
@@ -143,7 +143,7 @@ tbody td:first-child{text-align:left;font-weight:600;color:var(--text)}
 .chart-wrap{position:relative;height:240px}
 
 /* ── Competitor cards ──────────────────────────────── */
-.comp-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:var(--transition)}
+.comp-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:var(--transition)}
 .comp-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
 .comp-card.self{border-color:var(--blue);background:var(--blue-light)}
 .comp-name{font-size:15px;font-weight:700;margin-bottom:4px}
@@ -153,7 +153,7 @@ tbody td:first-child{text-align:left;font-weight:600;color:var(--text)}
 .comp-row span:last-child{font-weight:600}
 
 /* ── Copilot panel ─────────────────────────────────── */
-.copilot-panel{position:fixed;right:24px;bottom:24px;width:400px;height:580px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;z-index:900;transform:scale(0);transform-origin:bottom right;opacity:0;transition:var(--transition)}
+.copilot-panel{position:fixed;right:24px;bottom:24px;width:400px;height:580px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;z-index:900;transform:scale(0);transform-origin:bottom right;opacity:0;transition:var(--transition)}
 .copilot-panel.open{transform:scale(1);opacity:1}
 .copilot-header{background:linear-gradient(135deg,var(--blue),var(--blue2));padding:16px 18px;border-radius:var(--radius) var(--radius) 0 0;display:flex;align-items:center;gap:10px;flex-shrink:0}
 .copilot-icon{width:32px;height:32px;background:rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center}
@@ -176,7 +176,7 @@ tbody td:first-child{text-align:left;font-weight:600;color:var(--text)}
 
 /* ── Alert banner ──────────────────────────────────── */
 .alert{display:flex;align-items:flex-start;gap:10px;padding:14px 18px;border-radius:var(--radius-sm);margin-bottom:16px;font-size:13px}
-.alert-warn{background:#fff8e1;border-left:3px solid #f59f00}
+.alert-warn{background:#2a2310;border-left:3px solid #f59f00;color:var(--text2)}
 .alert-info{background:var(--blue-light);border-left:3px solid var(--blue)}
 
 /* ── Source tag ────────────────────────────────────── */
@@ -714,12 +714,12 @@ function buildChart(id, labels, datasets, type='bar', opts={}) {
       responsive: true, maintainAspectRatio: false,
       interaction: { intersect: false, mode: 'index' },
       plugins: {
-        legend: { position: 'bottom', labels: { font: { family: 'Poppins', size: 11 }, padding: 16, boxWidth: 10 } },
-        tooltip: { bodyFont: { family: 'Poppins', size: 11 }, titleFont: { family: 'Poppins', size: 11 } }
+        legend: { position: 'bottom', labels: { font: { family: 'Poppins', size: 11 }, padding: 16, boxWidth: 10, color: '#d4d4cc' } },
+        tooltip: { bodyFont: { family: 'Poppins', size: 11 }, titleFont: { family: 'Poppins', size: 11 }, backgroundColor: '#2c2c2e', borderColor: '#3a3a3c', borderWidth: 1, titleColor: '#f5f5f0', bodyColor: '#d4d4cc' }
       },
       scales: {
-        x: { ticks: { font: { family: 'Poppins', size: 10 } }, grid: { color: '#f0f0ee' } },
-        y: { ticks: { font: { family: 'Poppins', size: 10 } }, grid: { color: '#f0f0ee' } },
+        x: { ticks: { font: { family: 'Poppins', size: 10 }, color: '#8e8e86' }, grid: { color: '#3a3a3c' } },
+        y: { ticks: { font: { family: 'Poppins', size: 10 }, color: '#8e8e86' }, grid: { color: '#3a3a3c' } },
         ...opts.scales
       },
       animation: { duration: 700, easing: 'easeInOutQuart' },
