@@ -5,7 +5,7 @@ import {
   Tooltip, Legend, BarChart, Bar
 } from 'recharts'
 import { Users, Shield, AlertTriangle, TrendingUp } from 'lucide-react'
-import { tvCompetitors, digitalCompetitors, marketShareTrend } from '../../data/competitors'
+import { tvCompetitors, digitalCompetitors, marketShareTrend, peerComparison } from '../../data/competitors'
 
 const TABS = ['TV Players', 'Digital Players', 'Market Share Trend', 'SWOT']
 
@@ -19,9 +19,9 @@ const STATUS_CONFIG = {
 const LINE_COLORS = {
   ndtv: '#E8001D',
   aajTak: '#f59e0b',
-  republic: '#ef4444',
-  timesNow: '#3b82f6',
-  indiaTV: '#10b981',
+  network18: '#a855f7',
+  zee: '#3b82f6',
+  sunTV: '#10b981',
 }
 
 export default function CompetitorAnalysis() {
@@ -29,12 +29,12 @@ export default function CompetitorAnalysis() {
   const [selectedTV, setSelectedTV] = useState(null)
 
   const radarData = tvCompetitors.map(c => ({
-    name: c.name,
-    'Primetime Share': c.primetime.share,
-    'Revenue (100s Cr)': Math.round(c.revenue / 100),
-    'EBITDA Margin (%)': parseFloat(c.ebitdaMargin),
+    name: c.name.split(' ')[0],
+    'Primetime Share': typeof c.primetime.share === 'number' ? c.primetime.share : 5,
+    'Revenue (100s Cr)': Math.min(Math.round(c.revenue / 100), 20),
+    'EBITDA Margin': Math.max(parseFloat(c.ebitdaMargin) + 40, 0),
     'Channel Count': c.channels.length * 2,
-    'Brand Score': c.name === 'Aaj Tak (TV Today)' ? 9 : c.name === 'NDTV' ? 8 : c.name === 'Republic TV (ARG Outlier)' ? 6 : 7,
+    'Brand Score': c.name.includes('NDTV') ? 8 : c.name.includes('Aaj Tak') ? 9 : c.name.includes('Sun') ? 8 : c.name.includes('Zee') ? 7 : 6,
   }))
 
   return (
@@ -78,8 +78,8 @@ export default function CompetitorAnalysis() {
                   <div className="grid grid-cols-2 gap-2 text-xs">
                     <div><span className="text-gray-400">Revenue:</span> <span className="font-medium">₹{c.revenue} Cr</span></div>
                     <div><span className="text-gray-400">EBITDA Mg:</span> <span className="font-medium">{c.ebitdaMargin}</span></div>
-                    <div><span className="text-gray-400">Primetime:</span> <span className="font-medium">{c.primetime.share}% (#{c.primetime.rank})</span></div>
-                    <div><span className="text-gray-400">All Day:</span> <span className="font-medium">{c.allDay.share}% (#{c.allDay.rank})</span></div>
+                    <div><span className="text-gray-400">PAT FY25:</span> <span className={`font-medium ${c.pat < 0 ? 'text-red-400' : 'text-green-400'}`}>₹{c.pat} Cr</span></div>
+                    <div><span className="text-gray-400">EPS:</span> <span className={`font-medium ${c.eps < 0 ? 'text-red-400' : 'text-green-400'}`}>₹{c.eps}</span></div>
                   </div>
                   <div className="mt-2 flex flex-wrap gap-1">
                     {c.channels.map(ch => (
@@ -104,11 +104,11 @@ export default function CompetitorAnalysis() {
               <thead>
                 <tr className="text-gray-400 border-b border-ndtv-border">
                   <th className="text-left py-2 pr-3">Network</th>
-                  <th className="text-right px-3">Revenue (Cr)</th>
-                  <th className="text-right px-3">EBITDA Mg</th>
-                  <th className="text-right px-3">Primetime %</th>
-                  <th className="text-right px-3">All Day %</th>
-                  <th className="text-right px-3">Channels</th>
+                  <th className="text-right px-3">Ticker</th>
+                  <th className="text-right px-3">Rev FY25 (Cr)</th>
+                  <th className="text-right px-3">OPM FY25</th>
+                  <th className="text-right px-3">PAT FY25 (Cr)</th>
+                  <th className="text-right px-3">EPS FY25</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-ndtv-border/50">
@@ -116,13 +116,13 @@ export default function CompetitorAnalysis() {
                   <tr key={c.name} className={`hover:bg-ndtv-border/20 ${c.status === 'self' ? 'bg-ndtv-red/5' : ''}`}>
                     <td className="py-2 pr-3 font-medium">
                       {c.name}
-                      {c.status === 'self' && <span className="ml-1 badge-red">US</span>}
+                      {c.status === 'self' && <span className="ml-1 badge-red">NDTV</span>}
                     </td>
-                    <td className="text-right px-3">{c.revenue}</td>
+                    <td className="text-right px-3 text-gray-400 font-mono text-xs">{c.ticker}</td>
+                    <td className="text-right px-3">{c.revenue.toLocaleString()}</td>
                     <td className="text-right px-3">{c.ebitdaMargin}</td>
-                    <td className="text-right px-3">{c.primetime.share}%</td>
-                    <td className="text-right px-3">{c.allDay.share}%</td>
-                    <td className="text-right px-3">{c.channels.length}</td>
+                    <td className={`text-right px-3 ${c.pat < 0 ? 'text-red-400' : 'text-green-400'}`}>{c.pat}</td>
+                    <td className={`text-right px-3 ${c.eps < 0 ? 'text-red-400' : 'text-green-400'}`}>₹{c.eps}</td>
                   </tr>
                 ))}
               </tbody>
@@ -190,9 +190,9 @@ export default function CompetitorAnalysis() {
                 <Legend wrapperStyle={{ fontSize: 11 }} />
                 <Line type="monotone" dataKey="ndtv" name="NDTV" stroke={LINE_COLORS.ndtv} strokeWidth={2.5} dot={{ r: 3 }} />
                 <Line type="monotone" dataKey="aajTak" name="Aaj Tak" stroke={LINE_COLORS.aajTak} strokeWidth={2} dot={{ r: 3 }} />
-                <Line type="monotone" dataKey="republic" name="Republic" stroke={LINE_COLORS.republic} strokeWidth={2} dot={{ r: 3 }} strokeDasharray="4 2" />
-                <Line type="monotone" dataKey="timesNow" name="Times Now" stroke={LINE_COLORS.timesNow} strokeWidth={2} dot={{ r: 3 }} />
-                <Line type="monotone" dataKey="indiaTV" name="India TV" stroke={LINE_COLORS.indiaTV} strokeWidth={2} dot={{ r: 3 }} />
+                <Line type="monotone" dataKey="network18" name="Network18" stroke={LINE_COLORS.network18} strokeWidth={2} dot={{ r: 3 }} strokeDasharray="4 2" />
+                <Line type="monotone" dataKey="zee" name="Zee News" stroke={LINE_COLORS.zee} strokeWidth={2} dot={{ r: 3 }} />
+                <Line type="monotone" dataKey="sunTV" name="Sun TV" stroke={LINE_COLORS.sunTV} strokeWidth={2} dot={{ r: 3 }} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -201,9 +201,9 @@ export default function CompetitorAnalysis() {
               <AlertTriangle size={18} className="text-yellow-400 flex-shrink-0 mt-0.5" />
               <div className="text-sm">
                 <span className="font-medium text-yellow-400">Trend Alert: </span>
-                NDTV's combined viewership share has declined from ~8.9% to ~7.8% over Q1 FY23–Q4 FY24.
-                Aaj Tak remains market leader at 10.8%. Republic TV overtook NDTV in primetime from Q3 FY23.
-                Recovery strategy needed in Hindi news (NDTV India) to recapture mass audience.
+                NDTV's combined viewership share has declined from ~8.9% (Q1 FY23) to ~7.8% (Q4 FY24).
+                Aaj Tak (TV Today) remains the Hindi news market leader at ~10.8%. Network18 gaining share
+                with JioStar distribution. Viewership data based on BARC estimates (Hindi+English news genre).
               </div>
             </div>
           </div>

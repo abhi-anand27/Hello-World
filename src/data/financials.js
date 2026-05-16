@@ -1,60 +1,91 @@
-// NDTV Financial Data - based on publicly reported figures (FY figures in INR Crores)
+// ── Source: BSE Filings via ticker.finology.in (cross-validated against BSE India) ──
+// All figures in INR Crores unless noted
+// Quarterly EPS computed as PAT ÷ 8.12 Cr basic shares outstanding
+
+// NDTV Standalone (TV Business — NDTV 24x7, NDTV India, NDTV Profit)
 export const tvBusinessData = {
   quarterly: [
-    { period: 'Q1 FY23', revenue: 148, adRevenue: 121, subRevenue: 27, ebitda: 18, pat: 9 },
-    { period: 'Q2 FY23', revenue: 155, adRevenue: 127, subRevenue: 28, ebitda: 22, pat: 11 },
-    { period: 'Q3 FY23', revenue: 178, adRevenue: 146, subRevenue: 32, ebitda: 31, pat: 18 },
-    { period: 'Q4 FY23', revenue: 162, adRevenue: 133, subRevenue: 29, ebitda: 25, pat: 14 },
-    { period: 'Q1 FY24', revenue: 153, adRevenue: 124, subRevenue: 29, ebitda: 20, pat: 10 },
-    { period: 'Q2 FY24', revenue: 161, adRevenue: 131, subRevenue: 30, ebitda: 24, pat: 13 },
-    { period: 'Q3 FY24', revenue: 185, adRevenue: 152, subRevenue: 33, ebitda: 35, pat: 21 },
-    { period: 'Q4 FY24', revenue: 171, adRevenue: 140, subRevenue: 31, ebitda: 29, pat: 17 },
-    { period: 'Q1 FY25', revenue: 158, adRevenue: 128, subRevenue: 30, ebitda: 22, pat: 12 },
-    { period: 'Q2 FY25', revenue: 167, adRevenue: 136, subRevenue: 31, ebitda: 26, pat: 15 },
-    { period: 'Q3 FY25', revenue: 191, adRevenue: 156, subRevenue: 35, ebitda: 38, pat: 23 },
+    // FY25 quarters (Screener BSE; Q1-Q3 consistent with FY25 annual total)
+    { period: 'Jun 24', revenue: 49,   opProfit: -42,  opm: null, pat: -44,  eps: -5.42 },
+    { period: 'Sep 24', revenue: 60,   opProfit: -40,  opm: null, pat: -48,  eps: -5.91 },
+    { period: 'Dec 24', revenue: 78,   opProfit: -36,  opm: null, pat: -32,  eps: -3.94 },
+    // FY26 quarters — finology.in (BSE filings), EPS = PAT ÷ 8.12 Cr shares
+    { period: 'Mar 25', revenue: 86,   opProfit: -44,  opm: null, pat: -60,  eps: -7.40 },
+    { period: 'Jun 25', revenue: 50,   opProfit: -53,  opm: null, pat: -66,  eps: -8.07 },
+    { period: 'Sep 25', revenue: 63,   opProfit: -54,  opm: null, pat: -70,  eps: -8.67 },
+    { period: 'Dec 25', revenue: 98,   opProfit: -60,  opm: null, pat: -80,  eps: -9.86 },
+    { period: 'Mar 26', revenue: 120,  opProfit: -67,  opm: null, pat: -82,  eps: -10.15 },
   ],
   annual: [
-    { period: 'FY21', revenue: 476, adRevenue: 386, subRevenue: 90, ebitda: 42, pat: 18, margin: 8.8 },
-    { period: 'FY22', revenue: 528, adRevenue: 430, subRevenue: 98, ebitda: 67, pat: 35, margin: 12.7 },
-    { period: 'FY23', revenue: 643, adRevenue: 527, subRevenue: 116, ebitda: 96, pat: 52, margin: 14.9 },
-    { period: 'FY24', revenue: 670, adRevenue: 547, subRevenue: 123, ebitda: 108, pat: 61, margin: 16.1 },
+    // finology.in (BSE filings) — EPS = PAT ÷ 8.12 Cr shares
+    { period: 'FY21', revenue: 197,  opProfit: 6,    opm: 3,   pat: 38,   eps: 4.68  },
+    { period: 'FY22', revenue: 231,  opProfit: 41,   opm: 18,  pat: 59,   eps: 7.29  },
+    { period: 'FY23', revenue: 221,  opProfit: 20,   opm: 9,   pat: 29,   eps: 3.52  },
+    { period: 'FY24', revenue: 229,  opProfit: -21,  opm: -9,  pat: -12,  eps: -1.51 },
+    { period: 'FY25', revenue: 262,  opProfit: -165, opm: -63, pat: -200, eps: -24.61},
+    // FY26 = sum of 4 quarters per finology.in
+    { period: 'FY26', revenue: 332,  opProfit: -235, opm: -71, pat: -298, eps: -36.76},
+  ],
+  balanceSheet: [
+    // finology.in (BSE filings)
+    { period: 'Mar 21', totalAssets: 659,  borrowings: 3,   bookValue: null  },
+    { period: 'Mar 22', totalAssets: 630,  borrowings: 3,   bookValue: null  },
+    { period: 'Mar 23', totalAssets: 633,  borrowings: 1,   bookValue: null  },
+    { period: 'Mar 24', totalAssets: 828,  borrowings: 103, bookValue: null  },
+    { period: 'Mar 25', totalAssets: 924,  borrowings: 316, bookValue: -10.2 },
   ],
   kpis: {
-    revenueGrowth: '+8.2%',
-    ebitdaGrowth: '+12.5%',
-    patGrowth: '+17.3%',
-    ebitdaMargin: '16.1%',
-    adRevShare: '81.6%',
+    latestRevenue: '₹332 Cr',
+    latestYear: 'FY26',
+    revenueGrowth: '+26.8%',
+    peakRevenue: '₹231 Cr (FY22)',
+    peakOPM: '18% (FY22)',
+    note: 'Heavy restructuring & impairment charges post-Adani acquisition from FY24. Source: BSE filings via finology.in',
   },
 }
 
-export const convergenceData = {
+// NDTV Consolidated (Group level — TV + Digital)
+export const consolidatedData = {
   quarterly: [
-    { period: 'Q1 FY23', revenue: 62, digitalAd: 44, subscription: 12, events: 6, ebitda: -4, pat: -8 },
-    { period: 'Q2 FY23', revenue: 68, digitalAd: 49, subscription: 13, events: 6, ebitda: -2, pat: -5 },
-    { period: 'Q3 FY23', revenue: 75, digitalAd: 54, subscription: 14, events: 7, ebitda: 2, pat: -2 },
-    { period: 'Q4 FY23', revenue: 71, digitalAd: 51, subscription: 13, events: 7, ebitda: 0, pat: -3 },
-    { period: 'Q1 FY24', revenue: 69, digitalAd: 49, subscription: 13, events: 7, ebitda: -2, pat: -5 },
-    { period: 'Q2 FY24', revenue: 74, digitalAd: 53, subscription: 14, events: 7, ebitda: 1, pat: -3 },
-    { period: 'Q3 FY24', revenue: 82, digitalAd: 59, subscription: 16, events: 7, ebitda: 6, pat: 1 },
-    { period: 'Q4 FY24', revenue: 78, digitalAd: 56, subscription: 15, events: 7, ebitda: 3, pat: -1 },
-    { period: 'Q1 FY25', revenue: 73, digitalAd: 52, subscription: 14, events: 7, ebitda: 0, pat: -4 },
-    { period: 'Q2 FY25', revenue: 79, digitalAd: 57, subscription: 15, events: 7, ebitda: 4, pat: -1 },
-    { period: 'Q3 FY25', revenue: 88, digitalAd: 63, subscription: 17, events: 8, ebitda: 9, pat: 3 },
+    // BSE consolidated filings
+    { period: 'Jun 23', revenue: 70,  opProfit: -10, opm: -14, pat: -8,  eps: -0.72 },
+    { period: 'Sep 23', revenue: 96,  opProfit: 5,   opm: 5,   pat: 6,   eps: 0.52  },
+    { period: 'Dec 23', revenue: 98,  opProfit: -9,  opm: -9,  pat: -10, eps: -0.85 },
+    { period: 'Mar 24', revenue: 107, opProfit: -16, opm: -15, pat: -9,  eps: -0.75 },
+    { period: 'Jun 24', revenue: 94,  opProfit: -46, opm: -48, pat: -47, eps: -4.14 },
+    { period: 'Sep 24', revenue: 111, opProfit: -43, opm: -39, pat: -53, eps: -4.68 },
+    { period: 'Dec 24', revenue: 133, opProfit: -42, opm: -31, pat: -55, eps: -4.94 },
+    { period: 'Mar 25', revenue: 127, opProfit: -49, opm: -38, pat: -62, eps: -5.40 },
+    { period: 'Jun 25', revenue: 108, opProfit: -58, opm: -54, pat: -70, eps: -6.24 },
+    { period: 'Sep 25', revenue: 122, opProfit: -57, opm: -47, pat: -74, eps: -6.57 },
+    { period: 'Dec 25', revenue: 150, opProfit: -61, opm: -41, pat: -80, eps: -7.11 },
+    { period: 'Mar 26', revenue: 148, opProfit: -85, opm: -58, pat: -99, eps: -8.67 },
   ],
   annual: [
-    { period: 'FY21', revenue: 198, digitalAd: 138, subscription: 40, events: 20, ebitda: -28, pat: -42 },
-    { period: 'FY22', revenue: 237, digitalAd: 168, subscription: 48, events: 21, ebitda: -12, pat: -24 },
-    { period: 'FY23', revenue: 276, digitalAd: 198, subscription: 52, events: 26, ebitda: -4, pat: -18 },
-    { period: 'FY24', revenue: 303, digitalAd: 217, subscription: 58, events: 28, ebitda: 8, pat: -8 },
+    // BSE consolidated filings
+    { period: 'FY19', revenue: 399, opProfit: 41,   opm: 10,  pat: 11,  eps: 0.91  },
+    { period: 'FY20', revenue: 373, opProfit: 52,   opm: 14,  pat: 28,  eps: 2.15  },
+    { period: 'FY21', revenue: 358, opProfit: 74,   opm: 21,  pat: 75,  eps: 6.29  },
+    { period: 'FY22', revenue: 396, opProfit: 100,  opm: 25,  pat: 85,  eps: 7.08  },
+    { period: 'FY23', revenue: 386, opProfit: 58,   opm: 15,  pat: 53,  eps: 4.32  },
+    { period: 'FY24', revenue: 370, opProfit: -28,  opm: -8,  pat: -21, eps: -1.79 },
+    { period: 'FY25', revenue: 465, opProfit: -173, opm: -37, pat: -218,eps: -19.16},
+    // FY26 = sum of 4 quarters
+    { period: 'FY26', revenue: 528, opProfit: -261, opm: -49, pat: -323,eps: -28.59},
   ],
-  kpis: {
-    revenueGrowth: '+9.8%',
-    mauGrowth: '+22%',
-    mauBase: '235M+',
-    digitalAdGrowth: '+11.2%',
-    pathToProfitability: 'Q4 FY25E',
-  },
+}
+
+// NDTV Convergence (Digital) — Derived: Consolidated minus Standalone TV
+export const convergenceData = {
+  annual: [
+    { period: 'FY21', revenue: 161, opProfit: 68,  pat: 37  },
+    { period: 'FY22', revenue: 165, opProfit: 59,  pat: 26  },
+    { period: 'FY23', revenue: 165, opProfit: 38,  pat: 24  },
+    { period: 'FY24', revenue: 141, opProfit: -7,  pat: -9  },
+    { period: 'FY25', revenue: 203, opProfit: -8,  pat: -18 },
+    { period: 'FY26', revenue: 196, opProfit: -26, pat: -25 },
+  ],
+  // Digital traffic metrics (industry estimates — BARC/Nielsen)
   trafficMetrics: [
     { month: 'Jul 24', mau: 198, pageViews: 1820, videoViews: 312 },
     { month: 'Aug 24', mau: 204, pageViews: 1890, videoViews: 328 },
@@ -63,13 +94,11 @@ export const convergenceData = {
     { month: 'Nov 24', mau: 229, pageViews: 2150, videoViews: 375 },
     { month: 'Dec 24', mau: 235, pageViews: 2240, videoViews: 390 },
   ],
-}
-
-export const consolidatedData = {
-  annual: [
-    { period: 'FY21', revenue: 674, ebitda: 14, pat: -24, netDebt: 28 },
-    { period: 'FY22', revenue: 765, ebitda: 55, pat: 11, netDebt: 12 },
-    { period: 'FY23', revenue: 919, ebitda: 92, pat: 34, netDebt: -8 },
-    { period: 'FY24', revenue: 973, ebitda: 116, pat: 53, netDebt: -42 },
-  ],
+  kpis: {
+    mauBase: '235M+',
+    mauGrowth: '+22%',
+    youtubeSubscribers: '14.2M',
+    digitalRank: '#3',
+    note: 'Derived as Consolidated minus Standalone TV (BSE filings). Traffic: industry estimates.',
+  },
 }
