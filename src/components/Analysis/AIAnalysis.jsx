@@ -14,20 +14,34 @@ const SUGGESTED_PROMPTS = [
 
 const INITIAL_CONTEXT = `You are analyzing NDTV's financial dashboard. Here is the key context:
 
-**NDTV Group (FY24 Actuals):**
-- Consolidated Revenue: ₹973 Cr (+5.9% YoY)
-- EBITDA: ₹116 Cr (+26.1% YoY), Margin: 11.9%
-- TV Business Revenue: ₹670 Cr, EBITDA Margin: 16.1%
-- Digital/Convergence Revenue: ₹303 Cr, EBITDA: ₹8 Cr (near breakeven)
-- Digital MAU: 235M+, YoY growth: +22%
+**NDTV Group — FY26 Actuals (Apr 25 – Mar 26):**
+- Consolidated Revenue: ₹528 Cr (+13.5% vs FY25 ₹465 Cr)
+- Operating Profit: -₹261 Cr (OPM: -49%)
+- PAT: -₹323 Cr | EPS: ₹-28.59
+
+**TV Business Standalone (FY26):**
+- Revenue: ₹332 Cr (+26.8% vs FY25 ₹262 Cr)
+- Operating Profit: -₹235 Cr (OPM: -71%)
+- PAT: -₹298 Cr | EPS: ₹-36.76
+
+**Digital/Convergence (FY26):**
+- Revenue: ₹196 Cr (vs ₹203 Cr FY25 — slight decline)
+- Operating Profit: -₹26 Cr | PAT: -₹25 Cr
+- MAU: 235M+ (+22% YoY), YouTube: 14.2M subscribers, Rank #3 portal
+
+**Peer Benchmarks (FY25 OPM):**
+- TV Today (Aaj Tak): Revenue ₹993 Cr, OPM +10%, PAT ₹75 Cr
+- Sun TV: Revenue ₹3,879 Cr, OPM +54%, PAT ₹1,654 Cr
+- Zee Entertainment: Revenue ₹7,712 Cr, OPM +13%, PAT ₹701 Cr
+- Network18: Revenue ₹1,896 Cr, OPM +2%, PAT -₹185 Cr (operational)
+- HT Media: Revenue ₹1,036 Cr, OPM ~0%, PAT -₹65 Cr
 
 **Market Context:**
 - TV News Ad Market: ₹4,800 Cr (+7.2% YoY)
 - Digital News Ad Market: ₹5,600 Cr (+22.4% YoY)
-- NDTV viewership share: ~7.8% (declining from 8.9% in Q1 FY23)
-- Key competitors: Aaj Tak (10.8% share), Republic TV (11.4% primetime)
+- NDTV TV viewership share: ~7.8% (from 8.9% in Q1 FY23)
 
-**Ownership:** Adani Group holds 64.7% stake.`
+**Ownership:** Adani Group holds 64.7% stake. Borrowings at ₹316 Cr (Mar 25).`
 
 function Message({ role, content }) {
   return (

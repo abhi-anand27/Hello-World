@@ -8,6 +8,7 @@ import CompetitorAnalysis from './components/Competitors/CompetitorAnalysis'
 import MarketStatus from './components/Market/MarketStatus'
 import NewsTrends from './components/News/NewsTrends'
 import AIAnalysis from './components/Analysis/AIAnalysis'
+import CopilotPanel from './components/Copilot/CopilotPanel'
 
 const PAGES = {
   overview: Overview,
@@ -41,6 +42,7 @@ export default function App() {
           <PageComponent onNavigate={setActivePage} />
         </main>
       </div>
+      <CopilotPanel />
     </div>
   )
 }
