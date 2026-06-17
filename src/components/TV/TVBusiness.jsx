@@ -4,7 +4,7 @@ import {
   LineChart, Line, Legend, ReferenceLine
 } from 'recharts'
 import { TrendingUp, TrendingDown, Tv } from 'lucide-react'
-import { tvBusinessData } from '../../data/financials'
+import { useData } from '../../api/DataContext'
 
 const TAB_OPTIONS = ['Quarterly', 'Annual', 'P&L Detail']
 
@@ -19,6 +19,8 @@ function valColor(v) {
 
 export default function TVBusiness() {
   const [tab, setTab] = useState('Quarterly')
+  const { data } = useData()
+  const { tvBusinessData } = data.financials
   const quarterly = tvBusinessData.quarterly
   const annual    = tvBusinessData.annual
   const kpis      = tvBusinessData.kpis

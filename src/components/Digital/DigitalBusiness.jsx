@@ -4,7 +4,7 @@ import {
   BarChart, Bar, LineChart, Line, Legend, ReferenceLine
 } from 'recharts'
 import { Globe, TrendingUp, TrendingDown } from 'lucide-react'
-import { convergenceData } from '../../data/financials'
+import { useData } from '../../api/DataContext'
 
 const TABS = ['Annual', 'Traffic Metrics']
 
@@ -19,7 +19,8 @@ function valColor(v) {
 
 export default function DigitalBusiness() {
   const [tab, setTab] = useState('Annual')
-  const { annual, kpis, trafficMetrics } = convergenceData
+  const { data } = useData()
+  const { annual, kpis, trafficMetrics } = data.financials.convergenceData
 
   const latestAnnual = annual[annual.length - 1]  // FY26
   const prevAnnual   = annual[annual.length - 2]  // FY25

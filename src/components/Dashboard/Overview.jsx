@@ -4,7 +4,7 @@ import {
   BarChart, Bar, Legend, ReferenceLine
 } from 'recharts'
 import { TrendingUp, TrendingDown, Tv, Globe, Users, Activity } from 'lucide-react'
-import { consolidatedData, tvBusinessData, convergenceData } from '../../data/financials'
+import { useData } from '../../api/DataContext'
 
 function KPICard({ title, value, change, positive, icon: Icon, sub }) {
   return (
@@ -40,6 +40,8 @@ const tvVsDigital = [
 ]
 
 export default function Overview({ onNavigate }) {
+  const { data } = useData()
+  const { consolidatedData } = data.financials
   const consolidated = consolidatedData.annual
   // FY26 is the latest full year
   const latest = consolidated[consolidated.length - 1]   // FY26

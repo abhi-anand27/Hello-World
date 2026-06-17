@@ -1,0 +1,411 @@
+{
+  "tvBusinessData": {
+    "quarterly": [
+      {
+        "period": "Jun 24",
+        "revenue": 49,
+        "opProfit": -42,
+        "opm": null,
+        "pat": -44,
+        "eps": -5.42
+      },
+      {
+        "period": "Sep 24",
+        "revenue": 60,
+        "opProfit": -40,
+        "opm": null,
+        "pat": -48,
+        "eps": -5.91
+      },
+      {
+        "period": "Dec 24",
+        "revenue": 78,
+        "opProfit": -36,
+        "opm": null,
+        "pat": -32,
+        "eps": -3.94
+      },
+      {
+        "period": "Mar 25",
+        "revenue": 86,
+        "opProfit": -44,
+        "opm": null,
+        "pat": -60,
+        "eps": -7.4
+      },
+      {
+        "period": "Jun 25",
+        "revenue": 50,
+        "opProfit": -53,
+        "opm": null,
+        "pat": -66,
+        "eps": -8.07
+      },
+      {
+        "period": "Sep 25",
+        "revenue": 63,
+        "opProfit": -54,
+        "opm": null,
+        "pat": -70,
+        "eps": -8.67
+      },
+      {
+        "period": "Dec 25",
+        "revenue": 98,
+        "opProfit": -60,
+        "opm": null,
+        "pat": -80,
+        "eps": -9.86
+      },
+      {
+        "period": "Mar 26",
+        "revenue": 120,
+        "opProfit": -67,
+        "opm": null,
+        "pat": -82,
+        "eps": -10.15
+      }
+    ],
+    "annual": [
+      {
+        "period": "FY21",
+        "revenue": 197,
+        "opProfit": 6,
+        "opm": 3,
+        "pat": 38,
+        "eps": 4.68
+      },
+      {
+        "period": "FY22",
+        "revenue": 231,
+        "opProfit": 41,
+        "opm": 18,
+        "pat": 59,
+        "eps": 7.29
+      },
+      {
+        "period": "FY23",
+        "revenue": 221,
+        "opProfit": 20,
+        "opm": 9,
+        "pat": 29,
+        "eps": 3.52
+      },
+      {
+        "period": "FY24",
+        "revenue": 229,
+        "opProfit": -21,
+        "opm": -9,
+        "pat": -12,
+        "eps": -1.51
+      },
+      {
+        "period": "FY25",
+        "revenue": 262,
+        "opProfit": -165,
+        "opm": -63,
+        "pat": -200,
+        "eps": -24.61
+      },
+      {
+        "period": "FY26",
+        "revenue": 332,
+        "opProfit": -235,
+        "opm": -71,
+        "pat": -298,
+        "eps": -36.76
+      }
+    ],
+    "balanceSheet": [
+      {
+        "period": "Mar 21",
+        "totalAssets": 659,
+        "borrowings": 3,
+        "bookValue": null
+      },
+      {
+        "period": "Mar 22",
+        "totalAssets": 630,
+        "borrowings": 3,
+        "bookValue": null
+      },
+      {
+        "period": "Mar 23",
+        "totalAssets": 633,
+        "borrowings": 1,
+        "bookValue": null
+      },
+      {
+        "period": "Mar 24",
+        "totalAssets": 828,
+        "borrowings": 103,
+        "bookValue": null
+      },
+      {
+        "period": "Mar 25",
+        "totalAssets": 924,
+        "borrowings": 316,
+        "bookValue": -10.2
+      }
+    ],
+    "kpis": {
+      "latestRevenue": "₹332 Cr",
+      "latestYear": "FY26",
+      "revenueGrowth": "+26.8%",
+      "peakRevenue": "₹231 Cr (FY22)",
+      "peakOPM": "18% (FY22)",
+      "note": "Heavy restructuring & impairment charges post-Adani acquisition from FY24. Source: BSE filings via finology.in"
+    }
+  },
+  "consolidatedData": {
+    "quarterly": [
+      {
+        "period": "Jun 23",
+        "revenue": 70,
+        "opProfit": -10,
+        "opm": -14,
+        "pat": -8,
+        "eps": -0.72
+      },
+      {
+        "period": "Sep 23",
+        "revenue": 96,
+        "opProfit": 5,
+        "opm": 5,
+        "pat": 6,
+        "eps": 0.52
+      },
+      {
+        "period": "Dec 23",
+        "revenue": 98,
+        "opProfit": -9,
+        "opm": -9,
+        "pat": -10,
+        "eps": -0.85
+      },
+      {
+        "period": "Mar 24",
+        "revenue": 107,
+        "opProfit": -16,
+        "opm": -15,
+        "pat": -9,
+        "eps": -0.75
+      },
+      {
+        "period": "Jun 24",
+        "revenue": 94,
+        "opProfit": -46,
+        "opm": -48,
+        "pat": -47,
+        "eps": -4.14
+      },
+      {
+        "period": "Sep 24",
+        "revenue": 111,
+        "opProfit": -43,
+        "opm": -39,
+        "pat": -53,
+        "eps": -4.68
+      },
+      {
+        "period": "Dec 24",
+        "revenue": 133,
+        "opProfit": -42,
+        "opm": -31,
+        "pat": -55,
+        "eps": -4.94
+      },
+      {
+        "period": "Mar 25",
+        "revenue": 127,
+        "opProfit": -49,
+        "opm": -38,
+        "pat": -62,
+        "eps": -5.4
+      },
+      {
+        "period": "Jun 25",
+        "revenue": 108,
+        "opProfit": -58,
+        "opm": -54,
+        "pat": -70,
+        "eps": -6.24
+      },
+      {
+        "period": "Sep 25",
+        "revenue": 122,
+        "opProfit": -57,
+        "opm": -47,
+        "pat": -74,
+        "eps": -6.57
+      },
+      {
+        "period": "Dec 25",
+        "revenue": 150,
+        "opProfit": -61,
+        "opm": -41,
+        "pat": -80,
+        "eps": -7.11
+      },
+      {
+        "period": "Mar 26",
+        "revenue": 148,
+        "opProfit": -85,
+        "opm": -58,
+        "pat": -99,
+        "eps": -8.67
+      }
+    ],
+    "annual": [
+      {
+        "period": "FY19",
+        "revenue": 399,
+        "opProfit": 41,
+        "opm": 10,
+        "pat": 11,
+        "eps": 0.91
+      },
+      {
+        "period": "FY20",
+        "revenue": 373,
+        "opProfit": 52,
+        "opm": 14,
+        "pat": 28,
+        "eps": 2.15
+      },
+      {
+        "period": "FY21",
+        "revenue": 358,
+        "opProfit": 74,
+        "opm": 21,
+        "pat": 75,
+        "eps": 6.29
+      },
+      {
+        "period": "FY22",
+        "revenue": 396,
+        "opProfit": 100,
+        "opm": 25,
+        "pat": 85,
+        "eps": 7.08
+      },
+      {
+        "period": "FY23",
+        "revenue": 386,
+        "opProfit": 58,
+        "opm": 15,
+        "pat": 53,
+        "eps": 4.32
+      },
+      {
+        "period": "FY24",
+        "revenue": 370,
+        "opProfit": -28,
+        "opm": -8,
+        "pat": -21,
+        "eps": -1.79
+      },
+      {
+        "period": "FY25",
+        "revenue": 465,
+        "opProfit": -173,
+        "opm": -37,
+        "pat": -218,
+        "eps": -19.16
+      },
+      {
+        "period": "FY26",
+        "revenue": 528,
+        "opProfit": -261,
+        "opm": -49,
+        "pat": -323,
+        "eps": -28.59
+      }
+    ]
+  },
+  "convergenceData": {
+    "annual": [
+      {
+        "period": "FY21",
+        "revenue": 161,
+        "opProfit": 68,
+        "pat": 37
+      },
+      {
+        "period": "FY22",
+        "revenue": 165,
+        "opProfit": 59,
+        "pat": 26
+      },
+      {
+        "period": "FY23",
+        "revenue": 165,
+        "opProfit": 38,
+        "pat": 24
+      },
+      {
+        "period": "FY24",
+        "revenue": 141,
+        "opProfit": -7,
+        "pat": -9
+      },
+      {
+        "period": "FY25",
+        "revenue": 203,
+        "opProfit": -8,
+        "pat": -18
+      },
+      {
+        "period": "FY26",
+        "revenue": 196,
+        "opProfit": -26,
+        "pat": -25
+      }
+    ],
+    "trafficMetrics": [
+      {
+        "month": "Jul 24",
+        "mau": 198,
+        "pageViews": 1820,
+        "videoViews": 312
+      },
+      {
+        "month": "Aug 24",
+        "mau": 204,
+        "pageViews": 1890,
+        "videoViews": 328
+      },
+      {
+        "month": "Sep 24",
+        "mau": 216,
+        "pageViews": 2010,
+        "videoViews": 348
+      },
+      {
+        "month": "Oct 24",
+        "mau": 222,
+        "pageViews": 2080,
+        "videoViews": 361
+      },
+      {
+        "month": "Nov 24",
+        "mau": 229,
+        "pageViews": 2150,
+        "videoViews": 375
+      },
+      {
+        "month": "Dec 24",
+        "mau": 235,
+        "pageViews": 2240,
+        "videoViews": 390
+      }
+    ],
+    "kpis": {
+      "mauBase": "235M+",
+      "mauGrowth": "+22%",
+      "youtubeSubscribers": "14.2M",
+      "digitalRank": "#3",
+      "note": "Derived as Consolidated minus Standalone TV (BSE filings). Traffic: industry estimates."
+    }
+  }
+}

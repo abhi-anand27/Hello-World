@@ -1,0 +1,334 @@
+{
+  "tvCompetitors": [
+    {
+      "name": "NDTV (Reference)",
+      "ticker": "NDTV",
+      "channels": [
+        "NDTV 24x7",
+        "NDTV India",
+        "NDTV Profit",
+        "NDTV.com"
+      ],
+      "ownership": "Adani Media Ventures (64.7%)",
+      "revenue": 465,
+      "opProfit": -173,
+      "ebitdaMargin": "-37.2%",
+      "pat": -218,
+      "eps": -19.16,
+      "primetime": {
+        "share": 7.8,
+        "rank": 4
+      },
+      "allDay": {
+        "share": 7.2,
+        "rank": 4
+      },
+      "strength": "Premium English/Hindi News, Strong brand, Pan-India digital reach",
+      "weakness": "Mounting losses, declining TV market share post ownership change",
+      "status": "self"
+    },
+    {
+      "name": "Aaj Tak (TV Today Network)",
+      "ticker": "TVTODAY",
+      "channels": [
+        "Aaj Tak",
+        "India Today TV",
+        "Tez",
+        "Good News Today"
+      ],
+      "ownership": "India Today Group (Aroon Purie)",
+      "revenue": 993,
+      "opProfit": 100,
+      "ebitdaMargin": "10.1%",
+      "pat": 75,
+      "eps": 13.87,
+      "primetime": {
+        "share": 10.2,
+        "rank": 1
+      },
+      "allDay": {
+        "share": 10.8,
+        "rank": 1
+      },
+      "strength": "Market leader Hindi news, diversified revenue, profitable",
+      "weakness": "OPM compression from 26% (FY22) to 10% (FY25)",
+      "status": "threat"
+    },
+    {
+      "name": "Sun TV Network",
+      "ticker": "SUNTV",
+      "channels": [
+        "Sun News",
+        "Sun TV",
+        "KTV",
+        "Gemini TV",
+        "Udaya TV",
+        "Surya TV"
+      ],
+      "ownership": "Maran Family",
+      "revenue": 3879,
+      "opProfit": 2094,
+      "ebitdaMargin": "54.0%",
+      "pat": 1654,
+      "eps": 41.98,
+      "primetime": {
+        "share": "Regional leader",
+        "rank": 1
+      },
+      "allDay": {
+        "share": "Regional leader",
+        "rank": 1
+      },
+      "strength": "Highest OPM in sector (54%), dominant South Indian regional reach",
+      "weakness": "Revenue declined 6.5% YoY in FY25, limited Hindi/English presence",
+      "status": "neutral"
+    },
+    {
+      "name": "Zee Entertainment",
+      "ticker": "ZEEL",
+      "channels": [
+        "Zee News",
+        "Zee TV",
+        "Zee Cinema",
+        "&TV",
+        "WION",
+        "Zee Business"
+      ],
+      "ownership": "Essel Group / Institutional",
+      "revenue": 7712,
+      "opProfit": 1021,
+      "ebitdaMargin": "13.2%",
+      "pat": 701,
+      "eps": 7.3,
+      "primetime": {
+        "share": 6.8,
+        "rank": 5
+      },
+      "allDay": {
+        "share": 6.4,
+        "rank": 5
+      },
+      "strength": "Diversified portfolio, strong entertainment + news, recovery path",
+      "weakness": "Failed Sony merger, debt overhang, competitive pressure from JioStar",
+      "status": "neutral"
+    },
+    {
+      "name": "Network18 Media",
+      "ticker": "NETWORK18",
+      "channels": [
+        "CNN-News18",
+        "News18 India",
+        "CNBC TV18",
+        "Colors",
+        "MTV"
+      ],
+      "ownership": "Reliance/JioStar (post-consolidation)",
+      "revenue": 1896,
+      "opProfit": 33,
+      "ebitdaMargin": "1.8%",
+      "pat": -185,
+      "eps": -1.77,
+      "patNote": "Operational PAT; reported PAT ₹3,213 Cr includes ₹3,498 Cr exceptional items",
+      "primetime": {
+        "share": 8.9,
+        "rank": 2
+      },
+      "allDay": {
+        "share": 8.4,
+        "rank": 2
+      },
+      "strength": "Reliance/JioStar backing, largest news network, strong digital (News18.com)",
+      "weakness": "Ongoing operational losses, complex holding structure, thin OPM",
+      "status": "threat"
+    },
+    {
+      "name": "HT Media",
+      "ticker": "HTMEDIA",
+      "channels": [
+        "Hindustan Times",
+        "Mint",
+        "HT Digital",
+        "Fever FM"
+      ],
+      "ownership": "KK Birla Group (Shobhana Bhartia)",
+      "revenue": 1036,
+      "opProfit": 1,
+      "ebitdaMargin": "0.1%",
+      "pat": -65,
+      "eps": -2.8,
+      "primetime": {
+        "share": "Digital/Print",
+        "rank": null
+      },
+      "allDay": {
+        "share": "Digital/Print",
+        "rank": null
+      },
+      "strength": "Multi-platform (print + digital + radio), strong brand equity",
+      "weakness": "Near-breakeven ops, print industry secular decline, digital monetisation gap",
+      "status": "neutral"
+    }
+  ],
+  "digitalCompetitors": [
+    {
+      "name": "NDTV.com",
+      "mau": 235,
+      "rank": 3,
+      "adRevenue": 217,
+      "revenueModel": "Ad + Subscription",
+      "growth": "+18%",
+      "strength": "Strong brand, trusted news, premium ad rates",
+      "status": "self"
+    },
+    {
+      "name": "AajTak.in / IndiaToday.in",
+      "mau": 310,
+      "rank": 1,
+      "adRevenue": 290,
+      "revenueModel": "Ad + Events + Subscription",
+      "growth": "+24%",
+      "strength": "Hindi dominance, India Today print cross-sell",
+      "status": "threat"
+    },
+    {
+      "name": "TimesofIndia.com / ET Online",
+      "mau": 285,
+      "rank": 2,
+      "adRevenue": 268,
+      "revenueModel": "Ad + Subscription",
+      "growth": "+21%",
+      "strength": "Legacy print SEO authority, strong ET brand",
+      "status": "threat"
+    },
+    {
+      "name": "News18.com (Network18 / JioStar)",
+      "mau": 198,
+      "rank": 4,
+      "adRevenue": 165,
+      "revenueModel": "Ad-focused",
+      "growth": "+15%",
+      "strength": "Regional language content depth, JioStar distribution",
+      "status": "threat"
+    },
+    {
+      "name": "HindustanTimes.com / Mint",
+      "mau": 180,
+      "rank": 5,
+      "adRevenue": 142,
+      "revenueModel": "Ad + Subscription (Mint)",
+      "growth": "+12%",
+      "strength": "Premium English audience, strong Mint brand for B2B ads",
+      "status": "threat"
+    }
+  ],
+  "marketShareTrend": [
+    {
+      "period": "Q1 FY23",
+      "ndtv": 8.9,
+      "aajTak": 11.2,
+      "network18": 8.6,
+      "zee": 6.9,
+      "sunTV": 4.2
+    },
+    {
+      "period": "Q2 FY23",
+      "ndtv": 8.6,
+      "aajTak": 11,
+      "network18": 8.9,
+      "zee": 6.7,
+      "sunTV": 4.3
+    },
+    {
+      "period": "Q3 FY23",
+      "ndtv": 8.4,
+      "aajTak": 10.9,
+      "network18": 9.1,
+      "zee": 6.5,
+      "sunTV": 4.4
+    },
+    {
+      "period": "Q4 FY23",
+      "ndtv": 8.2,
+      "aajTak": 10.8,
+      "network18": 9.3,
+      "zee": 6.8,
+      "sunTV": 4.5
+    },
+    {
+      "period": "Q1 FY24",
+      "ndtv": 8,
+      "aajTak": 10.9,
+      "network18": 9.4,
+      "zee": 6.6,
+      "sunTV": 4.4
+    },
+    {
+      "period": "Q2 FY24",
+      "ndtv": 7.9,
+      "aajTak": 10.8,
+      "network18": 9.5,
+      "zee": 6.5,
+      "sunTV": 4.3
+    },
+    {
+      "period": "Q3 FY24",
+      "ndtv": 7.8,
+      "aajTak": 10.9,
+      "network18": 9.6,
+      "zee": 6.4,
+      "sunTV": 4.3
+    },
+    {
+      "period": "Q4 FY24",
+      "ndtv": 7.8,
+      "aajTak": 10.8,
+      "network18": 9.7,
+      "zee": 6.3,
+      "sunTV": 4.4
+    }
+  ],
+  "peerComparison": [
+    {
+      "name": "NDTV (Consol.)",
+      "revenue": 465,
+      "opm": -37,
+      "pat": -218,
+      "eps": -19.16
+    },
+    {
+      "name": "TV Today",
+      "revenue": 993,
+      "opm": 10,
+      "pat": 75,
+      "eps": 13.87
+    },
+    {
+      "name": "Sun TV",
+      "revenue": 3879,
+      "opm": 54,
+      "pat": 1654,
+      "eps": 41.98
+    },
+    {
+      "name": "Zee Entmt.",
+      "revenue": 7712,
+      "opm": 13,
+      "pat": 701,
+      "eps": 7.3
+    },
+    {
+      "name": "Network18",
+      "revenue": 1896,
+      "opm": 2,
+      "pat": -185,
+      "eps": -1.77
+    },
+    {
+      "name": "HT Media",
+      "revenue": 1036,
+      "opm": 0,
+      "pat": -65,
+      "eps": -2.8
+    }
+  ]
+}

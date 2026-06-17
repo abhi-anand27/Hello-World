@@ -5,7 +5,7 @@ import {
   Tooltip, Legend, BarChart, Bar
 } from 'recharts'
 import { Users, Shield, AlertTriangle, TrendingUp } from 'lucide-react'
-import { tvCompetitors, digitalCompetitors, marketShareTrend, peerComparison } from '../../data/competitors'
+import { useData } from '../../api/DataContext'
 
 const TABS = ['TV Players', 'Digital Players', 'Market Share Trend', 'SWOT']
 
@@ -27,6 +27,8 @@ const LINE_COLORS = {
 export default function CompetitorAnalysis() {
   const [tab, setTab] = useState('TV Players')
   const [selectedTV, setSelectedTV] = useState(null)
+  const { data } = useData()
+  const { tvCompetitors, digitalCompetitors, marketShareTrend } = data.competitors
 
   const radarData = tvCompetitors.map(c => ({
     name: c.name.split(' ')[0],

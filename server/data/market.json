@@ -1,0 +1,221 @@
+{
+  "marketOverview": {
+    "tvAdMarket": {
+      "totalFY24": 34200,
+      "newsSegment": 4800,
+      "newsShare": "14.0%",
+      "growthYoY": "+7.2%",
+      "topSpenders": [
+        "FMCG",
+        "Auto",
+        "BFSI",
+        "E-commerce",
+        "Telecom"
+      ]
+    },
+    "digitalNewsMarket": {
+      "totalFY24": 42000,
+      "newsSegment": 5600,
+      "newsShare": "13.3%",
+      "growthYoY": "+22.4%",
+      "mobileShare": "76%"
+    },
+    "viewershipTrends": {
+      "totalNewsMinutes": 4820,
+      "growth": "+3.1%",
+      "peakHours": "8-9 AM, 6-10 PM",
+      "electionUplift": "+35-45%"
+    }
+  },
+  "adMarketTrend": [
+    {
+      "year": "FY19",
+      "tvNews": 3100,
+      "digitalNews": 1800,
+      "total": 4900
+    },
+    {
+      "year": "FY20",
+      "tvNews": 2800,
+      "digitalNews": 2200,
+      "total": 5000
+    },
+    {
+      "year": "FY21",
+      "tvNews": 2600,
+      "digitalNews": 2600,
+      "total": 5200
+    },
+    {
+      "year": "FY22",
+      "tvNews": 3400,
+      "digitalNews": 3200,
+      "total": 6600
+    },
+    {
+      "year": "FY23",
+      "tvNews": 4200,
+      "digitalNews": 4400,
+      "total": 8600
+    },
+    {
+      "year": "FY24",
+      "tvNews": 4800,
+      "digitalNews": 5600,
+      "total": 10400
+    },
+    {
+      "year": "FY25E",
+      "tvNews": 5100,
+      "digitalNews": 7200,
+      "total": 12300
+    },
+    {
+      "year": "FY26E",
+      "tvNews": 5400,
+      "digitalNews": 9100,
+      "total": 14500
+    }
+  ],
+  "viewershipByChannel": [
+    {
+      "name": "Aaj Tak",
+      "share": 10.8,
+      "language": "Hindi"
+    },
+    {
+      "name": "India TV",
+      "share": 9.1,
+      "language": "Hindi"
+    },
+    {
+      "name": "Republic Bharat",
+      "share": 8.6,
+      "language": "Hindi"
+    },
+    {
+      "name": "Republic TV",
+      "share": 7.8,
+      "language": "English"
+    },
+    {
+      "name": "NDTV India",
+      "share": 5.2,
+      "language": "Hindi"
+    },
+    {
+      "name": "NDTV 24x7",
+      "share": 3,
+      "language": "English"
+    },
+    {
+      "name": "Times Now",
+      "share": 4.8,
+      "language": "English"
+    },
+    {
+      "name": "India Today TV",
+      "share": 3.6,
+      "language": "English"
+    },
+    {
+      "name": "Others",
+      "share": 47.1,
+      "language": "Mixed"
+    }
+  ],
+  "digitalTrafficRanking": [
+    {
+      "rank": 1,
+      "name": "AajTak/IndiaToday",
+      "mau": 310,
+      "yoy": "+24%"
+    },
+    {
+      "rank": 2,
+      "name": "Times of India",
+      "mau": 285,
+      "yoy": "+21%"
+    },
+    {
+      "rank": 3,
+      "name": "NDTV",
+      "mau": 235,
+      "yoy": "+18%"
+    },
+    {
+      "rank": 4,
+      "name": "Hindustan Times",
+      "mau": 210,
+      "yoy": "+16%"
+    },
+    {
+      "rank": 5,
+      "name": "News18",
+      "mau": 198,
+      "yoy": "+15%"
+    },
+    {
+      "rank": 6,
+      "name": "ABP Live",
+      "mau": 165,
+      "yoy": "+19%"
+    },
+    {
+      "rank": 7,
+      "name": "India.com",
+      "mau": 142,
+      "yoy": "+11%"
+    },
+    {
+      "rank": 8,
+      "name": "TheQuint",
+      "mau": 58,
+      "yoy": "+28%"
+    }
+  ],
+  "keyTrends": [
+    {
+      "category": "Connected TV (CTV)",
+      "impact": "High",
+      "description": "CTV viewership growing 45% YoY. News content seeing 3x engagement vs linear. Premium CPMs at ₹800-1200 vs ₹120-180 for linear.",
+      "opportunity": "Launch dedicated CTV apps, programmatic inventory",
+      "timeline": "FY25-26"
+    },
+    {
+      "category": "Digital Subscription",
+      "impact": "Medium",
+      "description": "Indian news subscription market at ~8M paying users, growing 35% YoY. ARPU ₹299-599/year. Global precedent: NYT, FT.",
+      "opportunity": "NDTV Premium launch, bundled with Adani services",
+      "timeline": "FY25"
+    },
+    {
+      "category": "Short-form Video",
+      "impact": "High",
+      "description": "YouTube Shorts & Instagram Reels consuming 38% of news video consumption. News clips outperform long-form in mobile.",
+      "opportunity": "Dedicated short-form newsroom, monetize via YT Partner Program",
+      "timeline": "Immediate"
+    },
+    {
+      "category": "AI in Newsrooms",
+      "impact": "Transformative",
+      "description": "AI-generated summaries, multilingual dubbing, auto-captioning reducing production costs by 25-40%. Reuters, AP leading adoption.",
+      "opportunity": "AI newsroom investment, reduce Hindi dubbing costs",
+      "timeline": "FY25-26"
+    },
+    {
+      "category": "Election Cycle",
+      "impact": "High",
+      "description": "Bihar elections FY26, followed by multiple state elections. Historical 35-45% ad revenue uplift during major elections.",
+      "opportunity": "Early advertiser lock-ins, premium election packages",
+      "timeline": "FY26"
+    },
+    {
+      "category": "Adani Group Synergies",
+      "impact": "Strategic",
+      "description": "Post-acquisition, cross-promotion opportunities with Adani's ports, airports, energy, and infrastructure businesses.",
+      "opportunity": "B2B media partnerships, Adani group advertising, premium business content",
+      "timeline": "Ongoing"
+    }
+  ]
+}

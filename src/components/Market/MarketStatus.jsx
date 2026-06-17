@@ -4,7 +4,7 @@ import {
   PieChart, Pie, Cell, AreaChart, Area, Legend, LineChart, Line
 } from 'recharts'
 import { TrendingUp, Activity, Globe, Tv } from 'lucide-react'
-import { marketOverview, adMarketTrend, viewershipByChannel, digitalTrafficRanking, keyTrends } from '../../data/market'
+import { useData } from '../../api/DataContext'
 
 const TABS = ['Ad Market', 'Viewership', 'Digital Ranking', 'Key Trends']
 const PIE_COLORS = ['#E8001D', '#f97316', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', '#06b6d4', '#ec4899', '#6b7280']
@@ -12,6 +12,8 @@ const IMPACT_COLOR = { High: 'badge-red', Medium: 'badge-yellow', Transformative
 
 export default function MarketStatus() {
   const [tab, setTab] = useState('Ad Market')
+  const { data } = useData()
+  const { adMarketTrend, viewershipByChannel, digitalTrafficRanking, keyTrends } = data.market
 
   return (
     <div className="space-y-6 max-w-screen-xl">

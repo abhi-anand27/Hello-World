@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   LayoutDashboard, Tv, Globe, Users, TrendingUp,
-  Newspaper, BrainCircuit, ChevronLeft, ChevronRight
+  Newspaper, BrainCircuit, Settings2, ChevronLeft, ChevronRight
 } from 'lucide-react'
 
 const NAV_ITEMS = [
@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { id: 'market', label: 'Market Status', icon: TrendingUp },
   { id: 'news', label: 'News & Trends', icon: Newspaper },
   { id: 'analysis', label: 'AI Analysis', icon: BrainCircuit },
+  { id: 'admin', label: 'Data Editor', icon: Settings2 },
 ]
 
 export default function Sidebar({ activePage, onNavigate, isOpen }) {
