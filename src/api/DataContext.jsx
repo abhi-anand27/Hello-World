@@ -1,7 +1,22 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react'
+import * as financialsStatic  from '../data/financials.js'
+import * as competitorsStatic from '../data/competitors.js'
+import * as marketStatic      from '../data/market.js'
 
 // Base URL: in dev, Vite proxies /api → http://localhost:3001 (see vite.config.js)
 const API = '/api'
+
+// Fallback data bundle used when the API is unreachable (e.g. standalone HTML file)
+function staticBundle() {
+  const { tvBusinessData, consolidatedData, convergenceData } = financialsStatic
+  const { tvCompetitors, digitalCompetitors, marketShareTrend, peerComparison } = competitorsStatic
+  const { adMarketTrend, viewershipByChannel, digitalTrafficRanking, keyTrends, marketOverview } = marketStatic
+  return {
+    financials:  { tvBusinessData, consolidatedData, convergenceData },
+    competitors: { tvCompetitors, digitalCompetitors, marketShareTrend, peerComparison },
+    market:      { adMarketTrend, viewershipByChannel, digitalTrafficRanking, keyTrends, marketOverview },
+  }
+}
 
 const DataContext = createContext(null)
 
@@ -24,7 +39,9 @@ export function DataProvider({ children }) {
       if (!res.ok) throw new Error(`API ${res.status}`)
       setData(await res.json())
     } catch (e) {
-      setError(e.message)
+      // API unreachable (standalone HTML / no backend) — fall back to baked-in data
+      setData(staticBundle())
+      setError(null)   // not a user-visible error; app still works read-only
     } finally {
       setLoading(false)
     }
