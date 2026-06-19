@@ -9,7 +9,7 @@ const NAV_ITEMS = [
   { id: 'tv', label: 'TV Business', icon: Tv },
   { id: 'digital', label: 'Digital / Convergence', icon: Globe },
   { id: 'competitors', label: 'Competitor Analysis', icon: Users },
-  { id: 'market', label: 'Market Status', icon: TrendingUp },
+  { id: 'market', label: 'M&E Industry FICCI', icon: TrendingUp },
   { id: 'news', label: 'News & Trends', icon: Newspaper },
   { id: 'analysis', label: 'AI Analysis', icon: BrainCircuit },
   { id: 'admin', label: 'Data Editor', icon: Settings2 },

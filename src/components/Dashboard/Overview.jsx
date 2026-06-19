@@ -147,7 +147,7 @@ export default function Overview({ onNavigate }) {
           { id: 'tv',          label: 'TV Business',          desc: `FY26 Revenue: ₹332 Cr`, icon: Tv,         color: 'border-ndtv-red/40 hover:border-ndtv-red' },
           { id: 'digital',     label: 'Digital / Convergence',desc: `FY26 Revenue: ₹196 Cr`, icon: Globe,      color: 'border-blue-500/40 hover:border-blue-500' },
           { id: 'competitors', label: 'Competitors',           desc: '5 Listed Peer Companies', icon: Users,   color: 'border-yellow-500/40 hover:border-yellow-500' },
-          { id: 'market',      label: 'Market Status',         desc: 'Ad market ₹10,400 Cr',   icon: TrendingUp,color: 'border-green-500/40 hover:border-green-500' },
+          { id: 'market',      label: 'M&E Industry FICCI',      desc: 'FICCI-EY 2026 Report',   icon: TrendingUp,color: 'border-green-500/40 hover:border-green-500' },
         ].map(({ id, label, desc, icon: Icon, color }) => (
           <button
             key={id}

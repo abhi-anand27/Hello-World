@@ -4,3 +4,4 @@ dist/
 .env.local
 *.log
 .claude/
+public/ficci-ey-2026.pdf
