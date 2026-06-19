@@ -1,35 +1,55 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { X, ExternalLink, BookOpen, ChevronLeft, ChevronRight, AlertCircle } from 'lucide-react'
 
 const LOCAL_PDF = '/ficci-ey-2026.pdf'
 const CDN_PDF   = 'https://assets.ey.com/content/dam/ey-sites/ey-com/en_in/topics/media-entertainment/2026/ey-ficci-media-entertainment-report-2026.pdf'
 
-export default function FICCIPDFModal({ page, onClose }) {
-  const [localOk, setLocalOk] = useState(null) // null = checking, true/false
-  const [currentPage, setCurrentPage] = useState(page)
-
-  // verify the local PDF is reachable (fails in standalone HTML mode)
-  useEffect(() => {
-    setCurrentPage(page)
-  }, [page])
-
-  useEffect(() => {
-    if (localOk !== null) return
-    fetch(LOCAL_PDF, { method: 'HEAD' })
-      .then(r => setLocalOk(r.ok))
-      .catch(() => setLocalOk(false))
-  }, [localOk])
-
-  const pdfSrc = localOk
-    ? `${LOCAL_PDF}#page=${currentPage}`
-    : null
-
-  const openExternal = () =>
-    window.open(`${CDN_PDF}#page=${currentPage}`, '_blank', 'noopener')
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Escape') onClose()
+// Decode the base64 PDF that the standalone-HTML build inlines onto window.
+// Returns an object-URL (blob:) that the browser PDF viewer can open with
+// a #page=N anchor — works fully offline from a file:// HTML.
+function getEmbeddedBlobUrl() {
+  const b64 = typeof window !== 'undefined' && window.__FICCI_PDF_B64__
+  if (!b64) return null
+  try {
+    const bin = atob(b64)
+    const len = bin.length
+    const bytes = new Uint8Array(len)
+    for (let i = 0; i < len; i++) bytes[i] = bin.charCodeAt(i)
+    return URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }))
+  } catch {
+    return null
   }
+}
+
+export default function FICCIPDFModal({ page, onClose }) {
+  const [currentPage, setCurrentPage] = useState(page)
+  // mode: 'checking' | 'blob' (embedded) | 'local' (dev server) | 'external' (CDN only)
+  const [mode, setMode] = useState('checking')
+
+  // Embedded blob URL (standalone HTML). Created once, revoked on unmount.
+  const blobUrl = useMemo(getEmbeddedBlobUrl, [])
+  useEffect(() => () => { if (blobUrl) URL.revokeObjectURL(blobUrl) }, [blobUrl])
+
+  useEffect(() => { setCurrentPage(page) }, [page])
+
+  // Decide the best available source once.
+  useEffect(() => {
+    if (mode !== 'checking') return
+    if (blobUrl) { setMode('blob'); return }
+    fetch(LOCAL_PDF, { method: 'HEAD' })
+      .then(r => setMode(r.ok ? 'local' : 'external'))
+      .catch(() => setMode('external'))
+  }, [mode, blobUrl])
+
+  const baseUrl = mode === 'blob' ? blobUrl : mode === 'local' ? LOCAL_PDF : null
+  const pdfSrc  = baseUrl ? `${baseUrl}#page=${currentPage}` : null
+
+  const openExternal = () => {
+    const target = baseUrl ? `${baseUrl}#page=${currentPage}` : `${CDN_PDF}#page=${currentPage}`
+    window.open(target, '_blank', 'noopener')
+  }
+
+  const handleKeyDown = (e) => { if (e.key === 'Escape') onClose() }
 
   return (
     <div
@@ -78,13 +98,13 @@ export default function FICCIPDFModal({ page, onClose }) {
 
         {/* Body */}
         <div className="flex-1 overflow-hidden rounded-b-xl">
-          {localOk === null && (
+          {mode === 'checking' && (
             <div className="flex items-center justify-center h-full">
-              <div className="text-gray-400 text-sm">Checking PDF availability…</div>
+              <div className="text-gray-400 text-sm">Loading report…</div>
             </div>
           )}
 
-          {localOk === true && (
+          {(mode === 'blob' || mode === 'local') && (
             <iframe
               key={currentPage}
               src={pdfSrc}
@@ -93,14 +113,14 @@ export default function FICCIPDFModal({ page, onClose }) {
             />
           )}
 
-          {localOk === false && (
+          {mode === 'external' && (
             <div className="flex flex-col items-center justify-center h-full gap-4 p-8 text-center">
               <AlertCircle size={40} className="text-amber-400" />
               <div>
-                <p className="text-white font-medium mb-1">PDF not available in standalone mode</p>
+                <p className="text-white font-medium mb-1">Opening the report in a new tab</p>
                 <p className="text-gray-400 text-sm max-w-md">
-                  The embedded viewer requires the local dev server. You can open the report
-                  directly in a new browser tab — it will jump to page {currentPage}.
+                  The embedded copy of the PDF isn't available here. Open the report
+                  directly — it will jump to page {currentPage}.
                 </p>
               </div>
               <button onClick={openExternal}
@@ -108,9 +128,7 @@ export default function FICCIPDFModal({ page, onClose }) {
                 <ExternalLink size={14} />
                 Open FICCI-EY 2026 Report — p.{currentPage}
               </button>
-              <p className="text-xs text-gray-600">
-                Source: EY India — assets.ey.com
-              </p>
+              <p className="text-xs text-gray-600">Source: EY India — assets.ey.com</p>
             </div>
           )}
         </div>
