@@ -1,102 +1,125 @@
-// Indian TV & Digital News Market Data
-export const marketOverview = {
-  tvAdMarket: {
-    totalFY24: 34200, // INR Crores
-    newsSegment: 4800,
-    newsShare: '14.0%',
-    growthYoY: '+7.2%',
-    topSpenders: ['FMCG', 'Auto', 'BFSI', 'E-commerce', 'Telecom'],
-  },
-  digitalNewsMarket: {
-    totalFY24: 42000,
-    newsSegment: 5600,
-    newsShare: '13.3%',
-    growthYoY: '+22.4%',
-    mobileShare: '76%',
-  },
-  viewershipTrends: {
-    totalNewsMinutes: 4820, // million minutes/day
-    growth: '+3.1%',
-    peakHours: '8-9 AM, 6-10 PM',
-    electionUplift: '+35-45%',
-  },
+// ════════════════════════════════════════════════════════════════════════════
+// Source: FICCI-EY 2026 — "Stories, scale and impact: Unlocking India's media
+// and entertainment economy" (released March 2026).
+// All figures are EY estimates, INR BILLION, gross of taxes, calendar years.
+// No figures here are estimated/interpolated by the dashboard — they are taken
+// verbatim from the report tables (page references noted).
+// ════════════════════════════════════════════════════════════════════════════
+
+// ── 1. M&E industry size — full segment table (report p.12) ──────────────────
+export const meSegments = [
+  { segment: 'Digital media',          y2022: 571,  y2023: 686,  y2024: 851,  y2025: 1110, y2026E: 1301, y2028E: 1640, cagr: 14  },
+  { segment: 'Television',             y2022: 726,  y2023: 711,  y2024: 679,  y2025: 617,  y2026E: 587,  y2028E: 535,  cagr: -5  },
+  { segment: 'Print',                  y2022: 250,  y2023: 259,  y2024: 257,  y2025: 259,  y2026E: 264,  y2028E: 264,  cagr: 1   },
+  { segment: 'Filmed entertainment',   y2022: 172,  y2023: 197,  y2024: 187,  y2025: 205,  y2026E: 224,  y2028E: 253,  cagr: 7   },
+  { segment: 'Online & video games',   y2022: 222,  y2023: 236,  y2024: 236,  y2025: 195,  y2026E: 74,   y2028E: 92,   cagr: -22 },
+  { segment: 'Live events',            y2022: 73,   y2023: 88,   y2024: 101,  y2025: 145,  y2026E: 140,  y2028E: 196,  cagr: 10  },
+  { segment: 'Animation & VFX',        y2022: 107,  y2023: 114,  y2024: 103,  y2025: 105,  y2026E: 113,  y2028E: 138,  cagr: 10  },
+  { segment: 'Out-of-home media',      y2022: 48,   y2023: 54,   y2024: 59,   y2025: 67,   y2026E: 74,   y2028E: 85,   cagr: 8   },
+  { segment: 'Music',                  y2022: 46,   y2023: 54,   y2024: 53,   y2025: 59,   y2026E: 64,   y2028E: 75,   cagr: 9   },
+  { segment: 'Radio',                  y2022: 21,   y2023: 23,   y2024: 25,   y2025: 23,   y2026E: 23,   y2028E: 22,   cagr: -2  },
+]
+
+export const meOverview = {
+  total2025: 2785,        // INR billion (₹2.78 trillion)
+  total2024: 2553,
+  total2026E: 2862,
+  total2028E: 3301,
+  growth2025: 9.1,        // %
+  growth2026E: 2.8,       // %
+  usd2025: 32,            // US$ billion
+  gdpSharePct: 0.8,
+  directJobsMn: 2.75,
+  indirectJobsMn: 10,
+  note: 'Indian M&E sector grew 9.1% in 2025 to ₹2.78 trillion (US$32B). Excluding online gaming (hit by the 4-month money-gaming ban), the sector grew 11.8%. Expected to reach ₹3.3 trillion by 2028.',
 }
 
-export const adMarketTrend = [
-  { year: 'FY19', tvNews: 3100, digitalNews: 1800, total: 4900 },
-  { year: 'FY20', tvNews: 2800, digitalNews: 2200, total: 5000 },
-  { year: 'FY21', tvNews: 2600, digitalNews: 2600, total: 5200 },
-  { year: 'FY22', tvNews: 3400, digitalNews: 3200, total: 6600 },
-  { year: 'FY23', tvNews: 4200, digitalNews: 4400, total: 8600 },
-  { year: 'FY24', tvNews: 4800, digitalNews: 5600, total: 10400 },
-  { year: 'FY25E', tvNews: 5100, digitalNews: 7200, total: 12300 },
-  { year: 'FY26E', tvNews: 5400, digitalNews: 9100, total: 14500 },
+// ── 2. Television — revenue split & subscriptions (report p.66–67) ───────────
+export const tvRevenue = [
+  { year: '2023',  advertising: 312, distribution: 398, total: 710 },
+  { year: '2024',  advertising: 294, distribution: 385, total: 679 },
+  { year: '2025',  advertising: 263, distribution: 354, total: 617 },
+  { year: '2026E', advertising: 244, distribution: 343, total: 587 },
+  { year: '2028E', advertising: 213, distribution: 322, total: 535 },
 ]
 
-export const viewershipByChannel = [
-  { name: 'Aaj Tak', share: 10.8, language: 'Hindi' },
-  { name: 'India TV', share: 9.1, language: 'Hindi' },
-  { name: 'Republic Bharat', share: 8.6, language: 'Hindi' },
-  { name: 'Republic TV', share: 7.8, language: 'English' },
-  { name: 'NDTV India', share: 5.2, language: 'Hindi' },
-  { name: 'NDTV 24x7', share: 3.0, language: 'English' },
-  { name: 'Times Now', share: 4.8, language: 'English' },
-  { name: 'India Today TV', share: 3.6, language: 'English' },
-  { name: 'Others', share: 47.1, language: 'Mixed' },
+export const tvSubscriptions = [
+  // millions of subscriptions
+  { year: '2023', payConnected: 141, freeTV: 45, total: 186 },
+  { year: '2024', payConnected: 141, freeTV: 49, total: 190 },
+  { year: '2025', payConnected: 140, freeTV: 53, total: 193 },
 ]
 
-export const digitalTrafficRanking = [
-  { rank: 1, name: 'AajTak/IndiaToday', mau: 310, yoy: '+24%' },
-  { rank: 2, name: 'Times of India', mau: 285, yoy: '+21%' },
-  { rank: 3, name: 'NDTV', mau: 235, yoy: '+18%' },
-  { rank: 4, name: 'Hindustan Times', mau: 210, yoy: '+16%' },
-  { rank: 5, name: 'News18', mau: 198, yoy: '+15%' },
-  { rank: 6, name: 'ABP Live', mau: 165, yoy: '+19%' },
-  { rank: 7, name: 'India.com', mau: 142, yoy: '+11%' },
-  { rank: 8, name: 'TheQuint', mau: 58, yoy: '+28%' },
+export const tvMetrics = {
+  weeklyReachMn: 745,         // BARC cume weekly reach, all India
+  channels: 956,
+  ftaSharePct: 65,
+  arpu: 288,                  // ₹ gross of taxes, end-customer
+  linearRevGrowth: -9.2,      // % 2025, 4th year of decline
+  linearAdGrowth: -10.3,      // %
+  adVolumeDrop: -11.5,        // %
+  subRevGrowth: -8.3,         // %
+  payTvLossMn: 11,            // Pay TV households lost in 2025
+  freeTvGainMn: 4.5,
+  connectedTvGainMn: 10,
+  ctvAd: 99,                  // ₹ billion (counted under digital)
+  ctvAdGrowth: 42,            // %
+  linearPlusCtvAd: 362,       // ₹ billion combined
+  msos: 818,
+  note: 'Television remains India\'s predominant medium, reaching ~745 million people weekly. Linear TV revenues fell 9.2% in 2025 — the 4th consecutive yearly decline — while Connected TV (counted under Digital) grew rapidly.',
+}
+
+// ── 3. Digital media — revenue split & metrics (report p.30–31) ──────────────
+export const digitalRevenue = [
+  { year: '2024',  advertising: 749,  subscription: 102, total: 851  },
+  { year: '2025',  advertising: 947,  subscription: 163, total: 1110 },
+  { year: '2026E', advertising: 1109, subscription: 191, total: 1300 },
+  { year: '2028E', advertising: 1393, subscription: 248, total: 1641 },
 ]
 
-export const keyTrends = [
-  {
-    category: 'Connected TV (CTV)',
-    impact: 'High',
-    description: 'CTV viewership growing 45% YoY. News content seeing 3x engagement vs linear. Premium CPMs at ₹800-1200 vs ₹120-180 for linear.',
-    opportunity: 'Launch dedicated CTV apps, programmatic inventory',
-    timeline: 'FY25-26',
-  },
-  {
-    category: 'Digital Subscription',
-    impact: 'Medium',
-    description: 'Indian news subscription market at ~8M paying users, growing 35% YoY. ARPU ₹299-599/year. Global precedent: NYT, FT.',
-    opportunity: 'NDTV Premium launch, bundled with Adani services',
-    timeline: 'FY25',
-  },
-  {
-    category: 'Short-form Video',
-    impact: 'High',
-    description: 'YouTube Shorts & Instagram Reels consuming 38% of news video consumption. News clips outperform long-form in mobile.',
-    opportunity: 'Dedicated short-form newsroom, monetize via YT Partner Program',
-    timeline: 'Immediate',
-  },
-  {
-    category: 'AI in Newsrooms',
-    impact: 'Transformative',
-    description: 'AI-generated summaries, multilingual dubbing, auto-captioning reducing production costs by 25-40%. Reuters, AP leading adoption.',
-    opportunity: 'AI newsroom investment, reduce Hindi dubbing costs',
-    timeline: 'FY25-26',
-  },
-  {
-    category: 'Election Cycle',
-    impact: 'High',
-    description: 'Bihar elections FY26, followed by multiple state elections. Historical 35-45% ad revenue uplift during major elections.',
-    opportunity: 'Early advertiser lock-ins, premium election packages',
-    timeline: 'FY26',
-  },
-  {
-    category: 'Adani Group Synergies',
-    impact: 'Strategic',
-    description: 'Post-acquisition, cross-promotion opportunities with Adani\'s ports, airports, energy, and infrastructure businesses.',
-    opportunity: 'B2B media partnerships, Adani group advertising, premium business content',
-    timeline: 'Ongoing',
-  },
+export const digitalMetrics = {
+  adGrowth: 26,               // %
+  adShareOfTotalAd: 63,       // % of all advertising
+  ecomPosAd: 220,             // ₹ billion e-commerce & POS ads
+  subGrowth: 60,              // %
+  videoSubRev: 148,           // ₹ billion
+  videoSubGrowth: 61,         // %
+  videoSubscriptionsMn: 216,
+  videoHouseholdsMn: 143,
+  audioSubRev: 10,            // ₹ billion (crossed ₹10B first time)
+  audioPaidMn: 14.4,
+  newsSubRev: 5,              // ₹ billion
+  newsSubscribersMn: 4,
+  ctvHouseholdsMn: 68,
+  ctvActiveMn: 40,
+  smartphoneUsersMn: 584,
+  videoViewersMn: 572,
+  socialUsersMn: 500,
+  cagr2528: 14,               // %
+  note: 'Digital media became the first M&E segment to cross ₹1 trillion in 2025, growing 30.5%. Digital advertising rose 26% to ₹947B (63% of all ad revenue) and digital subscriptions grew 60% to ₹163B.',
+}
+
+// ── 4. Advertising market — TV vs Digital split by segment (report p.234) ────
+export const adMarket = [
+  // INR billion, gross of taxes (includes SME & long-tail advertisers)
+  { segment: 'Television',    y2020: 264, y2021: 329, y2022: 334, y2023: 312, y2024: 297, y2025: 263, y2026E: 244 },
+  { segment: 'Digital',       y2020: 282, y2021: 383, y2022: 499, y2023: 597, y2024: 749, y2025: 947, y2026E: 1109 },
+  { segment: 'Print',         y2020: 122, y2021: 151, y2022: 170, y2023: 178, y2024: 177, y2025: 179, y2026E: 185 },
+  { segment: 'OOH',           y2020: 20,  y2021: 26,  y2022: 48,  y2023: 54,  y2024: 59,  y2025: 67,  y2026E: 74  },
+  { segment: 'Radio',         y2020: 14,  y2021: 16,  y2022: 21,  y2023: 23,  y2024: 25,  y2025: 23,  y2026E: 23  },
+  { segment: 'Cinema',        y2020: 2,   y2021: 1,   y2022: 5,   y2023: 8,   y2024: 9,   y2025: 9,   y2026E: 10  },
+  { segment: 'Online gaming', y2020: 7,   y2021: 8,   y2022: 11,  y2023: 13,  y2024: 14,  y2025: 15,  y2026E: 17  },
 ]
+
+export const adMarketOverview = {
+  total2025: 1504,            // ₹ billion (₹1.5 trillion)
+  total2024: 1326,
+  total2026E: 1662,
+  growth2025: 13.5,           // %
+  growth2026E: 10.5,          // %
+  digitalShare2025: 63,       // %
+  digitalShare2024: 56,       // %
+  tvAd2025: 263,
+  digitalAd2025: 947,
+  note: 'Indian advertising reached ₹1.5 trillion in 2025 (+13.5%). Digital media took 63% of all advertising, up from 56% in 2024, generating 111% of total ad growth. TV advertising fell as some viewing shifted to Connected TV (counted under digital).',
+}

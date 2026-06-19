@@ -10,11 +10,17 @@ const API = '/api'
 function staticBundle() {
   const { tvBusinessData, consolidatedData, convergenceData } = financialsStatic
   const { tvCompetitors, digitalCompetitors, marketShareTrend, peerComparison } = competitorsStatic
-  const { adMarketTrend, viewershipByChannel, digitalTrafficRanking, keyTrends, marketOverview } = marketStatic
+  const {
+    meSegments, meOverview, tvRevenue, tvSubscriptions, tvMetrics,
+    digitalRevenue, digitalMetrics, adMarket, adMarketOverview,
+  } = marketStatic
   return {
     financials:  { tvBusinessData, consolidatedData, convergenceData },
     competitors: { tvCompetitors, digitalCompetitors, marketShareTrend, peerComparison },
-    market:      { adMarketTrend, viewershipByChannel, digitalTrafficRanking, keyTrends, marketOverview },
+    market:      {
+      meSegments, meOverview, tvRevenue, tvSubscriptions, tvMetrics,
+      digitalRevenue, digitalMetrics, adMarket, adMarketOverview,
+    },
   }
 }
 
