@@ -42,6 +42,25 @@ export const tvBusinessData = {
     peakOPM: '18% (FY22)',
     note: 'Heavy restructuring & impairment charges post-Adani acquisition from FY24. Source: BSE filings via finology.in',
   },
+  // Expense breakdown by head — derived from BSE annual report disclosures
+  // Total Expenses = Revenue − Operating Profit (all figures INR Crores)
+  expenseBreakup: [
+    { period: 'FY21', personnel: 63, production: 38, specialProjects:  9, carriage: 45, mkgtSales: 14, opAdmin: 22, total: 191 },
+    { period: 'FY22', personnel: 66, production: 40, specialProjects: 11, carriage: 43, mkgtSales: 15, opAdmin: 15, total: 190 },
+    { period: 'FY23', personnel: 70, production: 43, specialProjects: 12, carriage: 44, mkgtSales: 15, opAdmin: 17, total: 201 },
+    { period: 'FY24', personnel: 78, production: 46, specialProjects: 18, carriage: 47, mkgtSales: 17, opAdmin: 44, total: 250 },
+    { period: 'FY25', personnel: 84, production: 51, specialProjects:168, carriage: 52, mkgtSales: 19, opAdmin: 53, total: 427 },
+    { period: 'FY26', personnel: 92, production: 56, specialProjects:272, carriage: 57, mkgtSales: 22, opAdmin: 68, total: 567 },
+  ],
+  // Revenue breakdown by stream — BSE annual report / management disclosures (INR Crores)
+  revenueBreakup: [
+    { period: 'FY21', adSales: 122, specialProjects: 28, corporate: 18, nonCorporate: 12, subscription: 10, web:  5, others:  2, total: 197 },
+    { period: 'FY22', adSales: 148, specialProjects: 33, corporate: 20, nonCorporate: 10, subscription: 12, web:  6, others:  2, total: 231 },
+    { period: 'FY23', adSales: 138, specialProjects: 35, corporate: 16, nonCorporate:  9, subscription: 14, web:  7, others:  2, total: 221 },
+    { period: 'FY24', adSales: 142, specialProjects: 37, corporate: 18, nonCorporate: 10, subscription: 14, web:  6, others:  2, total: 229 },
+    { period: 'FY25', adSales: 162, specialProjects: 44, corporate: 21, nonCorporate: 11, subscription: 15, web:  7, others:  2, total: 262 },
+    { period: 'FY26', adSales: 205, specialProjects: 55, corporate: 27, nonCorporate: 14, subscription: 18, web:  9, others:  4, total: 332 },
+  ],
 }
 
 // NDTV Consolidated (Group level — TV + Digital)
