@@ -4,10 +4,10 @@ import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, BarChart, Bar
 } from 'recharts'
-import { Users, Shield, AlertTriangle, TrendingUp } from 'lucide-react'
+import { Users, AlertTriangle } from 'lucide-react'
 import { useData } from '../../api/DataContext'
 
-const TABS = ['TV Players', 'Digital Players', 'Market Share Trend', 'SWOT']
+const TABS = ['TV Players', 'Digital Players', 'Market Share Trend']
 
 const STATUS_CONFIG = {
   self: { color: 'border-ndtv-red/60 bg-ndtv-red/10', badge: 'badge-red', label: 'NDTV' },
@@ -129,6 +129,7 @@ export default function CompetitorAnalysis() {
                 ))}
               </tbody>
             </table>
+            <p className="text-xs text-gray-600 mt-2">Source: BSE filings via finology.in (FY25 annual results). Figures in INR Crores.</p>
           </div>
         </div>
       )}
@@ -175,6 +176,7 @@ export default function CompetitorAnalysis() {
                 />
               </BarChart>
             </ResponsiveContainer>
+            <p className="text-xs text-gray-600 mt-2">Source: Industry estimates (BARC/Nielsen digital measurement). MAU = Monthly Active Users.</p>
           </div>
         </div>
       )}
@@ -208,88 +210,11 @@ export default function CompetitorAnalysis() {
                 with JioStar distribution. Viewership data based on BARC estimates (Hindi+English news genre).
               </div>
             </div>
+            <p className="text-xs text-gray-600 mt-2 px-2">Source: BARC India viewership data (Hindi + English news genre). Estimates — not official BARC publications.</p>
           </div>
         </div>
       )}
 
-      {tab === 'SWOT' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {[
-            {
-              title: 'Strengths',
-              icon: <Shield size={16} className="text-green-400" />,
-              color: 'border-green-500/30 bg-green-500/5',
-              headerColor: 'text-green-400',
-              items: [
-                'Premium English-language brand — trusted by urban, educated audience',
-                'NDTV Profit — strong financial news positioning',
-                'Digital MAU of 235M+ — top 3 news portal in India',
-                'Adani Group backing — financial stability & access to infrastructure',
-                'Strong original content & investigative journalism heritage',
-              ],
-            },
-            {
-              title: 'Weaknesses',
-              icon: <AlertTriangle size={16} className="text-red-400" />,
-              color: 'border-red-500/30 bg-red-500/5',
-              headerColor: 'text-red-400',
-              items: [
-                'Declining viewership market share across TV channels',
-                'Digital business yet to achieve profitability',
-                'Limited Hindi mass-market penetration vs. Aaj Tak',
-                'Leadership transition & ownership change creating talent uncertainty',
-                'Lower EBITDA margin vs. industry leader (Aaj Tak at 22%)',
-              ],
-            },
-            {
-              title: 'Opportunities',
-              icon: <TrendingUp size={16} className="text-blue-400" />,
-              color: 'border-blue-500/30 bg-blue-500/5',
-              headerColor: 'text-blue-400',
-              items: [
-                'CTV/OTT boom — premium advertising at 5-8x linear CPMs',
-                'Bihar elections FY26 + state election calendar — ad uplift of 35-45%',
-                'AI newsroom — reduce production costs by 25-40%',
-                'NDTV Premium subscription product launch',
-                'Adani Group B2B media partnerships & cross-group advertising',
-                'Regional language digital expansion (12 languages potential)',
-              ],
-            },
-            {
-              title: 'Threats',
-              icon: <AlertTriangle size={16} className="text-yellow-400" />,
-              color: 'border-yellow-500/30 bg-yellow-500/5',
-              headerColor: 'text-yellow-400',
-              items: [
-                'Republic TV/Bharat gaining mass Hindi audience rapidly',
-                'Network18/JioStar ecosystem — captive distribution advantage',
-                'Digital ad revenue shifting to Google, Meta, YouTube',
-                'Short-form video (Reels/Shorts) cannibalizing news video consumption',
-                'Regulatory/TRAI changes affecting carriage fee economics',
-                'Talent exodus concern post acquisition',
-              ],
-            },
-          ].map(section => (
-            <div key={section.title} className={`card border ${section.color}`}>
-              <h2 className={`font-semibold text-sm mb-3 flex items-center gap-2 ${section.headerColor}`}>
-                {section.icon} {section.title}
-              </h2>
-              <ul className="space-y-2">
-                {section.items.map((item, i) => (
-                  <li key={i} className="text-sm text-gray-300 flex items-start gap-2">
-                    <span className={`mt-1.5 w-1 h-1 rounded-full flex-shrink-0 ${
-                      section.title === 'Strengths' ? 'bg-green-400' :
-                      section.title === 'Weaknesses' ? 'bg-red-400' :
-                      section.title === 'Opportunities' ? 'bg-blue-400' : 'bg-yellow-400'
-                    }`} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   )
 }

@@ -13,6 +13,7 @@ function staticBundle() {
   const {
     meSegments, meOverview, tvRevenue, tvSubscriptions, tvMetrics,
     digitalRevenue, digitalMetrics, adMarket, adMarketOverview,
+    vodMetrics, appMetrics, onlineVideoMetrics,
   } = marketStatic
   return {
     financials:  { tvBusinessData, consolidatedData, convergenceData },
@@ -20,6 +21,7 @@ function staticBundle() {
     market:      {
       meSegments, meOverview, tvRevenue, tvSubscriptions, tvMetrics,
       digitalRevenue, digitalMetrics, adMarket, adMarketOverview,
+      vodMetrics, appMetrics, onlineVideoMetrics,
     },
   }
 }
