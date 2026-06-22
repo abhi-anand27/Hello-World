@@ -53,8 +53,8 @@ function RankBar({ data, unit = '', height = 260 }) {
     <ResponsiveContainer width="100%" height={height}>
       <BarChart data={data} layout="vertical" margin={{ left: 8, right: 16 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="#0f3460" horizontal={false} />
-        <XAxis type="number" tick={{ fontSize: 10, fill: '#9ca3af' }} />
-        <YAxis type="category" dataKey="name" tick={{ fontSize: 10, fill: '#f1f5f9' }} width={185} />
+        <XAxis type="number" tick={{ fontSize: 10, fill: '#cbd5e1' }} />
+        <YAxis type="category" dataKey="name" tick={{ fontSize: 10, fill: '#f1f5f9' }} width={190} interval={0} />
         <Tooltip contentStyle={TT} formatter={v => [`${v}${unit}`, 'Value']} cursor={{ fill: '#ffffff08' }} />
         <Bar dataKey="value" radius={[0, 3, 3, 0]}>
           {data.map((d, i) => <Cell key={i} fill={d.ndtv ? NDTV_RED : '#3b82f6'} />)}
@@ -77,11 +77,12 @@ function TrendLines({ data, series, unit = '', height = 260 }) {
         <Legend wrapperStyle={{ fontSize: 10 }} />
         {series.map((s, i) => {
           const isNdtv = i === firstNdtvIdx
-          // non-primary series cycle through palette starting at index 1 (skip red at 0)
-          const paletteIdx = isNdtv ? 0 : ((i < firstNdtvIdx ? i : i - 1) % (SERIES_COLORS.length - 1)) + 1
+          // non-NDTV series cycle through the non-red palette so none repeat red or render undefined
+          const pool = SERIES_COLORS.slice(1)
+          const color = isNdtv ? NDTV_RED : pool[i % pool.length]
           return (
             <Line key={s} type="monotone" dataKey={s}
-              stroke={SERIES_COLORS[paletteIdx]}
+              stroke={color}
               strokeWidth={isNdtv ? 2.6 : 1.5} dot={false} />
           )
         })}
@@ -128,7 +129,6 @@ function ComscoreSection() {
     { key: 'csHindi', title: 'Hindi News Sites — Unique Users', icon: Globe },
     { key: 'csProfit', title: 'Business News Sites — Unique Users', icon: Globe },
     { key: 'csMarathi', title: 'Marathi News Sites — Unique Users', icon: Globe },
-    { key: 'tdpGroup', title: 'Total Digital Population — Groups', icon: BarChart3 },
   ]
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -298,8 +298,17 @@ function GASection() {
 }
 
 /* ════════════════════════ YOUTUBE & SOCIAL ════════════════════════ */
+const SOCIAL_PLATFORMS = [
+  { key: 'yt', label: 'YouTube' },
+  { key: 'fb', label: 'Facebook' },
+  { key: 'insta', label: 'Instagram' },
+  { key: 'x', label: 'X (Twitter)' },
+  { key: 'wa', label: 'WhatsApp' },
+]
 function YouTubeSection() {
   const yt = DT.ytNative.trend
+  const [platform, setPlatform] = useState('yt')
+  const platMeta = SOCIAL_PLATFORMS.find(p => p.key === platform)
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
       <SubCard title="NDTV YouTube — Views trend" subtitle="NDTV / NDTV India / NDTV Profit (Mn views)" icon={Youtube} span notes={DT.ytNative.footnotes}>
@@ -331,14 +340,36 @@ function YouTubeSection() {
         <p className="text-[11px] text-gray-500 mt-1">Legend: ndtv = NDTV 24x7 · cnn = CNN-News18 · indiaToday = India Today</p>
       </SubCard>
 
-      {/* Social followers */}
-      {[['english', 'English channels'], ['hindi', 'Hindi channels'], ['business', 'Business channels']].map(([key, lbl]) => (
-        <SubCard key={key} title={`Social followers — ${lbl}`} subtitle={`YT subscribers (Mn) · as of ${ml(DT.social.updated)}`} icon={Youtube} notes={DT.social.footnotes}>
-          <RankBar
-            data={DT.social[key].map(c => ({ name: c.channel, value: c.yt, ndtv: c.ndtv })).sort((a, b) => b.value - a.value)}
-            unit=" Mn" height={Math.max(160, DT.social[key].length * 24)} />
-        </SubCard>
-      ))}
+      {/* Social platform selector */}
+      <div className="card lg:col-span-2">
+        <div className="flex items-center justify-between flex-wrap gap-2 mb-1">
+          <h3 className="font-semibold text-sm flex items-center gap-2">
+            <Globe size={15} className="text-gray-400" /> Social followers by platform
+          </h3>
+          <div className="flex gap-1 bg-ndtv-dark border border-ndtv-border rounded-lg p-1 flex-wrap">
+            {SOCIAL_PLATFORMS.map(p => (
+              <button key={p.key} onClick={() => setPlatform(p.key)}
+                className={`px-3 py-1 rounded-md text-[11px] font-medium transition-colors ${platform === p.key ? 'tab-active' : 'tab-inactive'}`}>
+                {p.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <p className="text-xs text-gray-500">{platMeta.label} followers (Mn) · NDTV vs peers · as of {ml(DT.social.updated)}</p>
+      </div>
+      {[['english', 'English channels'], ['hindi', 'Hindi channels'], ['business', 'Business channels']].map(([key, lbl]) => {
+        const rows = DT.social[key]
+          .map(c => ({ name: c.channel, value: c[platform] ?? 0, ndtv: c.ndtv }))
+          .filter(r => r.value > 0)
+          .sort((a, b) => b.value - a.value)
+        return (
+          <SubCard key={key} title={`${platMeta.label} — ${lbl}`} subtitle={`Followers (Mn) · ${ml(DT.social.updated)}`} icon={Youtube} notes={DT.social.footnotes}>
+            {rows.length
+              ? <RankBar data={rows} unit=" Mn" height={Math.max(160, rows.length * 26)} />
+              : <p className="text-xs text-gray-500 py-8 text-center">No {platMeta.label} data reported for these channels.</p>}
+          </SubCard>
+        )
+      })}
 
       {/* Social platform table */}
       <SubCard title="Social footprint — NDTV vs key peers" subtitle="Followers in millions across platforms" icon={Globe} span notes={DT.social.footnotes}>
