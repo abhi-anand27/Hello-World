@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  LayoutDashboard, Tv, Globe, Users, TrendingUp,
+  LayoutDashboard, Tv, Globe, Users, TrendingUp, Activity,
   Newspaper, BrainCircuit, Settings2, ChevronLeft, ChevronRight
 } from 'lucide-react'
 
@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { id: 'digital', label: 'Digital / Convergence', icon: Globe },
   { id: 'competitors', label: 'Competitor Analysis', icon: Users },
   { id: 'market', label: 'M&E Industry FICCI', icon: TrendingUp },
+  { id: 'traffic', label: 'Digital Traffic', icon: Activity },
   { id: 'news', label: 'News & Trends', icon: Newspaper },
   { id: 'analysis', label: 'AI Analysis', icon: BrainCircuit },
   { id: 'admin', label: 'Data Editor', icon: Settings2 },

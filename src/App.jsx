@@ -7,6 +7,7 @@ import TVBusiness from './components/TV/TVBusiness'
 import DigitalBusiness from './components/Digital/DigitalBusiness'
 import CompetitorAnalysis from './components/Competitors/CompetitorAnalysis'
 import MarketStatus from './components/Market/MarketStatus'
+import DigitalTraffic from './components/DigitalTraffic/DigitalTraffic'
 import NewsTrends from './components/News/NewsTrends'
 import AIAnalysis from './components/Analysis/AIAnalysis'
 import AdminEditor from './components/Admin/AdminEditor'
@@ -19,6 +20,7 @@ const PAGES = {
   digital: DigitalBusiness,
   competitors: CompetitorAnalysis,
   market: MarketStatus,
+  traffic: DigitalTraffic,
   news: NewsTrends,
   analysis: AIAnalysis,
   admin: AdminEditor,
