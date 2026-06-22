@@ -54,7 +54,7 @@ function RankBar({ data, unit = '', height = 260 }) {
       <BarChart data={data} layout="vertical" margin={{ left: 8, right: 16 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="#0f3460" horizontal={false} />
         <XAxis type="number" tick={{ fontSize: 10, fill: '#9ca3af' }} />
-        <YAxis type="category" dataKey="name" tick={{ fontSize: 10, fill: '#cbd5e1' }} width={140} />
+        <YAxis type="category" dataKey="name" tick={{ fontSize: 10, fill: '#f1f5f9' }} width={185} />
         <Tooltip contentStyle={TT} formatter={v => [`${v}${unit}`, 'Value']} cursor={{ fill: '#ffffff08' }} />
         <Bar dataKey="value" radius={[0, 3, 3, 0]}>
           {data.map((d, i) => <Cell key={i} fill={d.ndtv ? NDTV_RED : '#3b82f6'} />)}
@@ -64,8 +64,9 @@ function RankBar({ data, unit = '', height = 260 }) {
   )
 }
 
-// multi-line trend; NDTV-ish series gets red + thick
+// multi-line trend; only the FIRST ndtv-named series gets red, all others get palette colors
 function TrendLines({ data, series, unit = '', height = 260 }) {
+  const firstNdtvIdx = series.findIndex(s => s.toLowerCase().includes('ndtv'))
   return (
     <ResponsiveContainer width="100%" height={height}>
       <LineChart data={data}>
@@ -75,9 +76,12 @@ function TrendLines({ data, series, unit = '', height = 260 }) {
         <Tooltip contentStyle={TT} labelFormatter={ml} formatter={(v, n) => [`${v}${unit}`, n]} />
         <Legend wrapperStyle={{ fontSize: 10 }} />
         {series.map((s, i) => {
-          const isNdtv = s.toLowerCase().includes('ndtv')
+          const isNdtv = i === firstNdtvIdx
+          // non-primary series cycle through palette starting at index 1 (skip red at 0)
+          const paletteIdx = isNdtv ? 0 : ((i < firstNdtvIdx ? i : i - 1) % (SERIES_COLORS.length - 1)) + 1
           return (
-            <Line key={s} type="monotone" dataKey={s} stroke={isNdtv ? NDTV_RED : SERIES_COLORS[(i % 7) + 1]}
+            <Line key={s} type="monotone" dataKey={s}
+              stroke={SERIES_COLORS[paletteIdx]}
               strokeWidth={isNdtv ? 2.6 : 1.5} dot={false} />
           )
         })}
@@ -180,9 +184,22 @@ function ComscoreSection() {
         <TrendLines data={DT.csTimespent.trend} series={DT.csTimespent.trendSeries} unit=" Mn min" />
       </SubCard>
 
-      {/* Internal NDTV CS */}
+      {/* Internal NDTV CS — all 4 series are NDTV properties, use distinct palette (no competitor red) */}
       <SubCard title="NDTV — Comscore by property" subtitle="NDTV Group / .com / .in / Profit (Mn users)" icon={Activity} span notes={DT.csInternal.footnotes}>
-        <TrendLines data={DT.csInternal.trend} series={DT.csInternal.series} unit=" Mn" height={280} />
+        <ResponsiveContainer width="100%" height={280}>
+          <LineChart data={DT.csInternal.trend}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#0f3460" vertical={false} />
+            <XAxis dataKey="month" tickFormatter={ml} tick={{ fontSize: 9, fill: '#9ca3af' }} interval="preserveStartEnd" minTickGap={24} />
+            <YAxis tick={{ fontSize: 10, fill: '#9ca3af' }} />
+            <Tooltip contentStyle={TT} labelFormatter={ml} formatter={(v, n) => [`${v} Mn`, n]} />
+            <Legend wrapperStyle={{ fontSize: 10 }} />
+            {DT.csInternal.series.map((s, i) => (
+              <Line key={s} type="monotone" dataKey={s}
+                stroke={[NDTV_RED, '#3b82f6', '#f59e0b', '#10b981'][i] || SERIES_COLORS[i % SERIES_COLORS.length]}
+                strokeWidth={i === 0 ? 2.6 : 1.8} dot={false} />
+            ))}
+          </LineChart>
+        </ResponsiveContainer>
       </SubCard>
 
       {/* Snapshot ranking */}
@@ -330,6 +347,7 @@ function YouTubeSection() {
             <thead>
               <tr className="text-gray-400 border-b border-ndtv-border">
                 <th className="text-left py-2 pr-3">Channel</th>
+                <th className="text-left py-2 pr-3">Category</th>
                 <th className="text-right px-3">YouTube</th>
                 <th className="text-right px-3">Facebook</th>
                 <th className="text-right px-3">Instagram</th>
@@ -338,11 +356,16 @@ function YouTubeSection() {
               </tr>
             </thead>
             <tbody className="divide-y divide-ndtv-border/50">
-              {[...DT.social.english, ...DT.social.hindi, ...DT.social.business].map(c => (
-                <tr key={c.channel} className={`hover:bg-ndtv-border/20 ${c.ndtv ? 'bg-ndtv-red/5' : ''}`}>
+              {[
+                ...DT.social.english.map(c => ({ ...c, _cat: 'English' })),
+                ...DT.social.hindi.map(c => ({ ...c, _cat: 'Hindi' })),
+                ...DT.social.business.map(c => ({ ...c, _cat: 'Business' })),
+              ].map(c => (
+                <tr key={`${c._cat}-${c.channel}`} className={`hover:bg-ndtv-border/20 ${c.ndtv ? 'bg-ndtv-red/5' : ''}`}>
                   <td className="py-1.5 pr-3 font-medium text-white">
                     {c.channel}{c.ndtv && <span className="ml-1 badge-red">NDTV</span>}
                   </td>
+                  <td className="py-1.5 pr-3 text-gray-400">{c._cat}</td>
                   <td className="text-right px-3">{c.yt ?? '—'}</td>
                   <td className="text-right px-3">{c.fb ?? '—'}</td>
                   <td className="text-right px-3">{c.insta ?? '—'}</td>
