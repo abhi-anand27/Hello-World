@@ -1,78 +1,79 @@
 import React, { useState } from 'react'
-import { Newspaper, ExternalLink, TrendingUp, Zap, Globe, Tv } from 'lucide-react'
+import { Newspaper, ExternalLink, TrendingUp, Zap, Globe, Tv, Bot, Trash2, Radio } from 'lucide-react'
+import { useWebResults, clearWebResults } from '../../api/webResults'
 
 const NEWS_ITEMS = [
   {
     id: 1,
     category: 'Corporate',
-    title: 'Adani Group consolidates NDTV stake to 64.7%, sets 5-year growth roadmap',
-    summary: 'Following regulatory approvals, Adani Media Network has increased its holding in NDTV to 64.7%. Management has outlined a ₹500 Cr investment plan over FY25-29 for digital infrastructure and newsroom technology.',
-    date: '2024-11-12',
+    title: 'NDTV FY26 results: revenue ₹528 Cr (+13.5%), losses widen on content & restructuring',
+    summary: 'NDTV reported FY26 (Apr 25 – Mar 26) consolidated revenue of ₹528 Cr, up 13.5% YoY, but operating losses widened to -₹261 Cr (OPM -49%) and PAT to -₹323 Cr as the Adani-era investment in newsrooms, digital infrastructure and regional expansion continued ahead of monetisation.',
+    date: '2026-05-22',
     impact: 'Strategic',
-    tags: ['Adani', 'Ownership', 'Investment'],
+    tags: ['Results', 'FY26', 'Adani'],
   },
   {
     id: 2,
     category: 'Market',
-    title: 'Indian TV ad market expected to cross ₹5,100 Cr in FY25 — Madison Report',
-    summary: 'Madison Media\'s annual report forecasts 6.3% growth in TV news advertising for FY25, driven by election-related spending and FMCG category recovery. Digital news advertising projected to grow 28% to ₹7,200 Cr.',
-    date: '2024-12-05',
+    title: 'FICCI-EY 2026: Indian M&E sector crosses ₹2.78 lakh Cr, digital now the largest segment',
+    summary: 'The FICCI-EY Media & Entertainment 2026 report pegs the industry at ~₹2,78,500 Cr for CY2025, with digital media overtaking television as the single largest segment. Digital advertising and a recovering subscription business drive growth; news remains a small but resilient slice.',
+    date: '2026-03-18',
     impact: 'High',
-    tags: ['Ad Market', 'Forecast', 'Madison'],
+    tags: ['FICCI', 'M&E', 'Digital'],
   },
   {
     id: 3,
-    category: 'Technology',
-    title: 'AI-powered newsrooms: Reuters, AP cut production costs 30% — NDTV exploring',
-    summary: 'Leading global news agencies have deployed AI for automated briefs, multilingual dubbing, and sports/financial news generation. NDTV is reportedly in advanced discussions with two AI vendors for its Hindi content arm, potentially saving ₹25-30 Cr annually.',
-    date: '2025-01-08',
+    category: 'Audience',
+    title: 'NDTV.com ranks #1 English news site on Comscore unique users',
+    summary: 'Latest Comscore India data shows NDTV.com leading English news sites on monthly unique users, while the NDTV group ranks #7 across all publisher groups. App engagement (avg mins/user) remains best-in-class, underlining loyal audience depth even where reach trails larger Hindi networks.',
+    date: '2026-05-05',
     impact: 'High',
-    tags: ['AI', 'Technology', 'Cost Savings'],
+    tags: ['Comscore', 'Unique Users', 'Digital'],
   },
   {
     id: 4,
-    category: 'Regulation',
-    title: 'TRAI consultation paper on news broadcaster carriage fee — outcome awaited',
-    summary: 'TRAI has issued a consultation paper proposing cap on carriage fees paid by news broadcasters to cable/DTH operators. A favorable ruling could save news broadcasters ₹200-350 Cr industry-wide annually.',
-    date: '2025-02-14',
+    category: 'Digital',
+    title: 'NDTV India YouTube views surge past 2,900 Mn/month on viral news cycles',
+    summary: 'Databeing/Playboard tracking shows NDTV India\'s YouTube monthly views spiking to the top of the Hindi news pack in early 2026, with NDTV 24x7 also leading English broadcaster channels in several months. Short-form and live coverage are the primary drivers.',
+    date: '2026-04-12',
     impact: 'Medium',
-    tags: ['TRAI', 'Regulation', 'Carriage Fee'],
+    tags: ['YouTube', 'NDTV India', 'Video'],
   },
   {
     id: 5,
-    category: 'Competition',
-    title: 'JioStar merger completes — Network18 News channels get Reliance muscle',
-    summary: 'The merger of Star India and Reliance\'s Jio operations creates JioStar, potentially the largest media conglomerate in India. CNN-News18, News18 India and regional news channels now benefit from Reliance\'s ₹2L+ Cr balance sheet and JioCinema OTT platform.',
-    date: '2025-01-22',
-    impact: 'High',
-    tags: ['JioStar', 'Competition', 'Network18'],
+    category: 'Technology',
+    title: 'AI newsrooms scale up: NDTV expands automated briefs and multilingual dubbing',
+    summary: 'Following industry moves by Reuters and AP, NDTV has expanded AI-assisted workflows — automated briefs, multilingual dubbing and financial/sports summaries — across its Hindi and regional arms, targeting double-digit Cr in annual production savings.',
+    date: '2026-02-28',
+    impact: 'Medium',
+    tags: ['AI', 'Newsroom', 'Cost'],
   },
   {
     id: 6,
-    category: 'Digital',
-    title: 'Connected TV viewership in India doubles YoY — news content among top genres',
-    summary: 'CTV (Smart TV + Fire Stick + Apple TV etc.) viewership in India crossed 40 million households in 2024, doubling from FY23. News is the third-most-watched genre on CTV after entertainment and sports. CPMs on CTV are 5-8x higher than linear TV.',
-    date: '2025-01-30',
+    category: 'Competition',
+    title: 'JioStar consolidates distribution muscle; news players recalibrate carriage strategy',
+    summary: 'The merged JioStar entity continues to reshape distribution economics across linear and OTT. News broadcasters, including NDTV, are recalibrating carriage and bundling strategies as the platform\'s scale influences placement and ad inventory.',
+    date: '2026-01-20',
     impact: 'High',
-    tags: ['CTV', 'OTT', 'Digital'],
+    tags: ['JioStar', 'Competition', 'Distribution'],
   },
   {
     id: 7,
-    category: 'Audience',
-    title: 'Gen Z news consumption shifts to YouTube Shorts, Instagram — traditional TV declines',
-    summary: 'BARC data shows 18-34 year old news consumption on traditional TV has fallen 18% over 3 years. The same cohort\'s news consumption on YouTube and Instagram has grown 64%. NDTV\'s YouTube channel has 14.2M subscribers vs Aaj Tak\'s 32M.',
-    date: '2025-02-03',
+    category: 'Regulation',
+    title: 'TRAI carriage-fee framework: clarity expected to ease news broadcaster costs',
+    summary: 'A revised TRAI framework on carriage fees paid by news broadcasters to cable/DTH operators is expected to bring cost relief industry-wide. A favourable outcome would directly aid loss-making news networks managing high distribution costs.',
+    date: '2026-04-02',
     impact: 'Medium',
-    tags: ['Gen Z', 'YouTube', 'Audience Shift'],
+    tags: ['TRAI', 'Regulation', 'Carriage'],
   },
   {
     id: 8,
-    category: 'Events',
-    title: 'Bihar Assembly Elections 2025 — news channel spending window opens',
-    summary: 'Bihar Assembly Elections scheduled for late 2025 will provide significant advertising uplift for news channels. Historical data shows 35-45% revenue spike during major state elections. NDTV Bihar-focused content strategy yet to be announced.',
-    date: '2025-02-18',
+    category: 'Digital',
+    title: 'Connected TV crosses 68 Mn homes — premium news inventory opportunity grows',
+    summary: 'CTV penetration in India has crossed ~68 million homes per FICCI-EY 2026, with news among the top genres. CPMs on CTV remain multiples of linear TV, opening a premium inventory pool that NDTV is targeting via its apps and OTT presence.',
+    date: '2026-03-30',
     impact: 'High',
-    tags: ['Elections', 'Bihar', 'Revenue Uplift'],
+    tags: ['CTV', 'OTT', 'Inventory'],
   },
 ]
 
@@ -93,6 +94,61 @@ const CAT_CONFIG = {
   Events: 'bg-pink-500/20 text-pink-400',
 }
 
+function timeAgo(iso) {
+  const d = (Date.now() - new Date(iso).getTime()) / 1000
+  if (d < 60) return 'just now'
+  if (d < 3600) return `${Math.floor(d / 60)}m ago`
+  if (d < 86400) return `${Math.floor(d / 3600)}h ago`
+  return new Date(iso).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })
+}
+
+/* ── Live web feed populated by the Gemini chatbot (with permission) ──────── */
+function WebFeed() {
+  const results = useWebResults()
+  return (
+    <div className="card border border-blue-900/40">
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="font-semibold text-sm flex items-center gap-2">
+          <Radio size={15} className="text-green-400" /> Live from the web
+          <span className="text-[10px] font-normal text-gray-500">pulled by the Gemini analyst, with permission</span>
+        </h2>
+        {results.length > 0 && (
+          <button onClick={clearWebResults} className="flex items-center gap-1 text-[11px] text-gray-400 hover:text-white transition">
+            <Trash2 size={12} /> Clear
+          </button>
+        )}
+      </div>
+      {results.length === 0 ? (
+        <div className="text-center py-8 text-gray-500">
+          <Bot size={26} className="mx-auto mb-2 opacity-40" />
+          <p className="text-xs">No live web data yet.</p>
+          <p className="text-[11px] mt-1">Open the Gemini analyst (bottom-right), ask something current (e.g. “latest NDTV news”) and allow web search. Sources appear here.</p>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {results.map(r => (
+            <div key={r.id} className="bg-ndtv-dark border border-ndtv-border rounded-lg p-3">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-500/20 text-green-400 font-medium flex items-center gap-1"><Globe size={9} /> Web</span>
+                <span className="text-xs font-medium text-white truncate">{r.query}</span>
+                <span className="text-[10px] text-gray-500 ml-auto flex-shrink-0">{timeAgo(r.ts)}</span>
+              </div>
+              {r.summary && <p className="text-[12px] text-gray-300 leading-relaxed mb-2">{r.summary}{r.summary.length >= 280 ? '…' : ''}</p>}
+              <div className="space-y-0.5">
+                {r.sources.map((s, i) => (
+                  <a key={i} href={s.uri} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-[11px] text-blue-400 hover:text-blue-300 truncate">
+                    <ExternalLink size={10} className="flex-shrink-0" /> {s.title}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function NewsTrends() {
   const [filter, setFilter] = useState('All')
   const [expanded, setExpanded] = useState(null)
@@ -103,16 +159,16 @@ export default function NewsTrends() {
     <div className="space-y-6 max-w-screen-xl">
       <div>
         <h1 className="text-xl font-bold flex items-center gap-2"><Newspaper size={20} /> News & Industry Trends</h1>
-        <p className="text-sm text-gray-400 mt-0.5">Latest developments in Indian TV & Digital news business</p>
+        <p className="text-sm text-gray-400 mt-0.5">Latest developments in Indian TV & Digital news business · curated to {new Date().toLocaleDateString('en-IN', { month: 'short', year: 'numeric' })}</p>
       </div>
 
       {/* Quick stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
-          { label: 'Market-Moving News', value: '8', icon: Zap, color: 'text-yellow-400' },
-          { label: 'High Impact Items', value: '5', icon: TrendingUp, color: 'text-red-400' },
-          { label: 'Digital Trends', value: '3', icon: Globe, color: 'text-blue-400' },
-          { label: 'TV Industry', value: '4', icon: Tv, color: 'text-orange-400' },
+          { label: 'Tracked Items', value: String(NEWS_ITEMS.length), icon: Zap, color: 'text-yellow-400' },
+          { label: 'High Impact', value: String(NEWS_ITEMS.filter(n => n.impact === 'High').length), icon: TrendingUp, color: 'text-red-400' },
+          { label: 'Digital / Audience', value: String(NEWS_ITEMS.filter(n => ['Digital', 'Audience'].includes(n.category)).length), icon: Globe, color: 'text-blue-400' },
+          { label: 'TV / Competition', value: String(NEWS_ITEMS.filter(n => ['Competition', 'Regulation'].includes(n.category)).length), icon: Tv, color: 'text-orange-400' },
         ].map(({ label, value, icon: Icon, color }) => (
           <div key={label} className="card flex items-center gap-3">
             <Icon size={20} className={color} />
@@ -123,6 +179,9 @@ export default function NewsTrends() {
           </div>
         ))}
       </div>
+
+      {/* Live web feed (Gemini) */}
+      <WebFeed />
 
       {/* Category filter */}
       <div className="flex flex-wrap gap-2">
@@ -139,7 +198,7 @@ export default function NewsTrends() {
         ))}
       </div>
 
-      {/* News cards */}
+      {/* Curated news cards */}
       <div className="space-y-3">
         {filtered.map(item => (
           <div

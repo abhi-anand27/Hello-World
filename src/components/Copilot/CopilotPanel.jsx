@@ -1,188 +1,103 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { X, Bot, Send, User, Sparkles, MessageSquare, ExternalLink, Settings, ChevronRight } from 'lucide-react'
+import { X, Bot, Send, User, Settings, MessageSquare, Globe, ExternalLink, KeyRound, AlertTriangle, ShieldQuestion } from 'lucide-react'
+import { useData } from '../../api/DataContext'
+import { digitalTraffic as DT } from '../../data/digitalTraffic'
+import { addWebResult } from '../../api/webResults'
 
-// ── Copilot Studio embed URL ─────────────────────────────────────────────────
-// Replace with your tenant's Copilot Studio webchat URL once available.
-// Get it from: Copilot Studio → Your Bot → Settings → Channels → Custom Website
-// Format: https://copilotstudio.microsoft.com/environments/{env-id}/bots/{bot-id}/webchat?__version__=2
-const DEFAULT_COPILOT_URL = ''   // leave blank to show built-in chat
-
-// ── Updated financial context (FY25 & FY26 actuals) ─────────────────────────
-const CONTEXT = {
-  tv: {
-    fy25: { revenue: 262, opProfit: -165, opm: -63, pat: -200, eps: -24.61 },
-    fy26: { revenue: 332, opProfit: -235, opm: -71, pat: -298, eps: -36.76 },
-  },
-  consolidated: {
-    fy25: { revenue: 465, opProfit: -173, opm: -37, pat: -218, eps: -19.16 },
-    fy26: { revenue: 528, opProfit: -261, opm: -49, pat: -323, eps: -28.59 },
-  },
-  digital: {
-    fy25: { revenue: 203, opProfit: -8,  pat: -18 },
-    fy26: { revenue: 196, opProfit: -26, pat: -25 },
-  },
-}
+const LS_KEY   = 'ndtv_gemini_key'
+const LS_MODEL = 'ndtv_gemini_model'
+const LS_WEB   = 'ndtv_gemini_web'
+const DEFAULT_MODEL = 'gemini-2.5-flash'
 
 const QUICK_PROMPTS = [
-  'What is NDTV\'s FY26 revenue and PAT?',
-  'Compare NDTV FY25 vs FY26 performance',
-  'Why is NDTV operating margin negative?',
-  'How does NDTV compare to TV Today (Aaj Tak)?',
-  'What is the digital business trajectory?',
-  'What are the key risks for NDTV management?',
+  'Summarise NDTV FY26 consolidated results',
+  'How does NDTV rank on Comscore unique users?',
+  'What does the FICCI 2026 report say about M&E growth?',
+  'Compare NDTV vs peers on operating margin',
+  'Latest news on NDTV / Adani media',
 ]
 
-function buildAnswer(q) {
-  const ql = q.toLowerCase()
+// Heuristic: does this query likely need fresh internet data?
+const WEB_HINT = /\b(latest|today|current|now|recent|news|price|share price|stock|live|update|trending|this week|this month|2026|announce)\b/i
 
-  if (ql.includes('fy26') || ql.includes('latest') || ql.includes('recent')) {
-    return `**NDTV Latest Financials — FY26 (Apr 25 – Mar 26)**
-
-**Consolidated Group:**
-- Revenue: ₹528 Cr (+13.5% vs FY25 ₹465 Cr)
-- Operating Profit: -₹261 Cr (OPM: -49%)
-- PAT: -₹323 Cr | EPS: ₹-28.59
-
-**TV Standalone:**
-- Revenue: ₹332 Cr (+26.8% vs FY25 ₹262 Cr)
-- Operating Profit: -₹235 Cr (OPM: -71%)
-- PAT: -₹298 Cr | EPS: ₹-36.76
-
-**Digital (Convergence):**
-- Revenue: ₹196 Cr (vs ₹203 Cr in FY25)
-- Operating Profit: -₹26 Cr
-- PAT: -₹25 Cr
-
-Revenue is growing but losses are widening — driven by heavy restructuring, impairment charges, and content investment post-Adani acquisition.`
+/* ── Build a compact context from the dashboard's own data ────────────────── */
+function buildContext(data) {
+  const f = data.financials || {}
+  const m = data.market || {}
+  const slim = (arr, keys) => (arr || []).map(r => {
+    const o = {}; keys.forEach(k => { if (r[k] !== undefined) o[k] = r[k] }); return o
+  })
+  const csRank = (b) => {
+    if (!b?.ranking) return null
+    const i = b.ranking.findIndex(r => r.ndtv)
+    const r = b.ranking[i]
+    return r ? { rank: i + 1, value: r.value, month: b.latestMonth } : null
   }
-
-  if (ql.includes('compare') || ql.includes('fy25') || ql.includes('vs')) {
-    return `**NDTV FY25 vs FY26 Comparison (Consolidated)**
-
-| Metric         | FY25      | FY26      | Change   |
-|----------------|-----------|-----------|----------|
-| Revenue        | ₹465 Cr   | ₹528 Cr   | +13.5%   |
-| Op. Profit     | -₹173 Cr  | -₹261 Cr  | worse    |
-| OPM %          | -37%      | -49%      | -12 pp   |
-| PAT            | -₹218 Cr  | -₹323 Cr  | worse    |
-| EPS            | ₹-19.16   | ₹-28.59   | worse    |
-
-**TV Standalone FY25 vs FY26:**
-- Revenue: ₹262 Cr → ₹332 Cr (+26.8%)
-- PAT: -₹200 Cr → -₹298 Cr (widening)
-
-Revenue growth is positive but cost structure has expanded faster — management focus should be on opex discipline alongside revenue scaling.`
+  const ctx = {
+    note: 'All INR figures in Crores. FY = Apr–Mar. Comscore ranks use Unique Users. Negative = loss.',
+    financials: {
+      tvStandalone:  slim(f.tvBusinessData?.annual,   ['period', 'revenue', 'opProfit', 'opm', 'pat']),
+      consolidated:  slim(f.consolidatedData?.annual,  ['period', 'revenue', 'opProfit', 'opm', 'pat']),
+      digital:       slim(f.convergenceData?.annual,   ['period', 'revenue', 'opProfit', 'pat']),
+    },
+    ficci2026: {
+      meOverview: m.meOverview, segments: m.meSegments, adMarket: m.adMarket,
+      digitalRevenue: m.digitalRevenue, tvRevenue: m.tvRevenue,
+    },
+    digitalTraffic: {
+      comscoreUsers: {
+        groupRank: csRank(DT.csGroup), englishRank: csRank(DT.csEnglish),
+        hindiRank: csRank(DT.csHindi), profitRank: csRank(DT.csProfit),
+      },
+      ga4FY: DT.gaFY, gaGrowth: DT.gaFYGrowth,
+      youtubeLatest: DT.ytComp,
+      socialNDTV: {
+        english: (DT.social?.english || []).find(c => c.ndtv),
+        hindi:   (DT.social?.hindi   || []).find(c => c.ndtv),
+        business:(DT.social?.business|| []).find(c => c.ndtv),
+      },
+    },
   }
-
-  if (ql.includes('margin') || ql.includes('negative') || ql.includes('loss') || ql.includes('why')) {
-    return `**Why is NDTV's Operating Margin Negative?**
-
-NDTV's OPM turned negative in FY24 and has worsened:
-- FY23: +9% → FY24: -9% → FY25: -63% (TV standalone)
-
-**Key drivers of the losses:**
-
-1. **Restructuring & impairment charges** — Post-Adani acquisition write-downs of ₹100–150 Cr/year
-2. **Content & talent reinvestment** — New programming, anchor hiring, newsroom upgrades
-3. **Digital investment burn** — Building scale before monetisation catches up
-4. **Revenue base still modest** — ₹528 Cr consolidated with high fixed costs
-
-**What's different from peers:**
-- TV Today (Aaj Tak): OPM +10% (FY25) — lean ops, no restructuring
-- Sun TV: OPM +54% — regional monopoly, minimal competition
-
-The FY26 margin contraction (-49% OPM) suggests restructuring is still ongoing. Recovery expected from FY27 as one-time costs normalise.`
-  }
-
-  if (ql.includes('competitor') || ql.includes('aaj tak') || ql.includes('tv today') || ql.includes('compare') || ql.includes('peer')) {
-    return `**NDTV vs TV Today (Aaj Tak) — FY25 Peer Comparison**
-
-| Metric      | NDTV (Consol.) | TV Today   |
-|-------------|----------------|------------|
-| Revenue     | ₹465 Cr        | ₹993 Cr    |
-| Op. Profit  | -₹173 Cr       | +₹100 Cr   |
-| OPM %       | -37%           | +10%       |
-| PAT         | -₹218 Cr       | +₹75 Cr    |
-| EPS         | ₹-19.16        | ₹13.87     |
-
-**Key takeaways:**
-- TV Today has 2x NDTV's revenue with 10% OPM — lean, profitable
-- NDTV's losses are restructuring-driven, not operational at the revenue line
-- TV Today's margin has also compressed (26% in FY22 → 10% in FY25) — industry-wide pressure
-- Sun TV leads the sector at 54% OPM (regional monopoly advantage)
-
-Long-term, if NDTV normalises restructuring costs, there is a path to 10–15% OPM.`
-  }
-
-  if (ql.includes('digital') || ql.includes('convergence') || ql.includes('online')) {
-    return `**NDTV Digital (Convergence) Business**
-
-**FY26 Actuals:**
-- Revenue: ₹196 Cr (vs ₹203 Cr FY25 — slight dip)
-- Op. Profit: -₹26 Cr (vs -₹8 Cr FY25 — worsening)
-- PAT: -₹25 Cr
-
-**Traffic Metrics (latest):**
-- MAU: 235M+ (industry rank #3)
-- MAU Growth: +22% YoY
-- YouTube: 14.2M subscribers
-- Page Views: 2,240M/month
-
-**Key concerns:**
-- Revenue declined slightly FY25→FY26 despite MAU growth — monetisation gap
-- Operating losses widening — cost investments outpacing revenue
-- Peers: AajTak.in (310M MAU, rank #1), TOI.com (285M MAU, rank #2)
-
-**Path forward:**
-- Subscription product launch could add ₹15–25 Cr high-margin revenue
-- Digital ad yield improvement (currently below peer avg)
-- CTV expansion for premium inventory`
-  }
-
-  if (ql.includes('risk') || ql.includes('management') || ql.includes('concern')) {
-    return `**Key Risks for NDTV Management — FY26**
-
-**Financial Risks:**
-1. Losses widening: PAT -₹323 Cr (consolidated FY26), cash burn rate a concern
-2. Borrowings up: ₹316 Cr (Mar 25) vs ₹3 Cr (Mar 22) — leverage increasing
-3. Negative book value: -₹10.2/share (Mar 25) — equity erosion
-
-**Operational Risks:**
-1. TV viewership share: ~7.8% declining trend — revenue at risk
-2. Digital revenue soft: ₹196 Cr FY26 vs ₹203 Cr FY25 despite MAU growth
-3. Talent stability: Post-acquisition leadership transitions ongoing
-
-**Market Risks:**
-1. Network18/JioStar scale advantage in distribution
-2. Digital ad revenue competition from Google/Meta eating publisher share
-3. BARC measurement changes affecting TV ad pricing
-
-**Mitigants:**
-- Adani Group financial backing (₹500 Cr committed)
-- Strong NDTV brand — #3 digital portal, trusted advertiser
-- Revenue growing (+13.5% FY26) even if losses persist`
-  }
-
-  // Default
-  return `**NDTV Financial Summary — FY26**
-
-**Consolidated (Group):** Revenue ₹528 Cr | OPM -49% | PAT -₹323 Cr
-**TV Standalone:** Revenue ₹332 Cr | OPM -71% | PAT -₹298 Cr
-**Digital:** Revenue ₹196 Cr | OPM -ve | MAU 235M+
-
-**Top 5 peer comparison (FY25 OPM):**
-1. Sun TV: +54% 🟢
-2. TV Today: +10% 🟡
-3. Zee Entmt: +13% 🟡
-4. Network18: +2% 🔴
-5. HT Media: ~0% 🔴
-6. NDTV: -37% 🔴
-
-For specific analysis, try the quick prompts or ask about revenue, margins, digital business, competitor benchmarks, or investment risks.
-
-_Tip: Connect Microsoft Copilot 365 via Settings (⚙) for deeper AI-powered analysis with live data._`
+  return JSON.stringify(ctx)
 }
 
+const SYSTEM_PROMPT = (ctxJson) => `You are the NDTV Financial & Audience Analyst assistant embedded in an internal management dashboard.
+Answer questions about NDTV's financial performance, the FICCI-EY 2026 Media & Entertainment report, and digital traffic (Comscore unique users, Google Analytics, YouTube, social).
+Use ONLY the DASHBOARD DATA below for NDTV-specific numbers unless the user has allowed web search and you are given fresh web results.
+Be concise, use INR Crores, label years as FY, and call out when a number is a loss. Use short markdown (bold headers, bullet points). If a number isn't in the data, say so rather than inventing it.
+
+DASHBOARD DATA (JSON):
+${ctxJson}`
+
+/* ── Gemini REST call ─────────────────────────────────────────────────────── */
+async function callGemini({ key, model, system, history, web }) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(key)}`
+  const body = {
+    systemInstruction: { parts: [{ text: system }] },
+    contents: history.map(m => ({ role: m.role === 'user' ? 'user' : 'model', parts: [{ text: m.text }] })),
+    generationConfig: { temperature: 0.4, maxOutputTokens: 1400 },
+  }
+  if (web) body.tools = [{ google_search: {} }]
+
+  const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+  if (!res.ok) {
+    let detail = ''
+    try { detail = (await res.json())?.error?.message || '' } catch { /* ignore */ }
+    throw new Error(`${res.status} ${res.statusText}${detail ? ` — ${detail}` : ''}`)
+  }
+  const json = await res.json()
+  const cand = json.candidates?.[0]
+  const text = cand?.content?.parts?.map(p => p.text).filter(Boolean).join('\n') || '(no response)'
+  // Grounding / web sources
+  const gm = cand?.groundingMetadata
+  const sources = (gm?.groundingChunks || [])
+    .map(c => c.web).filter(Boolean)
+    .map(w => ({ title: w.title || w.uri, uri: w.uri }))
+  const queries = gm?.webSearchQueries || []
+  return { text, sources, queries }
+}
+
+/* ── Markdown-ish bubble ──────────────────────────────────────────────────── */
 function ChatBubble({ role, text }) {
   return (
     <div className={`flex gap-2 ${role === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -197,12 +112,12 @@ function ChatBubble({ role, text }) {
           : 'bg-[#1e2a3a] border border-blue-900/40 text-gray-200 rounded-bl-sm'
       }`}>
         {text.split('\n').map((line, i) => {
-          if (line.startsWith('**') && line.endsWith('**'))
-            return <div key={i} className="font-semibold text-white mt-1 mb-0.5">{line.replace(/\*\*/g, '')}</div>
-          if (line.startsWith('- ') || line.startsWith('1.') || line.startsWith('2.') || line.startsWith('3.'))
-            return <div key={i} className="mt-0.5 pl-1">{line}</div>
+          const t = line.replace(/\*\*(.+?)\*\*/g, '$1')
+          if (/^\s*#{1,3}\s/.test(line)) return <div key={i} className="font-semibold text-white mt-1 mb-0.5">{line.replace(/^#+\s/, '')}</div>
+          if (line.startsWith('**') && line.endsWith('**')) return <div key={i} className="font-semibold text-white mt-1 mb-0.5">{t}</div>
+          if (/^\s*[-*]\s/.test(line) || /^\s*\d+\./.test(line)) return <div key={i} className="mt-0.5 pl-1">{t}</div>
           if (line === '') return <div key={i} className="h-1" />
-          return <span key={i}>{line} </span>
+          return <div key={i}>{t}</div>
         })}
       </div>
       {role === 'user' && (
@@ -215,194 +130,199 @@ function ChatBubble({ role, text }) {
 }
 
 export default function CopilotPanel() {
-  const [open, setOpen]           = useState(false)
-  const [mode, setMode]           = useState('chat')   // 'chat' | 'copilot' | 'settings'
-  const [copilotUrl, setCopilotUrl] = useState(DEFAULT_COPILOT_URL)
-  const [urlInput, setUrlInput]   = useState(DEFAULT_COPILOT_URL)
-  const [messages, setMessages]   = useState([
-    { role: 'bot', text: 'Hi! I\'m your NDTV financial analyst. Ask me about FY25/FY26 results, competitor benchmarks, or business strategy.\n\nOr connect **Microsoft Copilot 365** via ⚙ Settings for advanced AI analysis.' }
+  const { data } = useData()
+  const [open, setOpen]     = useState(false)
+  const [mode, setMode]     = useState('chat')   // 'chat' | 'settings'
+  const [apiKey, setApiKey] = useState(() => localStorage.getItem(LS_KEY) || '')
+  const [keyInput, setKeyInput] = useState(() => localStorage.getItem(LS_KEY) || '')
+  const [model, setModel]   = useState(() => localStorage.getItem(LS_MODEL) || DEFAULT_MODEL)
+  const [webAllowed, setWebAllowed] = useState(() => localStorage.getItem(LS_WEB) === '1')
+  const [messages, setMessages] = useState([
+    { role: 'bot', text: 'Hi! I\'m the NDTV Gemini analyst. I can analyse the **financials**, **FICCI 2026 report**, and **digital traffic** in this dashboard.\n\nAdd your Google Gemini API key in ⚙ Settings to begin. I can also pull **live data from the web** — with your permission.' }
   ])
-  const [input, setInput]         = useState('')
-  const [typing, setTyping]       = useState(false)
+  const [input, setInput]   = useState('')
+  const [busy, setBusy]     = useState(false)
+  const [pending, setPending] = useState(null)   // query awaiting web permission
   const bottomRef = useRef(null)
 
-  useEffect(() => {
-    if (open) bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages, open])
+  useEffect(() => { if (open) bottomRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [messages, open, pending, busy])
+
+  const saveSettings = () => {
+    const k = keyInput.trim()
+    setApiKey(k)
+    if (k) localStorage.setItem(LS_KEY, k); else localStorage.removeItem(LS_KEY)
+    localStorage.setItem(LS_MODEL, model || DEFAULT_MODEL)
+    setMode('chat')
+    setMessages(p => [...p, { role: 'bot', text: k ? '✓ API key saved. Ask me anything about NDTV.' : 'API key cleared.' }])
+  }
+
+  const toggleWeb = () => {
+    const next = !webAllowed
+    setWebAllowed(next)
+    localStorage.setItem(LS_WEB, next ? '1' : '0')
+  }
+
+  // Run a query against Gemini. web=true includes Google Search grounding.
+  async function run(query, history, web) {
+    if (!apiKey) { setMode('settings'); return }
+    setBusy(true)
+    try {
+      const system = SYSTEM_PROMPT(buildContext(data))
+      const { text, sources, queries } = await callGemini({ key: apiKey, model, system, history, web })
+      setMessages(p => [...p, { role: 'bot', text, sources: web ? sources : undefined }])
+      if (web && sources.length) {
+        addWebResult(queries[0] || query, sources, text.slice(0, 280))
+        setMessages(p => [...p, { role: 'bot', text: `🌐 Pulled ${sources.length} web source${sources.length > 1 ? 's' : ''} — added to **News & Trends › Live from the web**.` }])
+      }
+    } catch (e) {
+      setMessages(p => [...p, { role: 'bot', text: `⚠️ Gemini error: ${e.message}\n\nCheck your API key/model in ⚙ Settings. Model in use: \`${model}\`.` }])
+    } finally {
+      setBusy(false)
+    }
+  }
 
   const send = (text) => {
     const q = (text || input).trim()
-    if (!q) return
+    if (!q || busy) return
+    if (!apiKey) { setMode('settings'); return }
+    const history = [...messages.filter(m => m.role === 'user' || m.role === 'bot'), { role: 'user', text: q }]
     setMessages(p => [...p, { role: 'user', text: q }])
     setInput('')
-    setTyping(true)
-    setTimeout(() => {
-      setMessages(p => [...p, { role: 'bot', text: buildAnswer(q) }])
-      setTyping(false)
-    }, 700 + Math.random() * 500)
+    // If query may need fresh data and web not yet allowed → ask permission first.
+    if (WEB_HINT.test(q) && !webAllowed) {
+      setPending({ q, history })
+      return
+    }
+    run(q, history, webAllowed)
   }
 
-  const saveCopilotUrl = () => {
-    setCopilotUrl(urlInput.trim())
-    setMode(urlInput.trim() ? 'copilot' : 'chat')
+  const grantWeb = (allow, persist) => {
+    const { q, history } = pending
+    setPending(null)
+    if (allow && persist) toggleWeb()
+    run(q, history, allow)
   }
+
+  const ready = !!apiKey
 
   return (
     <>
       {/* Floating toggle button */}
       <button
         onClick={() => setOpen(o => !o)}
-        className={`fixed bottom-5 right-5 z-50 w-13 h-13 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 ${
-          open
-            ? 'bg-gray-700 hover:bg-gray-600'
-            : 'bg-blue-600 hover:bg-blue-500'
-        }`}
+        className={`fixed bottom-5 right-5 z-50 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 ${open ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gradient-to-br from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500'}`}
         style={{ width: 52, height: 52 }}
-        title="Copilot / AI Analysis"
+        title="NDTV Gemini Analyst"
       >
-        {open
-          ? <X size={20} className="text-white" />
-          : <MessageSquare size={20} className="text-white" />
-        }
+        {open ? <X size={20} className="text-white" /> : <MessageSquare size={20} className="text-white" />}
       </button>
 
-      {/* Panel */}
       {open && (
-        <div className="fixed bottom-20 right-5 z-50 w-80 md:w-96 rounded-2xl shadow-2xl border border-blue-900/40 bg-[#111827] flex flex-col overflow-hidden"
-          style={{ height: 560 }}>
-
+        <div className="fixed bottom-20 right-5 z-50 w-80 md:w-96 rounded-2xl shadow-2xl border border-blue-900/40 bg-[#111827] flex flex-col overflow-hidden" style={{ height: 580 }}>
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 bg-[#0f172a] border-b border-blue-900/30">
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-full bg-blue-600/30 border border-blue-500/40 flex items-center justify-center">
-                <Bot size={14} className="text-blue-400" />
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-600/40 to-indigo-600/40 border border-blue-500/40 flex items-center justify-center">
+                <Bot size={14} className="text-blue-300" />
               </div>
               <div>
-                <div className="text-xs font-semibold text-white">NDTV Copilot</div>
-                <div className="text-[10px] text-gray-400">{copilotUrl ? 'Microsoft Copilot 365' : 'Built-in AI Analyst'}</div>
+                <div className="text-xs font-semibold text-white">NDTV Gemini Analyst</div>
+                <div className="text-[10px] text-gray-400">{ready ? `Google Gemini · ${model}` : 'API key needed'}</div>
               </div>
             </div>
             <div className="flex items-center gap-1">
-              {/* Mode switcher */}
-              {copilotUrl && (
-                <>
-                  <button onClick={() => setMode('chat')}
-                    className={`text-[10px] px-2 py-0.5 rounded-full transition ${mode === 'chat' ? 'bg-blue-600 text-white' : 'text-gray-400 hover:text-white'}`}>
-                    Built-in
-                  </button>
-                  <button onClick={() => setMode('copilot')}
-                    className={`text-[10px] px-2 py-0.5 rounded-full transition ${mode === 'copilot' ? 'bg-blue-600 text-white' : 'text-gray-400 hover:text-white'}`}>
-                    Copilot 365
-                  </button>
-                </>
-              )}
-              <button onClick={() => setMode(m => m === 'settings' ? (copilotUrl ? 'copilot' : 'chat') : 'settings')}
-                className="text-gray-400 hover:text-white p-1 rounded-full transition" title="Settings">
+              <button onClick={toggleWeb} title={webAllowed ? 'Web access ON' : 'Web access OFF'}
+                className={`flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full transition ${webAllowed ? 'bg-green-600/30 border border-green-500/40 text-green-300' : 'text-gray-400 hover:text-white border border-transparent'}`}>
+                <Globe size={11} /> Web
+              </button>
+              <button onClick={() => setMode(m => m === 'settings' ? 'chat' : 'settings')} className="text-gray-400 hover:text-white p-1 rounded-full transition" title="Settings">
                 <Settings size={13} />
               </button>
-              <button onClick={() => setOpen(false)} className="text-gray-400 hover:text-white p-1 rounded-full transition">
-                <X size={14} />
-              </button>
+              <button onClick={() => setOpen(false)} className="text-gray-400 hover:text-white p-1 rounded-full transition"><X size={14} /></button>
             </div>
           </div>
 
-          {/* Settings panel */}
+          {/* Settings */}
           {mode === 'settings' && (
             <div className="flex-1 p-4 space-y-4 overflow-y-auto">
               <div>
-                <div className="text-xs font-semibold text-white mb-2">Microsoft Copilot 365 Integration</div>
-                <div className="text-[11px] text-gray-400 leading-relaxed mb-3">
-                  Paste your <span className="text-blue-400">Copilot Studio webchat URL</span> to enable Microsoft Copilot 365. Get it from:<br/>
-                  <span className="text-gray-500">Copilot Studio → Your Bot → Channels → Custom Website</span>
+                <div className="text-xs font-semibold text-white mb-2 flex items-center gap-1.5"><KeyRound size={13} /> Google Gemini API key</div>
+                <div className="text-[11px] text-gray-400 leading-relaxed mb-2">
+                  Stored only in this browser (localStorage) — never committed. Get a free key at{' '}
+                  <a href="https://aistudio.google.com/apikey" target="_blank" rel="noreferrer" className="text-blue-400 hover:text-blue-300 inline-flex items-center gap-0.5">aistudio.google.com/apikey <ExternalLink size={10} /></a>.
                 </div>
-                <textarea
-                  value={urlInput}
-                  onChange={e => setUrlInput(e.target.value)}
-                  placeholder="https://copilotstudio.microsoft.com/environments/.../bots/.../webchat?__version__=2"
-                  className="w-full bg-[#1e2a3a] border border-blue-900/40 rounded-xl px-3 py-2 text-[11px] text-white placeholder-gray-600 resize-none h-20 focus:outline-none focus:border-blue-500/60"
-                />
-                <button onClick={saveCopilotUrl}
-                  className="mt-2 w-full bg-blue-600 hover:bg-blue-500 text-white text-xs py-2 rounded-xl transition font-medium">
-                  {urlInput.trim() ? 'Connect Copilot 365' : 'Use Built-in AI'}
-                </button>
+                <input type="password" value={keyInput} onChange={e => setKeyInput(e.target.value)} placeholder="AIza…"
+                  className="w-full bg-[#1e2a3a] border border-blue-900/40 rounded-xl px-3 py-2 text-[11px] text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/60" />
+                <div className="text-[11px] text-gray-400 mt-3 mb-1">Model</div>
+                <input value={model} onChange={e => setModel(e.target.value)} placeholder={DEFAULT_MODEL}
+                  className="w-full bg-[#1e2a3a] border border-blue-900/40 rounded-xl px-3 py-2 text-[11px] text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/60" />
+                <p className="text-[10px] text-gray-500 mt-1">e.g. gemini-2.5-flash, gemini-2.5-pro, gemini-2.0-flash</p>
+                <button onClick={saveSettings} className="mt-3 w-full bg-blue-600 hover:bg-blue-500 text-white text-xs py-2 rounded-xl transition font-medium">Save</button>
               </div>
-              <div className="border-t border-blue-900/30 pt-3">
-                <div className="text-[10px] text-gray-500 font-medium uppercase mb-2">How to get the URL</div>
-                {[
-                  'Sign in to copilotstudio.microsoft.com',
-                  'Open your NDTV analysis bot (or create one)',
-                  'Go to Settings → Channels → Custom Website',
-                  'Copy the webchat embed URL and paste above',
-                ].map((step, i) => (
-                  <div key={i} className="flex gap-2 text-[11px] text-gray-400 mb-1.5">
-                    <span className="text-blue-500 font-bold flex-shrink-0">{i + 1}.</span>
-                    <span>{step}</span>
-                  </div>
-                ))}
-                <a href="https://copilotstudio.microsoft.com" target="_blank" rel="noreferrer"
-                  className="mt-2 flex items-center gap-1 text-[11px] text-blue-400 hover:text-blue-300 transition">
-                  Open Copilot Studio <ExternalLink size={11} />
-                </a>
+              <div className="border-t border-blue-900/30 pt-3 text-[11px] text-gray-400 space-y-1.5">
+                <div className="flex items-start gap-2"><AlertTriangle size={12} className="text-yellow-500 mt-0.5 flex-shrink-0" /><span>Asking a question sends the dashboard's NDTV data to Google's Gemini API. Use only with authorised data.</span></div>
+                <div className="flex items-start gap-2"><Globe size={12} className="text-green-500 mt-0.5 flex-shrink-0" /><span>Web search is off by default. The bot asks permission before each web pull (or toggle Web on).</span></div>
               </div>
             </div>
           )}
 
-          {/* Copilot 365 iframe */}
-          {mode === 'copilot' && copilotUrl && (
-            <iframe
-              src={copilotUrl}
-              title="Microsoft Copilot 365"
-              frameBorder="0"
-              allow="camera; microphone; *"
-              className="flex-1 w-full"
-            />
-          )}
-
-          {/* Built-in chat */}
+          {/* Chat */}
           {mode === 'chat' && (
             <>
-              {/* Quick prompts */}
               <div className="px-3 py-2 border-b border-blue-900/20 flex gap-1.5 overflow-x-auto scrollbar-hide">
-                {QUICK_PROMPTS.slice(0, 4).map(p => (
-                  <button key={p} onClick={() => send(p)}
-                    className="flex-shrink-0 text-[10px] px-2 py-1 rounded-full bg-blue-900/30 border border-blue-800/40 text-blue-300 hover:bg-blue-800/40 transition whitespace-nowrap">
-                    {p.length > 28 ? p.slice(0, 28) + '…' : p}
+                {QUICK_PROMPTS.map(p => (
+                  <button key={p} onClick={() => send(p)} disabled={busy}
+                    className="flex-shrink-0 text-[10px] px-2 py-1 rounded-full bg-blue-900/30 border border-blue-800/40 text-blue-300 hover:bg-blue-800/40 transition whitespace-nowrap disabled:opacity-40">
+                    {p.length > 30 ? p.slice(0, 30) + '…' : p}
                   </button>
                 ))}
               </div>
 
-              {/* Messages */}
               <div className="flex-1 overflow-y-auto p-3 space-y-3">
                 {messages.map((m, i) => (
-                  <ChatBubble key={i} role={m.role} text={m.text} />
+                  <div key={i}>
+                    <ChatBubble role={m.role} text={m.text} />
+                    {m.sources && m.sources.length > 0 && (
+                      <div className="ml-8 mt-1 space-y-0.5">
+                        {m.sources.map((s, j) => (
+                          <a key={j} href={s.uri} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-[10px] text-blue-400 hover:text-blue-300 truncate">
+                            <ExternalLink size={9} className="flex-shrink-0" /> {s.title}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
-                {typing && (
-                  <div className="flex gap-2">
-                    <div className="w-6 h-6 rounded-full bg-blue-600/30 border border-blue-500/40 flex items-center justify-center flex-shrink-0">
-                      <Bot size={12} className="text-blue-400" />
+
+                {/* Web permission prompt */}
+                {pending && (
+                  <div className="bg-[#1e2a3a] border border-yellow-700/40 rounded-2xl px-3 py-2.5">
+                    <div className="flex items-center gap-1.5 text-[11px] text-yellow-300 font-medium mb-1"><ShieldQuestion size={13} /> Allow web search?</div>
+                    <div className="text-[11px] text-gray-300 mb-2">This question may need current data from the internet. Let Gemini search the web for it?</div>
+                    <div className="flex gap-1.5 flex-wrap">
+                      <button onClick={() => grantWeb(true, false)} className="text-[10px] px-2.5 py-1 rounded-full bg-green-600 hover:bg-green-500 text-white">Allow once</button>
+                      <button onClick={() => grantWeb(true, true)} className="text-[10px] px-2.5 py-1 rounded-full bg-green-700/60 hover:bg-green-600/60 text-white">Always allow</button>
+                      <button onClick={() => grantWeb(false, false)} className="text-[10px] px-2.5 py-1 rounded-full bg-gray-700 hover:bg-gray-600 text-gray-200">Answer offline</button>
                     </div>
+                  </div>
+                )}
+
+                {busy && (
+                  <div className="flex gap-2">
+                    <div className="w-6 h-6 rounded-full bg-blue-600/30 border border-blue-500/40 flex items-center justify-center flex-shrink-0"><Bot size={12} className="text-blue-400" /></div>
                     <div className="bg-[#1e2a3a] border border-blue-900/40 rounded-2xl rounded-bl-sm px-3 py-2 flex gap-1 items-center">
-                      {[0, 1, 2].map(i => (
-                        <div key={i} className="w-1.5 h-1.5 bg-blue-400/60 rounded-full animate-bounce"
-                          style={{ animationDelay: `${i * 150}ms` }} />
-                      ))}
+                      {[0, 1, 2].map(i => <div key={i} className="w-1.5 h-1.5 bg-blue-400/60 rounded-full animate-bounce" style={{ animationDelay: `${i * 150}ms` }} />)}
                     </div>
                   </div>
                 )}
                 <div ref={bottomRef} />
               </div>
 
-              {/* Input */}
               <div className="p-3 border-t border-blue-900/20 flex gap-2">
-                <input
-                  value={input}
-                  onChange={e => setInput(e.target.value)}
-                  onKeyDown={e => e.key === 'Enter' && !e.shiftKey && send()}
-                  placeholder="Ask about NDTV financials..."
-                  className="flex-1 bg-[#1e2a3a] border border-blue-900/40 rounded-xl px-3 py-2 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/60 transition"
-                />
-                <button onClick={() => send()} disabled={!input.trim() || typing}
-                  className="bg-blue-600 hover:bg-blue-500 disabled:opacity-40 disabled:cursor-not-allowed rounded-xl px-3 transition">
+                <input value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && !e.shiftKey && send()}
+                  placeholder={ready ? 'Ask about NDTV financials, FICCI, traffic…' : 'Add API key in ⚙ Settings first'}
+                  className="flex-1 bg-[#1e2a3a] border border-blue-900/40 rounded-xl px-3 py-2 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/60 transition" />
+                <button onClick={() => send()} disabled={!input.trim() || busy} className="bg-blue-600 hover:bg-blue-500 disabled:opacity-40 disabled:cursor-not-allowed rounded-xl px-3 transition">
                   <Send size={13} className="text-white" />
                 </button>
               </div>
