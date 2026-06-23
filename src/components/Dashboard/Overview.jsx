@@ -199,8 +199,9 @@ export default function Overview({ onNavigate }) {
         <p className="text-xs text-gray-500 mt-3">Source: BSE filings via finology.in (same data as Moneycontrol). FY26 = Apr 25 – Mar 26.</p>
       </div>
 
-      {/* Comscore Snapshot */}
+      {/* Comscore + GA snapshots (two separate rows) */}
       <ComscoreSnapshot />
+      <GASnapshot />
     </div>
   )
 }
@@ -227,8 +228,8 @@ function ComscoreSnapshot() {
 
   const kpis = [
     { label: 'Group Unique Users',  value: `${ndtvGroup?.value ?? '—'} Mn`,   sub: `#${groupRank} Publisher Group · ${ml(csGroup.latestMonth)}`,   icon: BarChart3,  color: 'text-blue-400' },
-    { label: 'English News',        value: `${ndtvEnglish?.value ?? '—'} Mn`, sub: `#${engRank} English News Site · NDTV.com`,                      icon: Globe,      color: 'text-green-400' },
-    { label: 'Hindi News',          value: `${ndtvHindi?.value ?? '—'} Mn`,   sub: `#${hindiRank} Hindi News Site · NDTV.in`,                       icon: Globe,      color: 'text-yellow-400' },
+    { label: 'English News',        value: `${ndtvEnglish?.value ?? '—'} Mn`, sub: `#${engRank} English News Site · ${ml(csEnglish.latestMonth)}`,   icon: Globe,      color: 'text-green-400' },
+    { label: 'Hindi News',          value: `${ndtvHindi?.value ?? '—'} Mn`,   sub: `#${hindiRank} Hindi News Site · ${ml(csHindi.latestMonth)}`,    icon: Globe,      color: 'text-yellow-400' },
     { label: 'App Engagement',      value: `${ndtvApp?.avgMins ?? '—'} min`,  sub: `Avg mins/user · #1 in app engagement`,                          icon: Activity,   color: 'text-purple-400' },
   ]
 
@@ -238,7 +239,7 @@ function ComscoreSnapshot() {
         <h2 className="font-semibold text-sm flex items-center gap-2">
           <BarChart3 size={15} className="text-gray-400" /> Comscore Snapshot — NDTV Digital Reach
         </h2>
-        <span className="text-xs text-gray-500">Source: Comscore India · {ml(csGroup.latestMonth)}</span>
+        <span className="text-xs text-gray-500">Source: Comscore India · Unique Users · {ml(csGroup.latestMonth)}</span>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {kpis.map(k => (
@@ -251,7 +252,41 @@ function ComscoreSnapshot() {
           </div>
         ))}
       </div>
-      <p className="text-xs text-gray-500 mt-2">Comscore India unique users (millions). Full detail in Digital Traffic section.</p>
+      <p className="text-xs text-gray-500 mt-2">Comscore India unique users (millions) — rankings on Users, not Pageviews. Full detail in Digital Traffic.</p>
+    </div>
+  )
+}
+
+function GASnapshot() {
+  const fy = DT.gaFY
+  const latest = DT.gaNDTV.trend[DT.gaNDTV.trend.length - 1]
+  const g = DT.gaFYGrowth
+  const kpis = [
+    { label: 'Users (FY24-25)',     value: `${fy[1].users.toLocaleString('en-IN')} Mn`,     sub: `${g.users >= 0 ? '+' : ''}${g.users}% YoY`,         pos: g.users >= 0,     icon: Activity },
+    { label: 'Sessions (FY24-25)',  value: `${fy[1].sessions.toLocaleString('en-IN')} Mn`,  sub: `${g.sessions >= 0 ? '+' : ''}${g.sessions}% YoY`,   pos: g.sessions >= 0,  icon: TrendingUp },
+    { label: 'Pageviews (FY24-25)', value: `${fy[1].pageviews.toLocaleString('en-IN')} Mn`, sub: `${g.pageviews >= 0 ? '+' : ''}${g.pageviews}% YoY`, pos: g.pageviews >= 0, icon: Globe },
+    { label: 'Latest-month Users',  value: `${latest?.users ?? '—'} Mn`,                    sub: `GA4 · ${ml(latest?.month)}`,                       pos: true,             icon: BarChart3 },
+  ]
+  return (
+    <div className="card">
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="font-semibold text-sm flex items-center gap-2">
+          <Globe size={15} className="text-gray-400" /> Google Analytics Snapshot — NDTV Group (GA4)
+        </h2>
+        <span className="text-xs text-gray-500">Source: Google Analytics 4 · {fy[1].fy}</span>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {kpis.map(k => (
+          <div key={k.label} className="bg-ndtv-dark border border-ndtv-border rounded-lg p-3">
+            <div className="flex items-center gap-1.5 text-xs text-gray-400 mb-1">
+              <k.icon size={12} /> {k.label}
+            </div>
+            <div className="text-lg font-bold text-white">{k.value}</div>
+            <div className={`text-[11px] mt-0.5 ${k.sub.includes('%') ? (k.pos ? 'text-green-400' : 'text-red-400') : 'text-gray-500'}`}>{k.sub}</div>
+          </div>
+        ))}
+      </div>
+      <p className="text-xs text-gray-500 mt-2">NDTV Group GA4 — Users / Sessions / Pageviews in millions. Full detail in Digital Traffic › Google Analytics.</p>
     </div>
   )
 }

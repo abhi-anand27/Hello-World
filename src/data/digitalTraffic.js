@@ -1,7 +1,7 @@
 // ============================================================================
 // Digital Traffic data — NDTV internal dashboards
-// Sources: Comscore India (CS), Google Analytics (GA4), YouTube (Playboard/Databeing), Social platforms
-// Generated from uploaded workbook: ComScore / Google Analytics / Youtube
+// Sources: Comscore India (CS, Unique Users), Google Analytics (GA4), YouTube, Social
+// Generated from uploaded workbook (v1)
 // ============================================================================
 
 export const digitalTraffic = {
@@ -518,39 +518,14 @@ export const digitalTraffic = {
       "HT Media Group"
     ],
     "footnotes": [
-      "All numbers in millions — Total Unique Users/Viewers, Comscore India.",
+      "Total Unique Users (millions), Comscore India MMX (Mobile + Desktop).",
       "Dailyhunt, Microsoft, Inshorts and Oppo removed (aggregators, not publishers).",
       "Data from Jan 2022 is MMX Desktop + Mobile."
     ]
   },
   "csEnglish": {
-    "latestMonth": "2026-05",
+    "latestMonth": "2026-04",
     "ranking": [
-      {
-        "name": "HINDUSTANTIMES.COM*",
-        "value": 211.0,
-        "ndtv": false
-      },
-      {
-        "name": "NDTV.COM*",
-        "value": 184.0,
-        "ndtv": true
-      },
-      {
-        "name": "INDIANEXPRESS.COM",
-        "value": 113.0,
-        "ndtv": false
-      },
-      {
-        "name": "THEHINDU.COM",
-        "value": 73.3,
-        "ndtv": false
-      },
-      {
-        "name": "INDIATODAY.IN*",
-        "value": 47.6,
-        "ndtv": false
-      },
       {
         "name": "NDTV.COM*",
         "value": 45.7,
@@ -564,16 +539,6 @@ export const digitalTraffic = {
       {
         "name": "INDIANEXPRESS.COM",
         "value": 34.4,
-        "ndtv": false
-      },
-      {
-        "name": "TIMESNOWNEWS.COM",
-        "value": 28.7,
-        "ndtv": false
-      },
-      {
-        "name": "INDIA.COM*",
-        "value": 25.3,
         "ndtv": false
       },
       {
@@ -603,11 +568,6 @@ export const digitalTraffic = {
       },
       {
         "name": "INDIATVNEWS.COM*",
-        "value": 4.3,
-        "ndtv": false
-      },
-      {
-        "name": "INDIATVNEWS.COM*",
         "value": 2.7,
         "ndtv": false
       },
@@ -630,431 +590,422 @@ export const digitalTraffic = {
     "trend": [
       {
         "month": "2022-01",
-        "NDTV.COM*": 245.0,
-        "INDIANEXPRESS.COM": 163.0,
-        "HINDUSTANTIMES.COM*": 149.0,
-        "INDIATODAY.IN*": 109.0,
-        "THEHINDU.COM": 94.0
+        "NDTV.COM*": 55.7,
+        "INDIANEXPRESS.COM": 56.8,
+        "HINDUSTANTIMES.COM*": 52.9,
+        "INDIATODAY.IN*": 47.3,
+        "THEHINDU.COM": 35.5
       },
       {
         "month": "2022-02",
-        "NDTV.COM*": 251.0,
-        "INDIANEXPRESS.COM": 156.0,
-        "HINDUSTANTIMES.COM*": 213.0,
-        "INDIATODAY.IN*": 94.0,
-        "THEHINDU.COM": 74.0
+        "NDTV.COM*": 56.8,
+        "INDIANEXPRESS.COM": 54.4,
+        "HINDUSTANTIMES.COM*": 51.6,
+        "INDIATODAY.IN*": 43.4,
+        "THEHINDU.COM": 30.0
       },
       {
         "month": "2022-03",
-        "NDTV.COM*": 286.0,
-        "INDIANEXPRESS.COM": 168.0,
-        "HINDUSTANTIMES.COM*": 218.0,
-        "INDIATODAY.IN*": 101.0,
-        "THEHINDU.COM": 65.0
+        "NDTV.COM*": 55.1,
+        "INDIANEXPRESS.COM": 55.9,
+        "HINDUSTANTIMES.COM*": 54.9,
+        "INDIATODAY.IN*": 40.8,
+        "THEHINDU.COM": 27.6
       },
       {
         "month": "2022-04",
-        "NDTV.COM*": 243.0,
-        "INDIANEXPRESS.COM": 164.0,
-        "HINDUSTANTIMES.COM*": 211.0,
-        "INDIATODAY.IN*": 99.0,
-        "THEHINDU.COM": 59.0
+        "NDTV.COM*": 49.2,
+        "INDIANEXPRESS.COM": 54.8,
+        "HINDUSTANTIMES.COM*": 51.7,
+        "INDIATODAY.IN*": 39.1,
+        "THEHINDU.COM": 24.2
       },
       {
         "month": "2022-05",
-        "NDTV.COM*": 248.0,
-        "INDIANEXPRESS.COM": 183.0,
-        "HINDUSTANTIMES.COM*": 216.0,
-        "INDIATODAY.IN*": 111.0,
-        "THEHINDU.COM": 53.0
+        "NDTV.COM*": 49.7,
+        "INDIANEXPRESS.COM": 55.8,
+        "HINDUSTANTIMES.COM*": 48.3,
+        "INDIATODAY.IN*": 42.1,
+        "THEHINDU.COM": 17.0
       },
       {
         "month": "2022-06",
-        "NDTV.COM*": 333.0,
-        "INDIANEXPRESS.COM": 212.0,
-        "HINDUSTANTIMES.COM*": 219.0,
-        "INDIATODAY.IN*": 114.0,
-        "THEHINDU.COM": 89.0
+        "NDTV.COM*": 57.6,
+        "INDIANEXPRESS.COM": 60.2,
+        "HINDUSTANTIMES.COM*": 53.0,
+        "INDIATODAY.IN*": 42.0,
+        "THEHINDU.COM": 26.2
       },
       {
         "month": "2022-07",
-        "NDTV.COM*": 410.0,
-        "INDIANEXPRESS.COM": 221.0,
-        "HINDUSTANTIMES.COM*": 241.0,
-        "INDIATODAY.IN*": 110.0,
-        "THEHINDU.COM": 111.0
+        "NDTV.COM*": 56.7,
+        "INDIANEXPRESS.COM": 62.9,
+        "HINDUSTANTIMES.COM*": 52.6,
+        "INDIATODAY.IN*": 41.0,
+        "THEHINDU.COM": 25.0
       },
       {
         "month": "2022-08",
-        "NDTV.COM*": 389.0,
-        "INDIANEXPRESS.COM": 207.0,
-        "HINDUSTANTIMES.COM*": 252.0,
-        "INDIATODAY.IN*": 114.0,
-        "THEHINDU.COM": 104.0
+        "NDTV.COM*": 54.4,
+        "INDIANEXPRESS.COM": 59.9,
+        "HINDUSTANTIMES.COM*": 49.1,
+        "INDIATODAY.IN*": 38.3,
+        "THEHINDU.COM": 30.6
       },
       {
         "month": "2022-09",
-        "NDTV.COM*": 290.0,
-        "INDIANEXPRESS.COM": 198.0,
-        "HINDUSTANTIMES.COM*": 275.0,
-        "INDIATODAY.IN*": 96.0,
-        "THEHINDU.COM": 104.0
+        "NDTV.COM*": 48.5,
+        "INDIANEXPRESS.COM": 56.0,
+        "HINDUSTANTIMES.COM*": 49.5,
+        "INDIATODAY.IN*": 36.5,
+        "THEHINDU.COM": 28.6
       },
       {
         "month": "2022-10",
-        "NDTV.COM*": 231.0,
-        "INDIANEXPRESS.COM": 253.0,
-        "HINDUSTANTIMES.COM*": 281.0,
-        "INDIATODAY.IN*": 104.0,
-        "THEHINDU.COM": 116.0
+        "NDTV.COM*": 41.9,
+        "INDIANEXPRESS.COM": 60.5,
+        "HINDUSTANTIMES.COM*": 54.5,
+        "INDIATODAY.IN*": 41.3,
+        "THEHINDU.COM": 28.0
       },
       {
         "month": "2022-11",
-        "NDTV.COM*": 239.0,
-        "INDIANEXPRESS.COM": 203.0,
-        "HINDUSTANTIMES.COM*": 229.0,
-        "INDIATODAY.IN*": 96.0,
-        "THEHINDU.COM": 109.0
+        "NDTV.COM*": 44.8,
+        "INDIANEXPRESS.COM": 52.9,
+        "HINDUSTANTIMES.COM*": 50.7,
+        "INDIATODAY.IN*": 33.9,
+        "THEHINDU.COM": 34.2
       },
       {
         "month": "2022-12",
-        "NDTV.COM*": 254.0,
-        "INDIANEXPRESS.COM": 189.0,
-        "HINDUSTANTIMES.COM*": 239.0,
-        "INDIATODAY.IN*": 94.0,
-        "THEHINDU.COM": 109.0
+        "NDTV.COM*": 49.9,
+        "INDIANEXPRESS.COM": 48.5,
+        "HINDUSTANTIMES.COM*": 52.4,
+        "INDIATODAY.IN*": 41.9,
+        "THEHINDU.COM": 36.0
       },
       {
         "month": "2023-01",
-        "NDTV.COM*": 234.0,
-        "INDIANEXPRESS.COM": 208.0,
-        "HINDUSTANTIMES.COM*": 217.0,
-        "INDIATODAY.IN*": 107.0,
-        "THEHINDU.COM": 94.0
+        "NDTV.COM*": 41.4,
+        "INDIANEXPRESS.COM": 47.3,
+        "HINDUSTANTIMES.COM*": 47.8,
+        "INDIATODAY.IN*": 41.8,
+        "THEHINDU.COM": 32.7
       },
       {
         "month": "2023-02",
-        "NDTV.COM*": 198.0,
-        "INDIANEXPRESS.COM": 175.0,
-        "HINDUSTANTIMES.COM*": 208.0,
-        "INDIATODAY.IN*": 94.0,
-        "THEHINDU.COM": 77.0
+        "NDTV.COM*": 35.1,
+        "INDIANEXPRESS.COM": 44.7,
+        "HINDUSTANTIMES.COM*": 48.2,
+        "INDIATODAY.IN*": 37.7,
+        "THEHINDU.COM": 25.7
       },
       {
         "month": "2023-03",
-        "NDTV.COM*": 211.0,
-        "INDIANEXPRESS.COM": 164.0,
-        "HINDUSTANTIMES.COM*": 213.0,
-        "INDIATODAY.IN*": 114.0,
-        "THEHINDU.COM": 66.0
+        "NDTV.COM*": 39.7,
+        "INDIANEXPRESS.COM": 46.4,
+        "HINDUSTANTIMES.COM*": 52.6,
+        "INDIATODAY.IN*": 42.2,
+        "THEHINDU.COM": 25.5
       },
       {
         "month": "2023-04",
-        "NDTV.COM*": 190.0,
-        "INDIANEXPRESS.COM": 153.0,
-        "HINDUSTANTIMES.COM*": 228.0,
-        "INDIATODAY.IN*": 123.0,
-        "THEHINDU.COM": 84.0
+        "NDTV.COM*": 33.2,
+        "INDIANEXPRESS.COM": 42.6,
+        "HINDUSTANTIMES.COM*": 54.1,
+        "INDIATODAY.IN*": 45.4,
+        "THEHINDU.COM": 24.8
       },
       {
         "month": "2023-05",
-        "NDTV.COM*": 195.0,
-        "INDIANEXPRESS.COM": 187.0,
-        "HINDUSTANTIMES.COM*": 283.0,
-        "INDIATODAY.IN*": 204.0,
-        "THEHINDU.COM": 118.0
+        "NDTV.COM*": 32.3,
+        "INDIANEXPRESS.COM": 48.9,
+        "HINDUSTANTIMES.COM*": 60.7,
+        "INDIATODAY.IN*": 54.9,
+        "THEHINDU.COM": 28.9
       },
       {
         "month": "2023-06",
-        "NDTV.COM*": 165.0,
-        "INDIANEXPRESS.COM": 159.0,
-        "HINDUSTANTIMES.COM*": 224.0,
-        "INDIATODAY.IN*": 193.0,
-        "THEHINDU.COM": 88.0
+        "NDTV.COM*": 28.1,
+        "INDIANEXPRESS.COM": 43.2,
+        "HINDUSTANTIMES.COM*": 48.3,
+        "INDIATODAY.IN*": 48.2,
+        "THEHINDU.COM": 29.4
       },
       {
         "month": "2023-07",
-        "NDTV.COM*": 114.0,
-        "INDIANEXPRESS.COM": 175.0,
-        "HINDUSTANTIMES.COM*": 242.0,
-        "INDIATODAY.IN*": 212.0,
-        "THEHINDU.COM": 77.0
+        "NDTV.COM*": 26.5,
+        "INDIANEXPRESS.COM": 44.4,
+        "HINDUSTANTIMES.COM*": 51.6,
+        "INDIATODAY.IN*": 53.6,
+        "THEHINDU.COM": 27.9
       },
       {
         "month": "2023-08",
-        "NDTV.COM*": 126.0,
-        "INDIANEXPRESS.COM": 156.0,
-        "HINDUSTANTIMES.COM*": 244.0,
-        "INDIATODAY.IN*": 119.0,
-        "THEHINDU.COM": 110.0
+        "NDTV.COM*": 31.1,
+        "INDIANEXPRESS.COM": 46.5,
+        "HINDUSTANTIMES.COM*": 56.8,
+        "INDIATODAY.IN*": 50.8,
+        "THEHINDU.COM": 38.5
       },
       {
         "month": "2023-09",
-        "NDTV.COM*": 154.0,
-        "INDIANEXPRESS.COM": 176.0,
-        "HINDUSTANTIMES.COM*": 262.0,
-        "INDIATODAY.IN*": 201.0,
-        "THEHINDU.COM": 110.0
+        "NDTV.COM*": 33.4,
+        "INDIANEXPRESS.COM": 42.3,
+        "HINDUSTANTIMES.COM*": 56.7,
+        "INDIATODAY.IN*": 45.7,
+        "THEHINDU.COM": 36.9
       },
       {
         "month": "2023-10",
-        "NDTV.COM*": 172.0,
-        "INDIANEXPRESS.COM": 166.0,
-        "HINDUSTANTIMES.COM*": 279.0,
-        "INDIATODAY.IN*": 179.0,
-        "THEHINDU.COM": 156.0
+        "NDTV.COM*": 28.9,
+        "INDIANEXPRESS.COM": 37.8,
+        "HINDUSTANTIMES.COM*": 53.3,
+        "INDIATODAY.IN*": 41.2,
+        "THEHINDU.COM": 43.2
       },
       {
         "month": "2023-11",
-        "NDTV.COM*": 171.0,
-        "INDIANEXPRESS.COM": 146.0,
-        "HINDUSTANTIMES.COM*": 140.0,
-        "INDIATODAY.IN*": 144.0,
-        "THEHINDU.COM": 117.0
+        "NDTV.COM*": 32.8,
+        "INDIANEXPRESS.COM": 34.3,
+        "HINDUSTANTIMES.COM*": 36.1,
+        "INDIATODAY.IN*": 37.4,
+        "THEHINDU.COM": 38.7
       },
       {
         "month": "2023-12",
-        "NDTV.COM*": 143.0,
-        "INDIANEXPRESS.COM": 150.0,
-        "HINDUSTANTIMES.COM*": 152.0,
-        "INDIATODAY.IN*": 134.0,
-        "THEHINDU.COM": 133.0
+        "NDTV.COM*": 30.4,
+        "INDIANEXPRESS.COM": 34.3,
+        "HINDUSTANTIMES.COM*": 37.6,
+        "INDIATODAY.IN*": 36.5,
+        "THEHINDU.COM": 36.0
       },
       {
         "month": "2024-01",
-        "NDTV.COM*": 165.0,
-        "INDIANEXPRESS.COM": 140.0,
-        "HINDUSTANTIMES.COM*": 190.0,
-        "INDIATODAY.IN*": 133.0,
-        "THEHINDU.COM": 95.0
+        "NDTV.COM*": 31.6,
+        "INDIANEXPRESS.COM": 31.6,
+        "HINDUSTANTIMES.COM*": 37.6,
+        "INDIATODAY.IN*": 32.9,
+        "THEHINDU.COM": 30.5
       },
       {
         "month": "2024-02",
-        "NDTV.COM*": 126.0,
-        "INDIANEXPRESS.COM": 145.0,
-        "HINDUSTANTIMES.COM*": 198.0,
-        "INDIATODAY.IN*": 112.0,
-        "THEHINDU.COM": 80.0
+        "NDTV.COM*": 26.1,
+        "INDIANEXPRESS.COM": 33.8,
+        "HINDUSTANTIMES.COM*": 38.6,
+        "INDIATODAY.IN*": 31.0,
+        "THEHINDU.COM": 28.9
       },
       {
         "month": "2024-03",
-        "NDTV.COM*": 162.0,
-        "INDIANEXPRESS.COM": 151.0,
-        "HINDUSTANTIMES.COM*": 222.0,
-        "INDIATODAY.IN*": 100.0,
-        "THEHINDU.COM": 91.0
+        "NDTV.COM*": 36.1,
+        "INDIANEXPRESS.COM": 39.8,
+        "HINDUSTANTIMES.COM*": 46.3,
+        "INDIATODAY.IN*": 38.0,
+        "THEHINDU.COM": 32.3
       },
       {
         "month": "2024-04",
-        "NDTV.COM*": 217.0,
-        "INDIANEXPRESS.COM": 218.0,
-        "HINDUSTANTIMES.COM*": 246.0,
-        "INDIATODAY.IN*": 84.0,
-        "THEHINDU.COM": 91.0
+        "NDTV.COM*": 41.4,
+        "INDIANEXPRESS.COM": 48.9,
+        "HINDUSTANTIMES.COM*": 57.6,
+        "INDIATODAY.IN*": 36.3,
+        "THEHINDU.COM": 31.0
       },
       {
         "month": "2024-05",
-        "NDTV.COM*": 268.0,
-        "INDIANEXPRESS.COM": 209.0,
-        "HINDUSTANTIMES.COM*": 240.0,
-        "INDIATODAY.IN*": 98.0,
-        "THEHINDU.COM": 105.0
+        "NDTV.COM*": 45.1,
+        "INDIANEXPRESS.COM": 47.6,
+        "HINDUSTANTIMES.COM*": 51.9,
+        "INDIATODAY.IN*": 37.4,
+        "THEHINDU.COM": 32.6
       },
       {
         "month": "2024-06",
-        "NDTV.COM*": 273.0,
-        "INDIANEXPRESS.COM": 193.0,
-        "HINDUSTANTIMES.COM*": 276.0,
-        "INDIATODAY.IN*": 142.0,
-        "THEHINDU.COM": 127.0
+        "NDTV.COM*": 55.5,
+        "INDIANEXPRESS.COM": 52.2,
+        "HINDUSTANTIMES.COM*": 51.2,
+        "INDIATODAY.IN*": 49.4,
+        "THEHINDU.COM": 44.7
       },
       {
         "month": "2024-07",
-        "NDTV.COM*": 188.0,
-        "INDIANEXPRESS.COM": 163.0,
-        "HINDUSTANTIMES.COM*": 262.0,
-        "INDIATODAY.IN*": 123.0,
-        "THEHINDU.COM": 119.0
+        "NDTV.COM*": 40.8,
+        "INDIANEXPRESS.COM": 42.2,
+        "HINDUSTANTIMES.COM*": 45.5,
+        "INDIATODAY.IN*": 39.5,
+        "THEHINDU.COM": 36.7
       },
       {
         "month": "2024-08",
-        "NDTV.COM*": 172.0,
-        "INDIANEXPRESS.COM": 149.0,
-        "HINDUSTANTIMES.COM*": 242.0,
-        "INDIATODAY.IN*": 99.0,
-        "THEHINDU.COM": 115.0
+        "NDTV.COM*": 38.7,
+        "INDIANEXPRESS.COM": 38.0,
+        "HINDUSTANTIMES.COM*": 43.8,
+        "INDIATODAY.IN*": 37.8,
+        "THEHINDU.COM": 41.9
       },
       {
         "month": "2024-09",
-        "NDTV.COM*": 136.0,
-        "INDIANEXPRESS.COM": 134.0,
-        "HINDUSTANTIMES.COM*": 288.0,
-        "INDIATODAY.IN*": 94.0,
-        "THEHINDU.COM": 111.0
+        "NDTV.COM*": 37.2,
+        "INDIANEXPRESS.COM": 32.5,
+        "HINDUSTANTIMES.COM*": 41.9,
+        "INDIATODAY.IN*": 34.8,
+        "THEHINDU.COM": 34.1
       },
       {
         "month": "2024-10",
-        "NDTV.COM*": 144.0,
-        "INDIANEXPRESS.COM": 126.0,
-        "HINDUSTANTIMES.COM*": 335.0,
-        "INDIATODAY.IN*": 92.0,
-        "THEHINDU.COM": 88.0
+        "NDTV.COM*": 39.1,
+        "INDIANEXPRESS.COM": 32.7,
+        "HINDUSTANTIMES.COM*": 42.7,
+        "INDIATODAY.IN*": 31.6,
+        "THEHINDU.COM": 32.2
       },
       {
         "month": "2024-11",
-        "NDTV.COM*": 155.0,
-        "INDIANEXPRESS.COM": 131.0,
-        "HINDUSTANTIMES.COM*": 339.0,
-        "INDIATODAY.IN*": 101.0,
-        "THEHINDU.COM": 97.0
+        "NDTV.COM*": 37.5,
+        "INDIANEXPRESS.COM": 36.2,
+        "HINDUSTANTIMES.COM*": 41.7,
+        "INDIATODAY.IN*": 34.0,
+        "THEHINDU.COM": 30.8
       },
       {
         "month": "2024-12",
-        "NDTV.COM*": 151.0,
-        "INDIANEXPRESS.COM": 145.0,
-        "HINDUSTANTIMES.COM*": 326.0,
-        "INDIATODAY.IN*": 85.0,
-        "THEHINDU.COM": 72.0
+        "NDTV.COM*": 34.8,
+        "INDIANEXPRESS.COM": 33.2,
+        "HINDUSTANTIMES.COM*": 37.5,
+        "INDIATODAY.IN*": 29.9,
+        "THEHINDU.COM": 20.6
       },
       {
         "month": "2025-01",
-        "NDTV.COM*": 150.0,
-        "INDIANEXPRESS.COM": 144.0,
-        "HINDUSTANTIMES.COM*": 332.0,
-        "INDIATODAY.IN*": 80.0,
-        "THEHINDU.COM": 61.0
+        "NDTV.COM*": 34.4,
+        "INDIANEXPRESS.COM": 35.7,
+        "HINDUSTANTIMES.COM*": 38.0,
+        "INDIATODAY.IN*": 29.2,
+        "THEHINDU.COM": 19.1
       },
       {
         "month": "2025-02",
-        "NDTV.COM*": 144.0,
-        "INDIANEXPRESS.COM": 154.0,
-        "HINDUSTANTIMES.COM*": 316.0,
-        "INDIATODAY.IN*": 74.0,
-        "THEHINDU.COM": 44.0
+        "NDTV.COM*": 36.2,
+        "INDIANEXPRESS.COM": 36.1,
+        "HINDUSTANTIMES.COM*": 39.4,
+        "INDIATODAY.IN*": 27.3,
+        "THEHINDU.COM": 18.4
       },
       {
         "month": "2025-03",
-        "NDTV.COM*": 162.0,
-        "INDIANEXPRESS.COM": 173.0,
-        "HINDUSTANTIMES.COM*": 357.0,
-        "INDIATODAY.IN*": 86.0,
-        "THEHINDU.COM": 55.0
+        "NDTV.COM*": 39.3,
+        "INDIANEXPRESS.COM": 38.8,
+        "HINDUSTANTIMES.COM*": 37.0,
+        "INDIATODAY.IN*": 27.2,
+        "THEHINDU.COM": 18.3
       },
       {
         "month": "2025-04",
-        "NDTV.COM*": 167.0,
-        "INDIANEXPRESS.COM": 199.0,
-        "HINDUSTANTIMES.COM*": 283.0,
-        "INDIATODAY.IN*": 78.0,
-        "THEHINDU.COM": 47.0
+        "NDTV.COM*": 38.5,
+        "INDIANEXPRESS.COM": 41.3,
+        "HINDUSTANTIMES.COM*": 35.4,
+        "INDIATODAY.IN*": 27.9,
+        "THEHINDU.COM": 19.6
       },
       {
         "month": "2025-05",
-        "NDTV.COM*": 192.0,
-        "INDIANEXPRESS.COM": 289.0,
-        "HINDUSTANTIMES.COM*": 375.0,
-        "INDIATODAY.IN*": 99.0,
-        "THEHINDU.COM": 72.0
+        "NDTV.COM*": 40.1,
+        "INDIANEXPRESS.COM": 48.5,
+        "HINDUSTANTIMES.COM*": 38.4,
+        "INDIATODAY.IN*": 31.5,
+        "THEHINDU.COM": 22.0
       },
       {
         "month": "2025-06",
-        "NDTV.COM*": 163.0,
-        "INDIANEXPRESS.COM": 170.0,
-        "HINDUSTANTIMES.COM*": 292.0,
-        "INDIATODAY.IN*": 103.0,
-        "THEHINDU.COM": 69.0
+        "NDTV.COM*": 34.0,
+        "INDIANEXPRESS.COM": 36.4,
+        "HINDUSTANTIMES.COM*": 33.7,
+        "INDIATODAY.IN*": 28.3,
+        "THEHINDU.COM": 20.6
       },
       {
         "month": "2025-07",
-        "NDTV.COM*": 138.0,
-        "INDIANEXPRESS.COM": 172.0,
-        "HINDUSTANTIMES.COM*": 353.0,
-        "INDIATODAY.IN*": 84.0,
-        "THEHINDU.COM": 59.0
+        "NDTV.COM*": 31.5,
+        "INDIANEXPRESS.COM": 37.6,
+        "HINDUSTANTIMES.COM*": 38.0,
+        "INDIATODAY.IN*": 27.7,
+        "THEHINDU.COM": 22.4
       },
       {
         "month": "2025-08",
-        "NDTV.COM*": 126.0,
-        "INDIANEXPRESS.COM": 173.0,
-        "HINDUSTANTIMES.COM*": 267.0,
-        "INDIATODAY.IN*": 66.0,
-        "THEHINDU.COM": 69.0
+        "NDTV.COM*": 32.1,
+        "INDIANEXPRESS.COM": 35.0,
+        "HINDUSTANTIMES.COM*": 35.8,
+        "INDIATODAY.IN*": 25.7,
+        "THEHINDU.COM": 21.1
       },
       {
         "month": "2025-09",
-        "NDTV.COM*": 132.0,
-        "INDIANEXPRESS.COM": 121.0,
-        "HINDUSTANTIMES.COM*": 278.0,
-        "INDIATODAY.IN*": 60.0,
-        "THEHINDU.COM": 63.0
+        "NDTV.COM*": 33.9,
+        "INDIANEXPRESS.COM": 36.5,
+        "HINDUSTANTIMES.COM*": 36.8,
+        "INDIATODAY.IN*": 22.8,
+        "THEHINDU.COM": 23.0
       },
       {
         "month": "2025-10",
-        "NDTV.COM*": 122.0,
-        "INDIANEXPRESS.COM": 134.0,
-        "HINDUSTANTIMES.COM*": 261.0,
-        "INDIATODAY.IN*": 57.0,
-        "THEHINDU.COM": 57.0
+        "NDTV.COM*": 25.9,
+        "INDIANEXPRESS.COM": 30.2,
+        "HINDUSTANTIMES.COM*": 27.8,
+        "INDIATODAY.IN*": 20.5,
+        "THEHINDU.COM": 16.2
       },
       {
         "month": "2025-11",
-        "NDTV.COM*": 118.0,
-        "INDIANEXPRESS.COM": 142.0,
-        "HINDUSTANTIMES.COM*": 193.0,
-        "INDIATODAY.IN*": 50.0,
-        "THEHINDU.COM": 50.0
+        "NDTV.COM*": 30.8,
+        "INDIANEXPRESS.COM": 35.4,
+        "HINDUSTANTIMES.COM*": 31.0,
+        "INDIATODAY.IN*": 18.0,
+        "THEHINDU.COM": 17.9
       },
       {
         "month": "2025-12",
-        "NDTV.COM*": 115.0,
-        "INDIANEXPRESS.COM": 105.0,
-        "HINDUSTANTIMES.COM*": 160.0,
-        "INDIATODAY.IN*": 33.0,
-        "THEHINDU.COM": 58.0
+        "NDTV.COM*": 28.4,
+        "INDIANEXPRESS.COM": 30.2,
+        "HINDUSTANTIMES.COM*": 29.6,
+        "INDIATODAY.IN*": 12.9,
+        "THEHINDU.COM": 19.3
       },
       {
         "month": "2026-01",
-        "NDTV.COM*": 124.0,
-        "INDIANEXPRESS.COM": 93.0,
-        "HINDUSTANTIMES.COM*": 142.0,
-        "INDIATODAY.IN*": 32.0,
-        "THEHINDU.COM": 66.0
+        "NDTV.COM*": 35.6,
+        "INDIANEXPRESS.COM": 30.0,
+        "HINDUSTANTIMES.COM*": 25.6,
+        "INDIATODAY.IN*": 13.9,
+        "THEHINDU.COM": 18.7
       },
       {
         "month": "2026-02",
-        "NDTV.COM*": 135.0,
-        "INDIANEXPRESS.COM": 79.0,
-        "HINDUSTANTIMES.COM*": 124.0,
-        "INDIATODAY.IN*": 33.0,
-        "THEHINDU.COM": 56.0
+        "NDTV.COM*": 37.3,
+        "INDIANEXPRESS.COM": 27.7,
+        "HINDUSTANTIMES.COM*": 25.4,
+        "INDIATODAY.IN*": 14.5,
+        "THEHINDU.COM": 18.5
       },
       {
         "month": "2026-03",
-        "NDTV.COM*": 157.0,
-        "INDIANEXPRESS.COM": 117.0,
-        "HINDUSTANTIMES.COM*": 186.0,
-        "INDIATODAY.IN*": 38.6,
-        "THEHINDU.COM": 72.5
+        "NDTV.COM*": 40.44,
+        "INDIANEXPRESS.COM": 36.38,
+        "HINDUSTANTIMES.COM*": 39.79,
+        "INDIATODAY.IN*": 15.24,
+        "THEHINDU.COM": 20.12
       },
       {
         "month": "2026-04",
-        "NDTV.COM*": 184.0,
-        "INDIANEXPRESS.COM": 113.0,
-        "HINDUSTANTIMES.COM*": 211.0,
-        "INDIATODAY.IN*": 47.6,
-        "THEHINDU.COM": 73.3
-      },
-      {
-        "month": "2026-05",
-        "NDTV.COM*": null,
-        "INDIANEXPRESS.COM": null,
-        "HINDUSTANTIMES.COM*": null,
-        "INDIATODAY.IN*": null,
-        "THEHINDU.COM": null
+        "NDTV.COM*": 45.7,
+        "INDIANEXPRESS.COM": 34.4,
+        "HINDUSTANTIMES.COM*": 43.5,
+        "INDIATODAY.IN*": 18.0,
+        "THEHINDU.COM": 23.2
       }
     ],
     "trendSeries": [
-      "NDTV.COM*",
       "NDTV.COM*",
       "HINDUSTANTIMES.COM*",
       "INDIANEXPRESS.COM",
@@ -1062,57 +1013,12 @@ export const digitalTraffic = {
       "INDIATODAY.IN*"
     ],
     "footnotes": [
-      "Total Unique Users (millions), Comscore India. Data from Dec 2024 is Total Digital Population."
+      "Total Unique Users (millions), Comscore India MMX (Mobile + Desktop). English news sites."
     ]
   },
   "csHindi": {
     "latestMonth": "2026-04",
     "ranking": [
-      {
-        "name": "BHASKAR.COM",
-        "value": 221.0,
-        "ndtv": false
-      },
-      {
-        "name": "LiveHindustan",
-        "value": 181.0,
-        "ndtv": false
-      },
-      {
-        "name": "AAJTAK.IN*",
-        "value": 167.0,
-        "ndtv": false
-      },
-      {
-        "name": "JAGRAN.COM*",
-        "value": 125.0,
-        "ndtv": false
-      },
-      {
-        "name": "Navbharat Times",
-        "value": 121.0,
-        "ndtv": false
-      },
-      {
-        "name": "News18 Hindi (w/ history)",
-        "value": 104.0,
-        "ndtv": false
-      },
-      {
-        "name": "AMARUJALA.COM",
-        "value": 78.6,
-        "ndtv": false
-      },
-      {
-        "name": "ABP Live Hindi - ABP News",
-        "value": 68.8,
-        "ndtv": false
-      },
-      {
-        "name": "NDTV.IN",
-        "value": 54.0,
-        "ndtv": true
-      },
       {
         "name": "JAGRAN.COM*",
         "value": 36.4,
@@ -1182,431 +1088,430 @@ export const digitalTraffic = {
     "trend": [
       {
         "month": "2022-01",
-        "AAJTAK.IN*": 375.0,
-        "NDTV.IN": 149.0,
-        "JAGRAN.COM*": 212.0,
-        "LiveHindustan": 316.0,
-        "BHASKAR.COM": 138.0
+        "AAJTAK.IN*": 71.5,
+        "NDTV.IN": 64.5,
+        "Navbharat Times": 78.3,
+        "JAGRAN.COM*": 47.5,
+        "LiveHindustan": 61.1
       },
       {
         "month": "2022-02",
-        "AAJTAK.IN*": 344.0,
-        "NDTV.IN": 138.0,
-        "JAGRAN.COM*": 156.0,
-        "LiveHindustan": 363.0,
-        "BHASKAR.COM": 119.0
+        "AAJTAK.IN*": 66.8,
+        "NDTV.IN": 62.6,
+        "Navbharat Times": 72.0,
+        "JAGRAN.COM*": 41.5,
+        "LiveHindustan": 62.2
       },
       {
         "month": "2022-03",
-        "AAJTAK.IN*": 365.0,
-        "NDTV.IN": 155.0,
-        "JAGRAN.COM*": 251.0,
-        "LiveHindustan": 506.0,
-        "BHASKAR.COM": 147.0
+        "AAJTAK.IN*": 69.9,
+        "NDTV.IN": 59.5,
+        "Navbharat Times": 78.9,
+        "JAGRAN.COM*": 58.9,
+        "LiveHindustan": 68.5
       },
       {
         "month": "2022-04",
-        "AAJTAK.IN*": 313.0,
-        "NDTV.IN": 154.0,
-        "JAGRAN.COM*": 244.0,
-        "LiveHindustan": 386.0,
-        "BHASKAR.COM": 131.0
+        "AAJTAK.IN*": 62.7,
+        "NDTV.IN": 63.2,
+        "Navbharat Times": 73.4,
+        "JAGRAN.COM*": 47.0,
+        "LiveHindustan": 55.6
       },
       {
         "month": "2022-05",
-        "AAJTAK.IN*": 316.0,
-        "NDTV.IN": 180.0,
-        "JAGRAN.COM*": 243.0,
-        "LiveHindustan": 330.0,
-        "BHASKAR.COM": 140.0
+        "AAJTAK.IN*": 63.2,
+        "NDTV.IN": 53.8,
+        "Navbharat Times": 64.7,
+        "JAGRAN.COM*": 49.8,
+        "LiveHindustan": 52.1
       },
       {
         "month": "2022-06",
-        "AAJTAK.IN*": 372.0,
-        "NDTV.IN": 194.0,
-        "JAGRAN.COM*": 163.0,
-        "LiveHindustan": 348.0,
-        "BHASKAR.COM": 153.0
+        "AAJTAK.IN*": 74.0,
+        "NDTV.IN": 66.1,
+        "Navbharat Times": 66.9,
+        "JAGRAN.COM*": 44.6,
+        "LiveHindustan": 55.0
       },
       {
         "month": "2022-07",
-        "AAJTAK.IN*": 334.0,
-        "NDTV.IN": 267.0,
-        "JAGRAN.COM*": 177.0,
-        "LiveHindustan": 371.0,
-        "BHASKAR.COM": 152.0
+        "AAJTAK.IN*": 68.8,
+        "NDTV.IN": 69.9,
+        "Navbharat Times": 74.3,
+        "JAGRAN.COM*": 40.3,
+        "LiveHindustan": 58.0
       },
       {
         "month": "2022-08",
-        "AAJTAK.IN*": 344.0,
-        "NDTV.IN": 213.0,
-        "JAGRAN.COM*": 177.0,
-        "LiveHindustan": 339.0,
-        "BHASKAR.COM": 144.0
+        "AAJTAK.IN*": 73.6,
+        "NDTV.IN": 68.5,
+        "Navbharat Times": 72.2,
+        "JAGRAN.COM*": 40.9,
+        "LiveHindustan": 56.9
       },
       {
         "month": "2022-09",
-        "AAJTAK.IN*": 304.0,
-        "NDTV.IN": 154.0,
-        "JAGRAN.COM*": 152.0,
-        "LiveHindustan": 363.0,
-        "BHASKAR.COM": 132.0
+        "AAJTAK.IN*": 66.7,
+        "NDTV.IN": 58.6,
+        "Navbharat Times": 69.1,
+        "JAGRAN.COM*": 42.1,
+        "LiveHindustan": 61.3
       },
       {
         "month": "2022-10",
-        "AAJTAK.IN*": 283.0,
-        "NDTV.IN": 120.0,
-        "JAGRAN.COM*": 169.0,
-        "LiveHindustan": 303.0,
-        "BHASKAR.COM": 123.0
+        "AAJTAK.IN*": 70.0,
+        "NDTV.IN": 50.6,
+        "Navbharat Times": 65.0,
+        "JAGRAN.COM*": 45.8,
+        "LiveHindustan": 63.2
       },
       {
         "month": "2022-11",
-        "AAJTAK.IN*": 269.0,
-        "NDTV.IN": 113.0,
-        "JAGRAN.COM*": 127.0,
-        "LiveHindustan": 266.0,
-        "BHASKAR.COM": 125.0
+        "AAJTAK.IN*": 59.4,
+        "NDTV.IN": 50.3,
+        "Navbharat Times": 60.6,
+        "JAGRAN.COM*": 36.5,
+        "LiveHindustan": 56.0
       },
       {
         "month": "2022-12",
-        "AAJTAK.IN*": 314.0,
-        "NDTV.IN": 137.0,
-        "JAGRAN.COM*": 110.0,
-        "LiveHindustan": 268.0,
-        "BHASKAR.COM": 134.0
+        "AAJTAK.IN*": 63.7,
+        "NDTV.IN": 49.5,
+        "Navbharat Times": 66.6,
+        "JAGRAN.COM*": 36.1,
+        "LiveHindustan": 56.8
       },
       {
         "month": "2023-01",
-        "AAJTAK.IN*": 343.0,
-        "NDTV.IN": 122.0,
-        "JAGRAN.COM*": 131.0,
-        "LiveHindustan": 277.0,
-        "BHASKAR.COM": 131.0
+        "AAJTAK.IN*": 65.0,
+        "NDTV.IN": 48.3,
+        "Navbharat Times": 65.3,
+        "JAGRAN.COM*": 36.7,
+        "LiveHindustan": 52.3
       },
       {
         "month": "2023-02",
-        "AAJTAK.IN*": 321.0,
-        "NDTV.IN": 85.0,
-        "JAGRAN.COM*": 124.0,
-        "LiveHindustan": 240.0,
-        "BHASKAR.COM": 123.0
+        "AAJTAK.IN*": 65.8,
+        "NDTV.IN": 41.7,
+        "Navbharat Times": 67.1,
+        "JAGRAN.COM*": 41.8,
+        "LiveHindustan": 48.8
       },
       {
         "month": "2023-03",
-        "AAJTAK.IN*": 327.0,
-        "NDTV.IN": 80.0,
-        "JAGRAN.COM*": 128.0,
-        "LiveHindustan": 283.0,
-        "BHASKAR.COM": 134.0
+        "AAJTAK.IN*": 68.6,
+        "NDTV.IN": 37.6,
+        "Navbharat Times": 63.4,
+        "JAGRAN.COM*": 40.2,
+        "LiveHindustan": 55.7
       },
       {
         "month": "2023-04",
-        "AAJTAK.IN*": 309.0,
-        "NDTV.IN": 92.0,
-        "JAGRAN.COM*": 138.0,
-        "LiveHindustan": 277.0,
-        "BHASKAR.COM": 128.0
+        "AAJTAK.IN*": 65.4,
+        "NDTV.IN": 36.1,
+        "Navbharat Times": 60.1,
+        "JAGRAN.COM*": 34.5,
+        "LiveHindustan": 53.7
       },
       {
         "month": "2023-05",
-        "AAJTAK.IN*": 319.0,
-        "NDTV.IN": 96.0,
-        "JAGRAN.COM*": 120.0,
-        "LiveHindustan": 301.0,
-        "BHASKAR.COM": 135.0
+        "AAJTAK.IN*": 65.5,
+        "NDTV.IN": 38.9,
+        "Navbharat Times": 64.4,
+        "JAGRAN.COM*": 26.7,
+        "LiveHindustan": 55.2
       },
       {
         "month": "2023-06",
-        "AAJTAK.IN*": 306.0,
-        "NDTV.IN": 105.0,
-        "JAGRAN.COM*": 103.0,
-        "LiveHindustan": 270.0,
-        "BHASKAR.COM": 125.0
+        "AAJTAK.IN*": 59.0,
+        "NDTV.IN": 36.3,
+        "Navbharat Times": 57.7,
+        "JAGRAN.COM*": 24.1,
+        "LiveHindustan": 47.4
       },
       {
         "month": "2023-07",
-        "AAJTAK.IN*": 280.0,
-        "NDTV.IN": 84.0,
-        "JAGRAN.COM*": 109.0,
-        "LiveHindustan": 305.0,
-        "BHASKAR.COM": 127.0
+        "AAJTAK.IN*": 58.7,
+        "NDTV.IN": 32.8,
+        "Navbharat Times": 61.9,
+        "JAGRAN.COM*": 25.9,
+        "LiveHindustan": 48.0
       },
       {
         "month": "2023-08",
-        "AAJTAK.IN*": 270.0,
-        "NDTV.IN": 95.0,
-        "JAGRAN.COM*": 118.0,
-        "LiveHindustan": 295.0,
-        "BHASKAR.COM": 149.0
+        "AAJTAK.IN*": 59.7,
+        "NDTV.IN": 38.5,
+        "Navbharat Times": 65.5,
+        "JAGRAN.COM*": 28.2,
+        "LiveHindustan": 47.1
       },
       {
         "month": "2023-09",
-        "AAJTAK.IN*": 269.0,
-        "NDTV.IN": 105.0,
-        "JAGRAN.COM*": 99.0,
-        "LiveHindustan": 331.0,
-        "BHASKAR.COM": 112.0
+        "AAJTAK.IN*": 53.6,
+        "NDTV.IN": 37.7,
+        "Navbharat Times": 42.8,
+        "JAGRAN.COM*": 27.8,
+        "LiveHindustan": 50.4
       },
       {
         "month": "2023-10",
-        "AAJTAK.IN*": 288.0,
-        "NDTV.IN": 130.0,
-        "JAGRAN.COM*": 178.0,
-        "LiveHindustan": 357.0,
-        "BHASKAR.COM": 119.0
+        "AAJTAK.IN*": 50.7,
+        "NDTV.IN": 35.1,
+        "Navbharat Times": 48.8,
+        "JAGRAN.COM*": 30.7,
+        "LiveHindustan": 52.1
       },
       {
         "month": "2023-11",
-        "AAJTAK.IN*": 248.0,
-        "NDTV.IN": 143.0,
-        "JAGRAN.COM*": 128.0,
-        "LiveHindustan": 343.0,
-        "BHASKAR.COM": 84.0
+        "AAJTAK.IN*": 45.2,
+        "NDTV.IN": 35.9,
+        "Navbharat Times": 46.8,
+        "JAGRAN.COM*": 25.0,
+        "LiveHindustan": 48.3
       },
       {
         "month": "2023-12",
-        "AAJTAK.IN*": 288.0,
-        "NDTV.IN": 138.0,
-        "JAGRAN.COM*": 124.0,
-        "LiveHindustan": 353.0,
-        "BHASKAR.COM": 99.0
+        "AAJTAK.IN*": 46.7,
+        "NDTV.IN": 36.1,
+        "Navbharat Times": 49.0,
+        "JAGRAN.COM*": 25.8,
+        "LiveHindustan": 41.8
       },
       {
         "month": "2024-01",
-        "AAJTAK.IN*": 273.0,
-        "NDTV.IN": 117.0,
-        "JAGRAN.COM*": 231.0,
-        "LiveHindustan": 273.0,
-        "BHASKAR.COM": 97.0
+        "AAJTAK.IN*": 45.8,
+        "NDTV.IN": 32.3,
+        "Navbharat Times": 48.9,
+        "JAGRAN.COM*": 31.2,
+        "LiveHindustan": 42.4
       },
       {
         "month": "2024-02",
-        "AAJTAK.IN*": 265.0,
-        "NDTV.IN": 105.0,
-        "JAGRAN.COM*": 193.0,
-        "LiveHindustan": 309.0,
-        "BHASKAR.COM": 87.0
+        "AAJTAK.IN*": 37.5,
+        "NDTV.IN": 31.7,
+        "Navbharat Times": 41.6,
+        "JAGRAN.COM*": 28.4,
+        "LiveHindustan": 37.3
       },
       {
         "month": "2024-03",
-        "AAJTAK.IN*": 279.0,
-        "NDTV.IN": 137.0,
-        "JAGRAN.COM*": 171.0,
-        "LiveHindustan": 281.0,
-        "BHASKAR.COM": 90.0
+        "AAJTAK.IN*": 54.4,
+        "NDTV.IN": 45.7,
+        "Navbharat Times": 54.5,
+        "JAGRAN.COM*": 38.6,
+        "LiveHindustan": 45.3
       },
       {
         "month": "2024-04",
-        "AAJTAK.IN*": 259.0,
-        "NDTV.IN": 165.0,
-        "JAGRAN.COM*": 168.0,
-        "LiveHindustan": 267.0,
-        "BHASKAR.COM": 90.0
+        "AAJTAK.IN*": 59.2,
+        "NDTV.IN": 55.3,
+        "Navbharat Times": 57.8,
+        "JAGRAN.COM*": 43.8,
+        "LiveHindustan": 49.3
       },
       {
         "month": "2024-05",
-        "AAJTAK.IN*": 305.0,
-        "NDTV.IN": 169.0,
-        "JAGRAN.COM*": 196.0,
-        "LiveHindustan": 376.0,
-        "BHASKAR.COM": 102.0
+        "AAJTAK.IN*": 64.1,
+        "NDTV.IN": 55.7,
+        "Navbharat Times": 59.4,
+        "JAGRAN.COM*": 40.4,
+        "LiveHindustan": 52.6
       },
       {
         "month": "2024-06",
-        "AAJTAK.IN*": 379.0,
-        "NDTV.IN": 276.0,
-        "JAGRAN.COM*": 287.0,
-        "LiveHindustan": 293.0,
-        "BHASKAR.COM": 119.0
+        "AAJTAK.IN*": 69.8,
+        "NDTV.IN": 68.3,
+        "Navbharat Times": 63.9,
+        "JAGRAN.COM*": 54.5,
+        "LiveHindustan": 50.6
       },
       {
         "month": "2024-07",
-        "AAJTAK.IN*": 324.0,
-        "NDTV.IN": 214.0,
-        "JAGRAN.COM*": 201.0,
-        "LiveHindustan": 296.0,
-        "BHASKAR.COM": 97.0
+        "AAJTAK.IN*": 63.8,
+        "NDTV.IN": 58.0,
+        "Navbharat Times": 72.8,
+        "JAGRAN.COM*": 43.1,
+        "LiveHindustan": 47.4
       },
       {
         "month": "2024-08",
-        "AAJTAK.IN*": 336.0,
-        "NDTV.IN": 177.0,
-        "JAGRAN.COM*": 191.0,
-        "LiveHindustan": 333.0,
-        "BHASKAR.COM": 94.0
+        "AAJTAK.IN*": 64.0,
+        "NDTV.IN": 54.4,
+        "Navbharat Times": 70.7,
+        "JAGRAN.COM*": 43.2,
+        "LiveHindustan": 57.6
       },
       {
         "month": "2024-09",
-        "AAJTAK.IN*": 311.0,
-        "NDTV.IN": 190.0,
-        "JAGRAN.COM*": 145.0,
-        "LiveHindustan": 379.0,
-        "BHASKAR.COM": 92.0
+        "AAJTAK.IN*": 66.0,
+        "NDTV.IN": 58.3,
+        "Navbharat Times": 65.6,
+        "JAGRAN.COM*": 41.0,
+        "LiveHindustan": 60.4
       },
       {
         "month": "2024-10",
-        "AAJTAK.IN*": 319.0,
-        "NDTV.IN": 163.0,
-        "JAGRAN.COM*": 132.0,
-        "LiveHindustan": 450.0,
-        "BHASKAR.COM": 89.0
+        "AAJTAK.IN*": 62.7,
+        "NDTV.IN": 54.6,
+        "Navbharat Times": 65.3,
+        "JAGRAN.COM*": 36.7,
+        "LiveHindustan": 60.1
       },
       {
         "month": "2024-11",
-        "AAJTAK.IN*": 283.0,
-        "NDTV.IN": 153.0,
-        "JAGRAN.COM*": 116.0,
-        "LiveHindustan": 366.0,
-        "BHASKAR.COM": 86.0
+        "AAJTAK.IN*": 55.4,
+        "NDTV.IN": 48.7,
+        "Navbharat Times": 48.3,
+        "JAGRAN.COM*": 31.7,
+        "LiveHindustan": 51.2
       },
       {
         "month": "2024-12",
-        "AAJTAK.IN*": 239.0,
-        "NDTV.IN": 145.0,
-        "JAGRAN.COM*": 123.0,
-        "LiveHindustan": 396.0,
-        "BHASKAR.COM": 94.0
+        "AAJTAK.IN*": 47.9,
+        "NDTV.IN": 49.6,
+        "Navbharat Times": 44.6,
+        "JAGRAN.COM*": 32.4,
+        "LiveHindustan": 53.3
       },
       {
         "month": "2025-01",
-        "AAJTAK.IN*": 218.0,
-        "NDTV.IN": 165.0,
-        "JAGRAN.COM*": 119.0,
-        "LiveHindustan": 420.0,
-        "BHASKAR.COM": 95.0
+        "AAJTAK.IN*": 42.2,
+        "NDTV.IN": 50.5,
+        "Navbharat Times": 45.3,
+        "JAGRAN.COM*": 32.5,
+        "LiveHindustan": 52.8
       },
       {
         "month": "2025-02",
-        "AAJTAK.IN*": 224.0,
-        "NDTV.IN": 139.0,
-        "JAGRAN.COM*": 112.0,
-        "LiveHindustan": 329.0,
-        "BHASKAR.COM": 88.0
+        "AAJTAK.IN*": 41.7,
+        "NDTV.IN": 42.7,
+        "Navbharat Times": 39.1,
+        "JAGRAN.COM*": 30.6,
+        "LiveHindustan": 49.0
       },
       {
         "month": "2025-03",
-        "AAJTAK.IN*": 234.0,
-        "NDTV.IN": 235.0,
-        "JAGRAN.COM*": 122.0,
-        "LiveHindustan": 427.0,
-        "BHASKAR.COM": 85.0
+        "AAJTAK.IN*": 48.1,
+        "NDTV.IN": 63.1,
+        "Navbharat Times": 42.2,
+        "JAGRAN.COM*": 36.3,
+        "LiveHindustan": 51.4
       },
       {
         "month": "2025-04",
-        "AAJTAK.IN*": 194.0,
-        "NDTV.IN": 142.0,
-        "JAGRAN.COM*": 145.0,
-        "LiveHindustan": 436.0,
-        "BHASKAR.COM": 87.0
+        "AAJTAK.IN*": 40.4,
+        "NDTV.IN": 44.9,
+        "Navbharat Times": 37.6,
+        "JAGRAN.COM*": 36.8,
+        "LiveHindustan": 52.0
       },
       {
         "month": "2025-05",
-        "AAJTAK.IN*": 270.0,
-        "NDTV.IN": 128.0,
-        "JAGRAN.COM*": 149.0,
-        "LiveHindustan": 546.0,
-        "BHASKAR.COM": 106.0
+        "AAJTAK.IN*": 48.2,
+        "NDTV.IN": 46.7,
+        "Navbharat Times": 39.4,
+        "JAGRAN.COM*": 34.7,
+        "LiveHindustan": 52.1
       },
       {
         "month": "2025-06",
-        "AAJTAK.IN*": 212.0,
-        "NDTV.IN": 148.0,
-        "JAGRAN.COM*": 110.0,
-        "LiveHindustan": 438.0,
-        "BHASKAR.COM": 94.0
+        "AAJTAK.IN*": 42.5,
+        "NDTV.IN": 50.5,
+        "Navbharat Times": 40.0,
+        "JAGRAN.COM*": 29.3,
+        "LiveHindustan": 47.2
       },
       {
         "month": "2025-07",
-        "AAJTAK.IN*": 225.0,
-        "NDTV.IN": 150.0,
-        "JAGRAN.COM*": 154.0,
-        "LiveHindustan": 496.0,
-        "BHASKAR.COM": 102.0
+        "AAJTAK.IN*": 43.8,
+        "NDTV.IN": 47.5,
+        "Navbharat Times": 38.4,
+        "JAGRAN.COM*": 44.5,
+        "LiveHindustan": 49.2
       },
       {
         "month": "2025-08",
-        "AAJTAK.IN*": 200.0,
-        "NDTV.IN": 131.0,
-        "JAGRAN.COM*": 151.0,
-        "LiveHindustan": 486.0,
-        "BHASKAR.COM": 92.0
+        "AAJTAK.IN*": 40.4,
+        "NDTV.IN": 42.0,
+        "Navbharat Times": 47.2,
+        "JAGRAN.COM*": 38.8,
+        "LiveHindustan": 47.4
       },
       {
         "month": "2025-09",
-        "AAJTAK.IN*": 186.0,
-        "NDTV.IN": 109.0,
-        "JAGRAN.COM*": 153.0,
-        "LiveHindustan": 367.0,
-        "BHASKAR.COM": 123.0
+        "AAJTAK.IN*": 37.3,
+        "NDTV.IN": 40.7,
+        "Navbharat Times": 42.5,
+        "JAGRAN.COM*": 40.7,
+        "LiveHindustan": 43.6
       },
       {
         "month": "2025-10",
-        "AAJTAK.IN*": 159.0,
-        "NDTV.IN": 80.0,
-        "JAGRAN.COM*": 143.0,
-        "LiveHindustan": 300.0,
-        "BHASKAR.COM": 113.0
+        "AAJTAK.IN*": 30.9,
+        "NDTV.IN": 30.4,
+        "Navbharat Times": 43.4,
+        "JAGRAN.COM*": 33.2,
+        "LiveHindustan": 35.6
       },
       {
         "month": "2025-11",
-        "AAJTAK.IN*": 178.0,
-        "NDTV.IN": 98.0,
-        "JAGRAN.COM*": 129.0,
-        "LiveHindustan": 251.0,
-        "BHASKAR.COM": 194.0
+        "AAJTAK.IN*": 30.6,
+        "NDTV.IN": 36.5,
+        "Navbharat Times": 42.2,
+        "JAGRAN.COM*": 30.8,
+        "LiveHindustan": 31.2
       },
       {
         "month": "2025-12",
-        "AAJTAK.IN*": 142.0,
-        "NDTV.IN": 68.0,
-        "JAGRAN.COM*": 124.0,
-        "LiveHindustan": 207.0,
-        "BHASKAR.COM": 205.0
+        "AAJTAK.IN*": 26.8,
+        "NDTV.IN": 27.9,
+        "Navbharat Times": 40.7,
+        "JAGRAN.COM*": 27.9,
+        "LiveHindustan": 25.9
       },
       {
         "month": "2026-01",
-        "AAJTAK.IN*": 145.0,
-        "NDTV.IN": 52.0,
-        "JAGRAN.COM*": 82.0,
-        "LiveHindustan": 168.0,
-        "BHASKAR.COM": 148.0
+        "AAJTAK.IN*": 27.1,
+        "NDTV.IN": 23.3,
+        "Navbharat Times": 34.6,
+        "JAGRAN.COM*": 26.3,
+        "LiveHindustan": 23.9
       },
       {
         "month": "2026-02",
-        "AAJTAK.IN*": 140.0,
-        "NDTV.IN": 44.0,
-        "JAGRAN.COM*": 88.0,
-        "LiveHindustan": 122.0,
-        "BHASKAR.COM": 262.0
+        "AAJTAK.IN*": 27.2,
+        "NDTV.IN": 22.6,
+        "Navbharat Times": 35.9,
+        "JAGRAN.COM*": 25.6,
+        "LiveHindustan": 22.2
       },
       {
         "month": "2026-03",
-        "AAJTAK.IN*": 187.0,
-        "NDTV.IN": 53.0,
-        "JAGRAN.COM*": 116.0,
-        "LiveHindustan": 172.0,
-        "BHASKAR.COM": 198.0
+        "AAJTAK.IN*": 33.31,
+        "NDTV.IN": 24.52,
+        "Navbharat Times": 36.32,
+        "JAGRAN.COM*": 29.38,
+        "LiveHindustan": 27.08
       },
       {
         "month": "2026-04",
-        "AAJTAK.IN*": 167.0,
-        "NDTV.IN": 54.0,
-        "JAGRAN.COM*": 125.0,
-        "LiveHindustan": 181.0,
-        "BHASKAR.COM": 221.0
+        "AAJTAK.IN*": 32.4,
+        "NDTV.IN": 23.6,
+        "Navbharat Times": 35.1,
+        "JAGRAN.COM*": 36.4,
+        "LiveHindustan": 31.7
       }
     ],
     "trendSeries": [
       "NDTV.IN",
-      "NDTV.IN",
-      "BHASKAR.COM",
-      "LiveHindustan",
+      "JAGRAN.COM*",
+      "Navbharat Times",
       "AAJTAK.IN*",
-      "JAGRAN.COM*"
+      "LiveHindustan"
     ],
     "footnotes": [
-      "Total Unique Users (millions), Comscore India. Data from Dec 2024 is Total Digital Population."
+      "Total Unique Users (millions), Comscore India MMX (Mobile + Desktop). Hindi news sites."
     ]
   },
   "csProfit": {
@@ -2012,7 +1917,7 @@ export const digitalTraffic = {
       "ZEEBIZ.COM"
     ],
     "footnotes": [
-      "MMX (Mobile + Desktop) Unique users, Comscore India. All numbers in millions."
+      "Total Unique Users (millions), Comscore India MMX. Business news sites."
     ]
   },
   "csMarathi": {
@@ -2171,236 +2076,55 @@ export const digitalTraffic = {
       "TV9MARATHI.COM"
     ],
     "footnotes": [
-      "Total Unique Users (millions), Comscore India. Data from Dec 2024 is Total Digital Population."
-    ]
-  },
-  "tdpGroup": {
-    "latestMonth": "2025-10",
-    "ranking": [
-      {
-        "name": "Network 18",
-        "value": 289.8,
-        "ndtv": false
-      },
-      {
-        "name": "India Today Group",
-        "value": 257.3,
-        "ndtv": false
-      },
-      {
-        "name": "Times Internet Limited",
-        "value": 208.5,
-        "ndtv": false
-      },
-      {
-        "name": "Times Network",
-        "value": 171.7,
-        "ndtv": false
-      },
-      {
-        "name": "TV9 Network",
-        "value": 131.3,
-        "ndtv": false
-      },
-      {
-        "name": "ABP Network",
-        "value": 124.7,
-        "ndtv": false
-      },
-      {
-        "name": "HT Media Group",
-        "value": 122.6,
-        "ndtv": false
-      },
-      {
-        "name": "NDTV",
-        "value": 121.6,
-        "ndtv": true
-      },
-      {
-        "name": "Jagran New Media",
-        "value": 116.1,
-        "ndtv": false
-      },
-      {
-        "name": "Zee Digital",
-        "value": 93.9,
-        "ndtv": false
-      },
-      {
-        "name": "The Indian Express Group",
-        "value": 82.7,
-        "ndtv": false
-      },
-      {
-        "name": "Amarujala Group",
-        "value": 39.8,
-        "ndtv": false
-      },
-      {
-        "name": "Bhaskar Group Sites",
-        "value": 30.5,
-        "ndtv": false
-      },
-      {
-        "name": "IndiaTV Group Sites",
-        "value": 27.4,
-        "ndtv": false
-      },
-      {
-        "name": "The Hindu Group",
-        "value": 26.4,
-        "ndtv": false
-      }
-    ],
-    "trend": [
-      {
-        "month": "2024-12",
-        "Times Internet Limited": 264.7,
-        "Network 18": 213.7,
-        "India Today Group": 105.0,
-        "NDTV": 84.4,
-        "Times Network": 99.7
-      },
-      {
-        "month": "2025-01",
-        "Times Internet Limited": 251.9,
-        "Network 18": 199.7,
-        "India Today Group": 101.3,
-        "NDTV": 84.3,
-        "Times Network": 95.1
-      },
-      {
-        "month": "2025-02",
-        "Times Internet Limited": 235.2,
-        "Network 18": 190.6,
-        "India Today Group": 95.9,
-        "NDTV": 99.3,
-        "Times Network": 107.1
-      },
-      {
-        "month": "2025-03",
-        "Times Internet Limited": 203.0,
-        "Network 18": 315.0,
-        "India Today Group": 103.6,
-        "NDTV": 148.7,
-        "Times Network": 144.1
-      },
-      {
-        "month": "2025-04",
-        "Times Internet Limited": 196.1,
-        "Network 18": 320.9,
-        "India Today Group": 211.4,
-        "NDTV": 132.1,
-        "Times Network": 159.4
-      },
-      {
-        "month": "2025-05",
-        "Times Internet Limited": 217.8,
-        "Network 18": 300.3,
-        "India Today Group": 204.4,
-        "NDTV": 129.7,
-        "Times Network": 146.3
-      },
-      {
-        "month": "2025-06",
-        "Times Internet Limited": 223.0,
-        "Network 18": 287.0,
-        "India Today Group": 223.2,
-        "NDTV": 147.2,
-        "Times Network": 147.9
-      },
-      {
-        "month": "2025-07",
-        "Times Internet Limited": 204.1,
-        "Network 18": 275.0,
-        "India Today Group": 294.9,
-        "NDTV": 128.2,
-        "Times Network": 141.3
-      },
-      {
-        "month": "2025-08",
-        "Times Internet Limited": 192.2,
-        "Network 18": 269.1,
-        "India Today Group": 270.7,
-        "NDTV": 127.4,
-        "Times Network": 138.4
-      },
-      {
-        "month": "2025-09",
-        "Times Internet Limited": 208.5,
-        "Network 18": 289.8,
-        "India Today Group": 257.3,
-        "NDTV": 121.6,
-        "Times Network": 171.7
-      },
-      {
-        "month": "2025-10",
-        "Times Internet Limited": null,
-        "Network 18": null,
-        "India Today Group": null,
-        "NDTV": null,
-        "Times Network": null
-      }
-    ],
-    "trendSeries": [
-      "NDTV",
-      "Network 18",
-      "India Today Group",
-      "Times Internet Limited",
-      "Times Network"
-    ],
-    "footnotes": [
-      "Total Digital Population = Mobile + Desktop + Social (where available), Comscore India.",
-      "Includes mobile + Desktop + App + YT Desktop + X + Insta + FB. All numbers in millions."
+      "Total Unique Users (millions), Comscore India MMX. Marathi news sites."
     ]
   },
   "csApp": {
-    "latestMonth": "Apr'26",
+    "latestMonth": "May'26",
     "ranking": [
       {
         "name": "Dainik Bhaskar (Mobile App)",
-        "value": 15244.0,
+        "value": 15573.0,
         "ndtv": false
       },
       {
         "name": "Aaj Tak (Mobile App)",
-        "value": 2260.0,
+        "value": 2896.0,
         "ndtv": false
       },
       {
         "name": "News18 (Mobile App)",
-        "value": 678.0,
+        "value": 722.0,
         "ndtv": false
       },
       {
         "name": "ABP Live News (Mobile App)",
-        "value": 490.0,
+        "value": 691.0,
         "ndtv": false
       },
       {
         "name": "NDTV + NDTV India",
-        "value": 439.0,
+        "value": 552.0,
         "ndtv": true
       },
       {
+        "name": "Hindustan Times",
+        "value": 364.0,
+        "ndtv": false
+      },
+      {
         "name": "Indian Express",
-        "value": 165.0,
+        "value": 181.0,
         "ndtv": false
       },
       {
         "name": "Zee News",
-        "value": 151.0,
+        "value": 159.0,
         "ndtv": false
       },
       {
         "name": "India Today (Mobile App)",
-        "value": 123.0,
-        "ndtv": false
-      },
-      {
-        "name": "Hindustan Times",
-        "value": 116.0,
+        "value": 127.0,
         "ndtv": false
       },
       {
@@ -2758,6 +2482,14 @@ export const digitalTraffic = {
         "News18 (Mobile App)": 678.0,
         "NDTV + NDTV India": 439.0,
         "ABP Live News (Mobile App)": 490.0
+      },
+      {
+        "month": "May'26",
+        "Dainik Bhaskar (Mobile App)": 15573.0,
+        "Aaj Tak (Mobile App)": 2896.0,
+        "News18 (Mobile App)": 722.0,
+        "NDTV + NDTV India": 552.0,
+        "ABP Live News (Mobile App)": 691.0
       }
     ],
     "trendSeries": [
@@ -2768,7 +2500,7 @@ export const digitalTraffic = {
       "ABP Live News (Mobile App)"
     ],
     "footnotes": [
-      "In thousands (000), Unique Users. Comscore India (India only)."
+      "Unique Users in thousands (000), Comscore India (India only) — app reach."
     ]
   },
   "csAppMins": {
@@ -3247,7 +2979,7 @@ export const digitalTraffic = {
       "Network 18"
     ],
     "footnotes": [
-      "Time spent in Million Minutes, Comscore India MMX (Desktop+Mobile)."
+      "Time spent in Million Minutes, Comscore India MMX (Desktop + Mobile)."
     ]
   },
   "csInternal": {
@@ -3617,7 +3349,7 @@ export const digitalTraffic = {
       "NDTV Profit"
     ],
     "footnotes": [
-      "MMX (Mobile + Desktop) Unique Users, Comscore India (NDTV internal view)."
+      "MMX (Mobile + Desktop) Unique Users (millions), Comscore India — NDTV internal view by property."
     ]
   },
   "csSnapshot": {
@@ -3876,7 +3608,7 @@ export const digitalTraffic = {
       }
     ],
     "footnotes": [
-      "Comscore India unique users (millions), Oct 2025. Latest 4-month snapshot (Jul–Oct 2025)."
+      "Comscore India Unique Users (millions), Oct 2025. Latest 4-month snapshot (Jul–Oct 2025)."
     ]
   },
   "gaNDTV": {
@@ -3886,8 +3618,8 @@ export const digitalTraffic = {
         "users": 182.2,
         "sessions": 502.31,
         "pageviews": 326.5,
-        "comUsers": 48.86,
-        "inUsers": 42.52,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 3.3
       },
       {
@@ -3895,8 +3627,8 @@ export const digitalTraffic = {
         "users": 178.01,
         "sessions": 475.02,
         "pageviews": 310.5,
-        "comUsers": 46.51,
-        "inUsers": 42.13,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 3.2
       },
       {
@@ -3904,8 +3636,8 @@ export const digitalTraffic = {
         "users": 173.27,
         "sessions": 504.86,
         "pageviews": 326.2,
-        "comUsers": 50.9,
-        "inUsers": 41.79,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 4.5
       },
       {
@@ -3913,8 +3645,8 @@ export const digitalTraffic = {
         "users": 174.35,
         "sessions": 480.76,
         "pageviews": 317.1,
-        "comUsers": 41.38,
-        "inUsers": 45.51,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 3.6
       },
       {
@@ -3922,8 +3654,8 @@ export const digitalTraffic = {
         "users": 175.57,
         "sessions": 507.08,
         "pageviews": 328.5,
-        "comUsers": 43.39,
-        "inUsers": 44.14,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 2.7
       },
       {
@@ -3931,8 +3663,8 @@ export const digitalTraffic = {
         "users": 180.69,
         "sessions": 513.97,
         "pageviews": 339.6,
-        "comUsers": 54.62,
-        "inUsers": 48.73,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 4.0
       },
       {
@@ -3940,8 +3672,8 @@ export const digitalTraffic = {
         "users": 184.2,
         "sessions": 541.14,
         "pageviews": 355.4,
-        "comUsers": 48.52,
-        "inUsers": 52.99,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 4.3
       },
       {
@@ -3949,8 +3681,8 @@ export const digitalTraffic = {
         "users": 173.89,
         "sessions": 494.56,
         "pageviews": 322.2,
-        "comUsers": 44.22,
-        "inUsers": 46.42,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 4.7
       },
       {
@@ -3958,8 +3690,8 @@ export const digitalTraffic = {
         "users": 174.35,
         "sessions": 489.1,
         "pageviews": 314.9,
-        "comUsers": 50.73,
-        "inUsers": 41.51,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 3.2
       },
       {
@@ -3967,8 +3699,8 @@ export const digitalTraffic = {
         "users": 149.62,
         "sessions": 414.14,
         "pageviews": 262.2,
-        "comUsers": 38.43,
-        "inUsers": 35.59,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 1.7
       },
       {
@@ -3976,8 +3708,8 @@ export const digitalTraffic = {
         "users": 164.73,
         "sessions": 455.54,
         "pageviews": 285.9,
-        "comUsers": 45.91,
-        "inUsers": 36.66,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 2.7
       },
       {
@@ -3985,8 +3717,8 @@ export const digitalTraffic = {
         "users": 160.92,
         "sessions": 432.53,
         "pageviews": 283.5,
-        "comUsers": 49.57,
-        "inUsers": 42.07,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 2.0
       },
       {
@@ -3994,8 +3726,8 @@ export const digitalTraffic = {
         "users": 140.26,
         "sessions": 391.27,
         "pageviews": 251.1,
-        "comUsers": 42.98,
-        "inUsers": 37.47,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 1.6
       },
       {
@@ -4003,8 +3735,8 @@ export const digitalTraffic = {
         "users": 120.71,
         "sessions": 345.55,
         "pageviews": 208.6,
-        "comUsers": 35.82,
-        "inUsers": 29.99,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 2.7
       },
       {
@@ -4012,8 +3744,8 @@ export const digitalTraffic = {
         "users": 105.55,
         "sessions": 315.74,
         "pageviews": 199.0,
-        "comUsers": 38.59,
-        "inUsers": 30.29,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 1.4
       },
       {
@@ -4021,8 +3753,8 @@ export const digitalTraffic = {
         "users": 91.38,
         "sessions": 280.11,
         "pageviews": 177.6,
-        "comUsers": 31.92,
-        "inUsers": 27.01,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 0.8
       },
       {
@@ -4030,8 +3762,8 @@ export const digitalTraffic = {
         "users": 100.68,
         "sessions": 315.93,
         "pageviews": 200.2,
-        "comUsers": 33.51,
-        "inUsers": 32.47,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 1.0
       },
       {
@@ -4039,8 +3771,8 @@ export const digitalTraffic = {
         "users": 95.91,
         "sessions": 283.58,
         "pageviews": 182.9,
-        "comUsers": 33.45,
-        "inUsers": 30.99,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 0.8
       },
       {
@@ -4048,8 +3780,8 @@ export const digitalTraffic = {
         "users": 95.13,
         "sessions": 274.61,
         "pageviews": 173.3,
-        "comUsers": 31.32,
-        "inUsers": 29.48,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 0.8
       },
       {
@@ -4057,8 +3789,8 @@ export const digitalTraffic = {
         "users": 103.08,
         "sessions": 289.4,
         "pageviews": 181.9,
-        "comUsers": 35.34,
-        "inUsers": 29.96,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 0.6
       },
       {
@@ -4066,8 +3798,8 @@ export const digitalTraffic = {
         "users": 104.94,
         "sessions": 304.45,
         "pageviews": 192.8,
-        "comUsers": 36.45,
-        "inUsers": 31.62,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 0.5
       },
       {
@@ -4075,8 +3807,8 @@ export const digitalTraffic = {
         "users": 119.91,
         "sessions": 361.44,
         "pageviews": 224.5,
-        "comUsers": 38.76,
-        "inUsers": 34.32,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 0.7
       },
       {
@@ -4084,8 +3816,8 @@ export const digitalTraffic = {
         "users": 116.66,
         "sessions": 346.92,
         "pageviews": 219.6,
-        "comUsers": 39.06,
-        "inUsers": 36.09,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 0.5
       },
       {
@@ -4093,8 +3825,8 @@ export const digitalTraffic = {
         "users": 107.8,
         "sessions": 312.9,
         "pageviews": 201.0,
-        "comUsers": 34.8,
-        "inUsers": 37.0,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 2.93
       },
       {
@@ -4102,8 +3834,8 @@ export const digitalTraffic = {
         "users": 117.7,
         "sessions": 346.8,
         "pageviews": 211.1,
-        "comUsers": 41.2,
-        "inUsers": 32.5,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 3.63
       },
       {
@@ -4111,8 +3843,8 @@ export const digitalTraffic = {
         "users": 93.9,
         "sessions": 274.5,
         "pageviews": 174.3,
-        "comUsers": 29.5,
-        "inUsers": 32.2,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 3.52
       },
       {
@@ -4120,8 +3852,8 @@ export const digitalTraffic = {
         "users": 126.7,
         "sessions": 382.2,
         "pageviews": 233.4,
-        "comUsers": 42.3,
-        "inUsers": 38.2,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 1.95
       },
       {
@@ -4129,8 +3861,8 @@ export const digitalTraffic = {
         "users": 159.62,
         "sessions": 332.47,
         "pageviews": 468.93,
-        "comUsers": 45.24,
-        "inUsers": 40.23,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 1.14
       },
       {
@@ -4138,8 +3870,8 @@ export const digitalTraffic = {
         "users": 198.93,
         "sessions": 374.07,
         "pageviews": 589.9,
-        "comUsers": 46.54,
-        "inUsers": 53.62,
+        "comUsers": null,
+        "inUsers": null,
         "profitUsers": 2.25
       },
       {
@@ -4147,8 +3879,8 @@ export const digitalTraffic = {
         "users": 195.49,
         "sessions": 370.75,
         "pageviews": 695.3,
-        "comUsers": 61.92,
-        "inUsers": 65.84,
+        "comUsers": 92.6,
+        "inUsers": 70.9,
         "profitUsers": 3.01
       },
       {
@@ -4156,8 +3888,8 @@ export const digitalTraffic = {
         "users": 166.85,
         "sessions": 324.74,
         "pageviews": 471.77,
-        "comUsers": 48.5,
-        "inUsers": 55.98,
+        "comUsers": 78.0,
+        "inUsers": 58.8,
         "profitUsers": 2.8
       },
       {
@@ -4165,8 +3897,8 @@ export const digitalTraffic = {
         "users": 152.53,
         "sessions": 313.07,
         "pageviews": 429.74,
-        "comUsers": 41.71,
-        "inUsers": 50.14,
+        "comUsers": 71.5,
+        "inUsers": 53.1,
         "profitUsers": 2.37
       },
       {
@@ -4174,8 +3906,8 @@ export const digitalTraffic = {
         "users": 145.11,
         "sessions": 278.1,
         "pageviews": 388.53,
-        "comUsers": 34.22,
-        "inUsers": 53.22,
+        "comUsers": 55.5,
+        "inUsers": 56.5,
         "profitUsers": 4.6
       },
       {
@@ -4183,8 +3915,8 @@ export const digitalTraffic = {
         "users": 136.41,
         "sessions": 278.75,
         "pageviews": 382.35,
-        "comUsers": 38.45,
-        "inUsers": 46.74,
+        "comUsers": 59.7,
+        "inUsers": 50.6,
         "profitUsers": 3.5
       },
       {
@@ -4192,8 +3924,8 @@ export const digitalTraffic = {
         "users": 140.97,
         "sessions": 272.06,
         "pageviews": 381.48,
-        "comUsers": 37.29,
-        "inUsers": 43.22,
+        "comUsers": 65.0,
+        "inUsers": 45.5,
         "profitUsers": 3.7
       },
       {
@@ -4201,8 +3933,8 @@ export const digitalTraffic = {
         "users": 135.7,
         "sessions": 262.28,
         "pageviews": 366.65,
-        "comUsers": 36.83,
-        "inUsers": 41.45,
+        "comUsers": 61.7,
+        "inUsers": 44.2,
         "profitUsers": 4.5
       },
       {
@@ -4210,8 +3942,8 @@ export const digitalTraffic = {
         "users": 140.42,
         "sessions": 276.38,
         "pageviews": 379.45,
-        "comUsers": 40.12,
-        "inUsers": 44.73,
+        "comUsers": 63.1,
+        "inUsers": 48.7,
         "profitUsers": 3.8
       },
       {
@@ -4219,8 +3951,8 @@ export const digitalTraffic = {
         "users": 134.8,
         "sessions": 259.48,
         "pageviews": 371.02,
-        "comUsers": 44.2,
-        "inUsers": 39.35,
+        "comUsers": 65.0,
+        "inUsers": 41.9,
         "profitUsers": 3.4
       },
       {
@@ -4228,8 +3960,8 @@ export const digitalTraffic = {
         "users": 166.26,
         "sessions": 308.91,
         "pageviews": 464.16,
-        "comUsers": 48.06,
-        "inUsers": 58.75,
+        "comUsers": 76.9,
+        "inUsers": 61.6,
         "profitUsers": 3.9
       },
       {
@@ -4237,8 +3969,8 @@ export const digitalTraffic = {
         "users": 136.6,
         "sessions": 270.5,
         "pageviews": 409.9,
-        "comUsers": 45.6,
-        "inUsers": 44.78,
+        "comUsers": 61.4,
+        "inUsers": 47.8,
         "profitUsers": 3.0
       },
       {
@@ -4246,8 +3978,8 @@ export const digitalTraffic = {
         "users": 142.23,
         "sessions": 306.63,
         "pageviews": 436.21,
-        "comUsers": 51.2,
-        "inUsers": 40.83,
+        "comUsers": 68.3,
+        "inUsers": 43.6,
         "profitUsers": 2.78
       },
       {
@@ -4255,8 +3987,8 @@ export const digitalTraffic = {
         "users": 135.4,
         "sessions": 287.1,
         "pageviews": 411.9,
-        "comUsers": 41.5,
-        "inUsers": 47.6,
+        "comUsers": 58.1,
+        "inUsers": 49.7,
         "profitUsers": 3.8
       },
       {
@@ -4264,8 +3996,8 @@ export const digitalTraffic = {
         "users": 133.7,
         "sessions": 277.9,
         "pageviews": 403.4,
-        "comUsers": 37.8,
-        "inUsers": 46.7,
+        "comUsers": 52.6,
+        "inUsers": 49.8,
         "profitUsers": 4.2
       },
       {
@@ -4273,8 +4005,8 @@ export const digitalTraffic = {
         "users": 120.5,
         "sessions": 259.6,
         "pageviews": 359.4,
-        "comUsers": 35.6,
-        "inUsers": 39.3,
+        "comUsers": 50.1,
+        "inUsers": 43.7,
         "profitUsers": 3.6
       },
       {
@@ -4282,8 +4014,8 @@ export const digitalTraffic = {
         "users": 126.2,
         "sessions": 259.5,
         "pageviews": 390.2,
-        "comUsers": 37.3,
-        "inUsers": 31.1,
+        "comUsers": 55.2,
+        "inUsers": 36.2,
         "profitUsers": 4.6
       },
       {
@@ -4291,8 +4023,8 @@ export const digitalTraffic = {
         "users": 109.4,
         "sessions": 218.1,
         "pageviews": 337.8,
-        "comUsers": 30.9,
-        "inUsers": 26.5,
+        "comUsers": 45.4,
+        "inUsers": 31.8,
         "profitUsers": 3.9
       },
       {
@@ -4300,8 +4032,8 @@ export const digitalTraffic = {
         "users": 124.7,
         "sessions": 243.8,
         "pageviews": 384.9,
-        "comUsers": 34.8,
-        "inUsers": 29.2,
+        "comUsers": 51.0,
+        "inUsers": 31.2,
         "profitUsers": 3.2
       },
       {
@@ -4309,8 +4041,8 @@ export const digitalTraffic = {
         "users": 101.5,
         "sessions": 205.4,
         "pageviews": 313.6,
-        "comUsers": 28.3,
-        "inUsers": 21.9,
+        "comUsers": 45.6,
+        "inUsers": 23.2,
         "profitUsers": 2.3
       },
       {
@@ -4318,8 +4050,8 @@ export const digitalTraffic = {
         "users": 96.5,
         "sessions": 188.3,
         "pageviews": 286.9,
-        "comUsers": 32.7,
-        "inUsers": 15.9,
+        "comUsers": 46.5,
+        "inUsers": 17.1,
         "profitUsers": 2.2
       },
       {
@@ -4327,8 +4059,8 @@ export const digitalTraffic = {
         "users": 112.16,
         "sessions": 211.1,
         "pageviews": 308.45,
-        "comUsers": 33.05,
-        "inUsers": 14.74,
+        "comUsers": 49.99,
+        "inUsers": 15.71,
         "profitUsers": 4.04
       },
       {
@@ -4336,8 +4068,8 @@ export const digitalTraffic = {
         "users": 128.6,
         "sessions": 251.8,
         "pageviews": 361.6,
-        "comUsers": 42.2,
-        "inUsers": 19.8,
+        "comUsers": 58.13,
+        "inUsers": 20.8,
         "profitUsers": 7.0
       },
       {
@@ -4345,8 +4077,8 @@ export const digitalTraffic = {
         "users": 128.3,
         "sessions": 249.2,
         "pageviews": 356.69,
-        "comUsers": 48.77,
-        "inUsers": 18.41,
+        "comUsers": 64.95,
+        "inUsers": 19.68,
         "profitUsers": 3.98
       },
       {
@@ -4354,14 +4086,14 @@ export const digitalTraffic = {
         "users": 140.62,
         "sessions": 286.57,
         "pageviews": 405.78,
-        "comUsers": 55.12,
-        "inUsers": 19.65,
+        "comUsers": 69.61,
+        "inUsers": 21.41,
         "profitUsers": 7.29
       }
     ],
     "footnotes": [
-      "NDTV Group Google Analytics (GA4). Users/Sessions in millions, Pageviews in millions.",
-      "Numbers for April 2026 are basis extrapolation."
+      "NDTV Group Google Analytics (GA4). Users/Sessions/Pageviews in millions.",
+      "Numbers for the most recent month may be provisional/extrapolated."
     ]
   },
   "gaFY": [
@@ -4582,6 +4314,12 @@ export const digitalTraffic = {
         "MPCG": 0.45,
         "Rajasthan": 0.6,
         "Marathi": 1.78
+      },
+      {
+        "month": "2026-04",
+        "MPCG": 0.39,
+        "Rajasthan": 0.8,
+        "Marathi": 1.86
       }
     ],
     "series": [
@@ -4590,39 +4328,38 @@ export const digitalTraffic = {
       "Marathi"
     ],
     "footnotes": [
-      "NDTV Regional editions — Users (millions), Google Analytics.",
-      "Numbers for April 2026 are basis extrapolation."
+      "NDTV Regional editions — Users (millions), Google Analytics."
     ]
   },
   "gaApps": {
     "editions": [
       {
         "name": "English",
-        "value": 538142.0
+        "value": 664789.64
       },
       {
         "name": "Hindi",
-        "value": 171167.0
+        "value": 171978.95
       },
       {
         "name": "World",
-        "value": 54453.0
+        "value": 42464.45
       },
       {
         "name": "Profit",
-        "value": 30332.0
+        "value": 24067.36
       },
       {
         "name": "MPCG",
-        "value": 3274.0
+        "value": 3754.3
       },
       {
         "name": "RJ",
-        "value": 3802.0
+        "value": 4266.61
       },
       {
         "name": "MR",
-        "value": 11868.0
+        "value": 9687.68
       }
     ],
     "session": [
@@ -4676,11 +4413,11 @@ export const digitalTraffic = {
     "platform": [
       {
         "name": "Android",
-        "users": 626307.0
+        "users": 742586.4
       },
       {
         "name": "iOS",
-        "users": 368064.0
+        "users": 421012.16
       }
     ],
     "footnotes": [
@@ -4904,7 +4641,7 @@ export const digitalTraffic = {
     ],
     "updated": "2026-06",
     "footnotes": [
-      "Social media followers in millions, as of Jun 2026. YT = YouTube subscribers."
+      "Social media followers in millions. YT = YouTube subscribers."
     ]
   },
   "ytNative": {
@@ -5480,11 +5217,21 @@ export const digitalTraffic = {
         "indiaUV": 72.3,
         "profitViews": 42.1,
         "profitSubs": 33.4
+      },
+      {
+        "month": "2026-05",
+        "ndtvViews": null,
+        "ndtvSubs": null,
+        "ndtvUV": null,
+        "indiaViews": null,
+        "indiaSubs": null,
+        "indiaUV": null,
+        "profitViews": null,
+        "profitSubs": null
       }
     ],
     "footnotes": [
-      "NDTV YouTube channels — Views & Unique Viewers in millions, New Subscribers in 000s.",
-      "Native = videos embedded on NDTV web pages."
+      "NDTV YouTube channels — Views & Unique Viewers in millions, New Subscribers in 000s."
     ]
   },
   "ytComp": {
@@ -5851,6 +5598,6 @@ export const digitalTraffic = {
   },
   "meta": {
     "source": "NDTV internal — Comscore India, Google Analytics (GA4), YouTube/Playboard/Databeing, Social platforms",
-    "note": "Some recent months are provisional/extrapolated as noted per section."
+    "note": "Comscore rankings use Unique Users (not Pageviews). Some recent months are provisional/extrapolated."
   }
 }
