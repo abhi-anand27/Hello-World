@@ -4,8 +4,8 @@ import { useData } from '../../api/DataContext'
 
 // Editable annual P&L tables — the most common thing management updates each quarter.
 const TARGETS = [
-  { id: 'tvAnnual',     label: 'TV Standalone (Annual)', dataset: 'financials', key: 'tvBusinessData',   path: 'annual', cols: ['period', 'revenue', 'opProfit', 'opm', 'pat', 'eps'] },
-  { id: 'consAnnual',   label: 'Consolidated (Annual)',  dataset: 'financials', key: 'consolidatedData', path: 'annual', cols: ['period', 'revenue', 'opProfit', 'opm', 'pat', 'eps'] },
+  { id: 'tvAnnual',     label: 'TV Standalone (Annual)', dataset: 'financials', key: 'tvBusinessData',   path: 'annual', cols: ['period', 'revenue', 'opProfit', 'opm', 'pat'] },
+  { id: 'consAnnual',   label: 'Consolidated (Annual)',  dataset: 'financials', key: 'consolidatedData', path: 'annual', cols: ['period', 'revenue', 'opProfit', 'opm', 'pat'] },
   { id: 'digiAnnual',   label: 'Digital (Annual)',       dataset: 'financials', key: 'convergenceData',  path: 'annual', cols: ['period', 'revenue', 'opProfit', 'pat'] },
   { id: 'tvQuarterly',  label: 'TV Standalone (Quarterly)', dataset: 'financials', key: 'tvBusinessData', path: 'quarterly', cols: ['period', 'revenue', 'opProfit', 'pat', 'eps'] },
   { id: 'adMarket',     label: 'Ad Market Trend',        dataset: 'market',     key: 'adMarketTrend',    path: null, cols: ['year', 'tvNews', 'digitalNews', 'total'] },

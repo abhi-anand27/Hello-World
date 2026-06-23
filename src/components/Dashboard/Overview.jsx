@@ -3,8 +3,9 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   BarChart, Bar, Legend, ReferenceLine
 } from 'recharts'
-import { TrendingUp, TrendingDown, Tv, Globe, Users, Activity } from 'lucide-react'
+import { TrendingUp, TrendingDown, Tv, Globe, Users, Activity, BarChart3 } from 'lucide-react'
 import { useData } from '../../api/DataContext'
+import { digitalTraffic as DT } from '../../data/digitalTraffic'
 
 function KPICard({ title, value, change, positive, icon: Icon, sub }) {
   return (
@@ -77,7 +78,7 @@ export default function Overview({ onNavigate }) {
         <KPICard
           title="PAT (Net Profit)"
           value={`₹${latest.pat} Cr`}
-          change={`EPS: ₹${latest.eps}`}
+          change={latest.pat >= 0 ? `OPM ${latest.opm}%` : 'Loss year'}
           positive={latest.pat >= 0}
           icon={latest.pat >= 0 ? TrendingUp : TrendingDown}
           sub="FY26 Actuals"
@@ -180,7 +181,6 @@ export default function Overview({ onNavigate }) {
                 { label: 'Op. Profit',   key: 'opProfit', fmt: v => v < 0 ? `(${Math.abs(v)})` : v },
                 { label: 'OPM %',        key: 'opm',      fmt: v => `${v}%` },
                 { label: 'PAT',          key: 'pat',      fmt: v => v < 0 ? `(${Math.abs(v)})` : v },
-                { label: 'EPS (₹)',      key: 'eps',      fmt: v => v },
               ].map(({ label, key, fmt }) => (
                 <tr key={key} className="hover:bg-ndtv-border/20">
                   <td className="py-2 pr-4 text-gray-300 font-medium">{label}</td>
@@ -198,6 +198,60 @@ export default function Overview({ onNavigate }) {
         </div>
         <p className="text-xs text-gray-500 mt-3">Source: BSE filings via finology.in (same data as Moneycontrol). FY26 = Apr 25 – Mar 26.</p>
       </div>
+
+      {/* Comscore Snapshot */}
+      <ComscoreSnapshot />
+    </div>
+  )
+}
+
+function ml(m) {
+  if (typeof m !== 'string' || !m.includes('-')) return m
+  const [y, mo] = m.split('-')
+  const names = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+  return `${names[+mo] || mo}'${y.slice(2)}`
+}
+
+function ComscoreSnapshot() {
+  const csGroup   = DT.csGroup
+  const csEnglish = DT.csEnglish
+  const csHindi   = DT.csHindi
+  const appMins   = DT.csAppMins
+  const ndtvGroup   = csGroup.ranking.find(r => r.ndtv)
+  const ndtvEnglish = csEnglish.ranking.find(r => r.ndtv)
+  const ndtvHindi   = csHindi.ranking.find(r => r.ndtv)
+  const ndtvApp     = appMins.rows.find(r => r.ndtv)
+  const groupRank   = csGroup.ranking.findIndex(r => r.ndtv) + 1
+  const engRank     = csEnglish.ranking.findIndex(r => r.ndtv) + 1
+  const hindiRank   = csHindi.ranking.findIndex(r => r.ndtv) + 1
+
+  const kpis = [
+    { label: 'Group Unique Users',  value: `${ndtvGroup?.value ?? '—'} Mn`,   sub: `#${groupRank} Publisher Group · ${ml(csGroup.latestMonth)}`,   icon: BarChart3,  color: 'text-blue-400' },
+    { label: 'English News',        value: `${ndtvEnglish?.value ?? '—'} Mn`, sub: `#${engRank} English News Site · NDTV.com`,                      icon: Globe,      color: 'text-green-400' },
+    { label: 'Hindi News',          value: `${ndtvHindi?.value ?? '—'} Mn`,   sub: `#${hindiRank} Hindi News Site · NDTV.in`,                       icon: Globe,      color: 'text-yellow-400' },
+    { label: 'App Engagement',      value: `${ndtvApp?.avgMins ?? '—'} min`,  sub: `Avg mins/user · #1 in app engagement`,                          icon: Activity,   color: 'text-purple-400' },
+  ]
+
+  return (
+    <div className="card">
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="font-semibold text-sm flex items-center gap-2">
+          <BarChart3 size={15} className="text-gray-400" /> Comscore Snapshot — NDTV Digital Reach
+        </h2>
+        <span className="text-xs text-gray-500">Source: Comscore India · {ml(csGroup.latestMonth)}</span>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {kpis.map(k => (
+          <div key={k.label} className="bg-ndtv-dark border border-ndtv-border rounded-lg p-3">
+            <div className="flex items-center gap-1.5 text-xs text-gray-400 mb-1">
+              <k.icon size={12} /> {k.label}
+            </div>
+            <div className={`text-lg font-bold ${k.color}`}>{k.value}</div>
+            <div className="text-[11px] text-gray-500 mt-0.5">{k.sub}</div>
+          </div>
+        ))}
+      </div>
+      <p className="text-xs text-gray-500 mt-2">Comscore India unique users (millions). Full detail in Digital Traffic section.</p>
     </div>
   )
 }
